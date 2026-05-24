@@ -1,0 +1,65 @@
+locale: zh
+meta:
+  title: X32 Studio
+  description: 一个高密度的小型工作室，创造 agentic 产品、学习工具和工程实验。
+navigation:
+  - key: home
+    label: 首页
+    href: /zh/
+  - key: products
+    label: 产品
+    href: /zh/products/
+  - key: about
+    label: 关于
+    href: /zh/about/
+hero:
+  eyebrow: 独立 Agentic Studio
+  title: X32 Studio 创造小而锋利的系统，帮助人获得更大的杠杆。
+  subtitle: 我们是一对夫妻组成的高密度工作室，把 agentic 算法工程能力和产品判断结合起来，为极客、小白和 AI 原生工作流打造产品。
+  primaryCta:
+    label: 查看 Labs
+    href: /zh/products/
+  secondaryCta:
+    label: 了解我们
+    href: /zh/about/
+  stats:
+    - value: 2
+      label: 创造者
+    - value: 3
+      label: 产品线
+    - value: 1
+      label: 工作室
+studio:
+  kicker: 我们是谁
+  title: 很小的公司，很高的能量密度。
+  body: X32 Studio 有意保持小而清晰。一位创始人深入 agentic 算法与工程系统，另一位负责产品、定位和用户体验。我们能从想法快速走到可用作品，同时不丢掉判断力。
+  principles:
+    - 用高密度手艺替代规模幻觉
+    - 产品既要有用，也要让人学会
+    - Agentic 系统需要看得见边界
+    - 用有品味的界面表达技术想法
+labsIntro:
+  eyebrow: 产品线
+  title: 三个 Labs，一个共同的 studio 操作系统。
+  body: 每个 Lab 都承载一类长期产品和实验。后续新增条目只需要改内容配置，不需要重写页面结构。
+about:
+  eyebrow: 关于
+  title: 由一对喜欢难题和实用软件的夫妻共同完成。
+  body: 我们把算法深度和产品清晰度放在一起。Studio 的形式让我们始终靠近真实工作：研究、原型、写作、发布、学习、迭代。
+  capabilities:
+    - Agentic 算法设计
+    - 产品策略与用户路径
+    - 全栈原型开发
+    - 技术叙事与表达
+links:
+  title: 在其他地方找到我们
+  items:
+    - label: GitHub
+      href: https://github.com/x32studio
+      note: 代码、实验和开源作品
+    - label: Email
+      href: mailto:hello@x32studio.com
+      note: 合作与产品交流
+footer:
+  tagline: 小型工作室，认真创造系统。
+  copyright: X32 Studio

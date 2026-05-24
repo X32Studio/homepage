@@ -1,0 +1,144 @@
+---
+import type { SiteContent } from "@lib/content";
+
+type Props = {
+  content: SiteContent;
+};
+
+const { content } = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero-copy">
+    <p class="label reveal">{content.hero.eyebrow}</p>
+    <h1 class="hero-title reveal reveal-delay-1">{content.hero.title}</h1>
+    <p class="hero-subtitle reveal reveal-delay-2">{content.hero.subtitle}</p>
+    <div class="hero-actions reveal reveal-delay-2">
+      <a class="button button-primary" href={content.hero.primaryCta.href}>
+        {content.hero.primaryCta.label}
+      </a>
+      <a class="button button-quiet" href={content.hero.secondaryCta.href}>
+        {content.hero.secondaryCta.label}
+      </a>
+    </div>
+  </div>
+  <aside class="hero-panel reveal reveal-delay-2" aria-label="Studio facts">
+    <p class="panel-kicker">Studio Index</p>
+    <div class="hero-stats">
+      {
+        content.hero.stats.map((stat) => (
+          <div>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))
+      }
+    </div>
+    <p>{content.studio.body}</p>
+  </aside>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: clamp(2rem, 4vw, 4rem);
+    grid-template-columns: minmax(0, 1.25fr) minmax(17rem, 0.75fr);
+    min-height: 76vh;
+    padding: clamp(4rem, 8vw, 7rem) 0;
+  }
+
+  .hero-copy {
+    align-self: end;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.4rem, 9vw, 9rem);
+    font-weight: 500;
+    letter-spacing: -0.075em;
+    line-height: 0.86;
+    margin: 1rem 0 1.5rem;
+    max-width: 10ch;
+  }
+
+  .hero-subtitle {
+    color: var(--color-ink-soft);
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    line-height: 1.55;
+    max-width: 43rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2rem;
+  }
+
+  .button {
+    border: 1px solid var(--color-ink);
+    border-radius: 999px;
+    display: inline-flex;
+    font-weight: 800;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .button-primary {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .button-quiet {
+    background: rgba(244, 239, 229, 0.55);
+  }
+
+  .hero-panel {
+    align-self: center;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+  }
+
+  .panel-kicker {
+    color: var(--color-accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hero-stats {
+    border-bottom: 1px solid var(--color-line);
+    border-top: 1px solid var(--color-line);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 1rem 0;
+    padding: 1rem 0;
+  }
+
+  .hero-stats strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.3rem;
+    line-height: 1;
+  }
+
+  .hero-stats span,
+  .hero-panel p:last-child {
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .hero-title {
+      max-width: 11ch;
+    }
+  }
+</style>

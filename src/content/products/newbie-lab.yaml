@@ -1,0 +1,22 @@
+id: newbie-lab
+lab: newbie
+order: 2
+name:
+  en: Newbie Lab
+  zh: Newbie Lab
+audience:
+  en: Curious beginners and non-technical operators
+  zh: 好奇的小白用户和非技术实践者
+status:
+  en: Learning products in design
+  zh: 学习型产品设计中
+summary:
+  en: Friendly products that make complex technology feel approachable without making it shallow.
+  zh: 让复杂技术更容易靠近，但不把它变浅的友好产品。
+tags:
+  - learning
+  - explainers
+  - guided workflows
+links:
+  - label: Contact
+    href: mailto:hello@x32studio.com

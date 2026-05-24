@@ -1,0 +1,23 @@
+---
+import LanguageSwitch from "@components/LanguageSwitch.astro";
+import type { Locale, SiteContent } from "@lib/content";
+
+type Props = {
+  content: SiteContent;
+  locale: Locale;
+  alternatePath: string;
+};
+
+const { content, locale, alternatePath } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="brand-mark" href={locale === "en" ? "/" : "/zh/"} aria-label="X32 Studio home">
+    <span class="brand-symbol">X32</span>
+    <span class="brand-word">Studio</span>
+  </a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    {content.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+  <LanguageSwitch locale={locale} alternatePath={alternatePath} />
+</header>

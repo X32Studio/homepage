@@ -1,0 +1,41 @@
+---
+import ProductCard from "@components/ProductCard.astro";
+import type { Product, SiteContent } from "@lib/content";
+
+type Props = {
+  content: SiteContent;
+  products: Product[];
+  compact?: boolean;
+};
+
+const { content, products, compact = false } = Astro.props;
+---
+
+<section class:list={["section", compact && "lab-index-compact"]}>
+  <div class="lab-heading">
+    <p class="label">{content.labsIntro.eyebrow}</p>
+    <h2 class="section-title">{content.labsIntro.title}</h2>
+    <p class="body-copy">{content.labsIntro.body}</p>
+  </div>
+  <div class="lab-list">
+    {products.map((product, index) => <ProductCard product={product} index={index} />)}
+  </div>
+</section>
+
+<style>
+  .lab-heading {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+    max-width: 54rem;
+  }
+
+  .lab-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .lab-index-compact {
+    padding-bottom: 2rem;
+  }
+</style>

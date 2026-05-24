@@ -1,0 +1,17 @@
+:root {
+  --color-ink: #171411;
+  --color-ink-soft: #4b453d;
+  --color-paper: #f4efe5;
+  --color-paper-deep: #e6dccb;
+  --color-line: rgba(23, 20, 17, 0.18);
+  --color-accent: #bf3f1d;
+  --color-accent-soft: #f2b544;
+  --color-panel: rgba(255, 250, 239, 0.68);
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --font-body: "Avenir Next", "Gill Sans", "Helvetica Neue", sans-serif;
+  --space-page: clamp(1rem, 3vw, 3rem);
+  --max-width: 1180px;
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}

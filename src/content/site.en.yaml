@@ -1,0 +1,65 @@
+locale: en
+meta:
+  title: X32 Studio
+  description: A compact studio building agentic products, learning tools, and engineering experiments with unusual density.
+navigation:
+  - key: home
+    label: Home
+    href: /
+  - key: products
+    label: Products
+    href: /products/
+  - key: about
+    label: About
+    href: /about/
+hero:
+  eyebrow: Independent agentic studio
+  title: X32 Studio builds small, sharp systems for people who want leverage.
+  subtitle: A two-person studio pairing deep agentic engineering with product taste, shipping tools for builders, beginners, and AI-native workflows.
+  primaryCta:
+    label: Explore the labs
+    href: /products/
+  secondaryCta:
+    label: Read the studio note
+    href: /about/
+  stats:
+    - value: 2
+      label: Makers
+    - value: 3
+      label: Labs
+    - value: 1
+      label: Studio
+studio:
+  kicker: What we are
+  title: Tiny company, high agency.
+  body: X32 Studio is intentionally small. One founder goes deep on agentic algorithms and engineering systems; the other shapes products, positioning, and user experience. The result is a studio that can move from idea to artifact without losing the plot.
+  principles:
+    - Dense craft over headcount
+    - Products that teach while they work
+    - Agentic systems with visible edges
+    - Tasteful interfaces for technical ideas
+labsIntro:
+  eyebrow: Product lines
+  title: Three labs, one studio operating system.
+  body: Each lab is a shelf for ongoing products and experiments. New entries can be added through content files without redesigning the site.
+about:
+  eyebrow: About
+  title: Built by a couple who like hard problems and useful software.
+  body: We combine algorithmic depth with product clarity. The studio format lets us stay close to the work: research, prototype, write, ship, learn, and refine.
+  capabilities:
+    - Agentic algorithm design
+    - Product strategy and user journeys
+    - Full-stack prototypes
+    - Technical storytelling
+links:
+  title: Find us elsewhere
+  items:
+    - label: GitHub
+      href: https://github.com/x32studio
+      note: Code, experiments, and open-source work
+    - label: Email
+      href: mailto:hello@x32studio.com
+      note: Collaborations and product conversations
+footer:
+  tagline: Small studio. Serious systems.
+  copyright: X32 Studio

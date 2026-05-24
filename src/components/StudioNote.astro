@@ -1,0 +1,46 @@
+---
+import type { SiteContent } from "@lib/content";
+
+type Props = {
+  content: SiteContent;
+};
+
+const { content } = Astro.props;
+---
+
+<section class="section section-grid">
+  <div>
+    <p class="label">{content.studio.kicker}</p>
+    <h2 class="section-title">{content.studio.title}</h2>
+  </div>
+  <div class="studio-note">
+    <p class="body-copy">{content.studio.body}</p>
+    <ul>
+      {content.studio.principles.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .studio-note {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .studio-note ul {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .studio-note li {
+    border-top: 1px solid var(--color-line);
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.6vw, 2.2rem);
+    letter-spacing: -0.04em;
+    padding-top: 0.75rem;
+  }
+</style>

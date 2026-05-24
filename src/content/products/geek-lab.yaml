@@ -1,0 +1,22 @@
+id: geek-lab
+lab: geek
+order: 1
+name:
+  en: Geek Lab
+  zh: Geek Lab
+audience:
+  en: Engineers, hackers, and technical founders
+  zh: 工程师、极客和技术型创造者
+status:
+  en: Experiments shipping in public
+  zh: 持续公开发布实验
+summary:
+  en: Tools and notes for people who enjoy seeing how the machine thinks.
+  zh: 为喜欢理解系统如何运转的人准备的工具和笔记。
+tags:
+  - agent tooling
+  - developer systems
+  - research notes
+links:
+  - label: GitHub
+    href: https://github.com/x32studio

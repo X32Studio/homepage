@@ -1,0 +1,22 @@
+---
+import AboutSection from "@components/AboutSection.astro";
+import Hero from "@components/Hero.astro";
+import LabIndex from "@components/LabIndex.astro";
+import LinkDock from "@components/LinkDock";
+import StudioNote from "@components/StudioNote.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getAlternateLocalePath, getProducts, getSiteContent } from "@lib/content";
+
+const locale = "en";
+const content = getSiteContent(locale);
+const products = getProducts(locale);
+const alternatePath = getAlternateLocalePath(locale, Astro.url.pathname);
+---
+
+<BaseLayout content={content} locale={locale} alternatePath={alternatePath}>
+  <Hero content={content} />
+  <StudioNote content={content} />
+  <LabIndex content={content} products={products} compact />
+  <AboutSection content={content} />
+  <LinkDock title={content.links.title} items={content.links.items} />
+</BaseLayout>

@@ -1,0 +1,22 @@
+id: agentic-lab
+lab: agentic
+order: 3
+name:
+  en: Agentic Lab
+  zh: Agentic Lab
+audience:
+  en: Teams exploring AI-native workflows
+  zh: 探索 AI 原生工作流的团队
+status:
+  en: Prototypes and applied systems
+  zh: 原型与应用系统
+summary:
+  en: Agentic products that turn judgment, memory, and iteration into practical leverage.
+  zh: 把判断、记忆和迭代转化为实际杠杆的 agentic 产品。
+tags:
+  - autonomous agents
+  - workflow design
+  - evaluation loops
+links:
+  - label: Studio email
+    href: mailto:hello@x32studio.com

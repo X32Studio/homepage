@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="X32 Studio">
+  <rect width="64" height="64" rx="18" fill="#171411" />
+  <path d="M16 18h8l8 10 8-10h8L36 32l12 14h-8l-8-10-8 10h-8l12-14L16 18Z" fill="#f4efe5" />
+  <path d="M43 43h8v5h-8z" fill="#bf3f1d" />
+</svg>
