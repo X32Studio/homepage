@@ -45,7 +45,7 @@ labsIntro:
 about:
   eyebrow: About
   title: Built by a couple who like hard problems and useful software.
-  body: We combine algorithmic depth with product clarity. The studio format lets us stay close to the work: research, prototype, write, ship, learn, and refine.
+  body: "We combine algorithmic depth with product clarity. The studio format lets us stay close to the work: research, prototype, write, ship, learn, and refine."
   capabilities:
     - Agentic algorithm design
     - Product strategy and user journeys

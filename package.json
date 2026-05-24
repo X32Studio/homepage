@@ -21,6 +21,8 @@
   "devDependencies": {
     "@astrojs/check": "latest",
     "@types/node": "latest",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
     "typescript": "latest",
     "vitest": "latest"
   }
