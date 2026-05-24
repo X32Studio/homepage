@@ -3,5 +3,5 @@
 - Key changes made: Added initial work-session log entry.
 
 ## 2026-05-24 17:24 UTC+8
-- Core work summary: Initialized and published current homepage code to GitHub.
-- Key changes made: Prepared first git commit and configured homepage remote.
+- Core work summary: Initialized current homepage code as a local git repository.
+- Key changes made: Created initial commit and configured homepage remote; push is blocked by GitHub repository access.
