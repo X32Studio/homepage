@@ -152,13 +152,43 @@
 
 @media (max-width: 760px) {
   .site-header {
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem 1rem;
+    padding: 0.9rem 0;
   }
 
   .site-nav {
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    gap: 0.55rem;
+    margin-inline: calc(var(--space-page) * -1);
+    order: 3;
+    overflow-x: auto;
+    padding: 0.15rem var(--space-page) 0.35rem;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-nav a,
+  .language-switch {
+    align-items: center;
+    display: inline-flex;
+    min-height: 44px;
+  }
+
+  .site-nav a {
+    background: rgba(247, 241, 229, 0.06);
+    border: 1px solid rgba(247, 241, 229, 0.1);
+    border-radius: 999px;
+    flex: 0 0 auto;
+    padding: 0 0.8rem;
+  }
+
+  .brand-word {
+    display: none;
   }
 
   .section-grid {

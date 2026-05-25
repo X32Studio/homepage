@@ -87,6 +87,11 @@
 - Core work summary: Added a GitHub-ready README for the X32 Studio homepage.
 - Key changes made: Documented project purpose, stack, structure, commands, content editing, and remote push notes.
 
+## 2026-05-25 20:45 UTC+8
+- Core work summary: Improved mobile responsiveness for the X32 Studio homepage.
+- Key changes made: Split deep-space story styles into a dedicated CSS file, added phone/tablet breakpoints, improved mobile cards and header navigation, and added responsive CSS tests.
+- Verification: `npm test`, `npm run build`, `npm run check:lines`, and lints passed.
+
 ## 2026-05-24 17:24 UTC+8
 - Core work summary: Initialized current homepage code as a local git repository.
 - Key changes made: Created initial commit and configured homepage remote; push is blocked by GitHub repository access.
@@ -136,3 +141,27 @@
 - Core work summary: Added and verified a reusable one-command deployment script.
 - Key changes made: Added `scripts/deploy.sh`, `npm run deploy`, and a Vitest coverage check for the deployment flow.
 - Verification: Deploy script ran successfully against ECS; full Vitest suite, line-count check, lints, and public HTTP checks passed.
+
+## 2026-05-25 20:39 UTC+8
+- Core work summary: Drafted a Nano Banana prompt direction for an X32Studio enterprise logo.
+- Key changes made: Recommended a K/X monogram with subtle 32 origin symbolism for website and GitHub usage.
+
+## 2026-05-25 20:44 UTC+8
+- Core work summary: Revised the X32Studio logo direction away from orbiting planet imagery.
+- Key changes made: Shifted prompt toward a restrained K/X engineering monogram with hidden 32 details.
+
+## 2026-05-25 20:47 UTC+8
+- Core work summary: Refined X32Studio logo prompt to embed `32` inside the X monogram.
+- Key changes made: Proposed negative-space and stroke-cut design constraints for a scalable K/X/32 symbol.
+
+## 2026-05-25 20:53 UTC+8
+- Core work summary: Simplified the X32Studio logo prompt direction.
+- Key changes made: Reduced the concept to a clean X mark with subtle K and 32 hints instead of complex hidden geometry.
+
+## 2026-05-25 20:57 UTC+8
+- Core work summary: Refined logo prompt to place `32` at the lower-right of the X mark.
+- Key changes made: Prioritized a readable K/X monogram and shifted color direction away from Twitter/X-like black-blue styling.
+
+## 2026-05-25 20:59 UTC+8
+- Core work summary: Corrected the X32Studio logo prompt around the K/X relationship.
+- Key changes made: Reframed the mark so the X is constructed from a transformed K skeleton, with `32` as a small lower-right signature.
