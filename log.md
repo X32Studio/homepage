@@ -90,3 +90,49 @@
 ## 2026-05-24 17:24 UTC+8
 - Core work summary: Initialized current homepage code as a local git repository.
 - Key changes made: Created initial commit and configured homepage remote; push is blocked by GitHub repository access.
+
+## 2026-05-25 16:40 UTC+8
+- Core work summary: Reviewed how to deploy the current Astro homepage to an Aliyun ECS server.
+- Key changes made: Confirmed build command and static output path; local verification is blocked because `npm` is unavailable in the current shell.
+
+## 2026-05-25 16:44 UTC+8
+- Core work summary: Started ECS deployment access setup for `47.237.216.32`.
+- Key changes made: Tested SSH key login and confirmed the server still requires password-based authorization before automated deployment can continue.
+
+## 2026-05-25 16:53 UTC+8
+- Core work summary: Deployed the Astro homepage build to Aliyun ECS Nginx.
+- Key changes made: Installed Nginx/Node/npm, synced source to `/var/www/x32-source`, built `dist`, published to `/var/www/x32`, and configured Nginx.
+- Verification: Server localhost returns 200; public access is blocked by security group/DNS records pending console updates.
+
+## 2026-05-25 16:54 UTC+8
+- Core work summary: Clarified runtime model for the deployed Astro homepage.
+- Key changes made: Confirmed the static site should be served by Nginx/systemd rather than `nohup`.
+
+## 2026-05-25 16:56 UTC+8
+- Core work summary: Verified Aliyun security group screenshot and public reachability.
+- Key changes made: Confirmed Nginx serves locally on port 80, but public IP still times out and DNS still includes old GoDaddy parking IPs.
+
+## 2026-05-25 16:57 UTC+8
+- Core work summary: Reviewed GoDaddy DNS records for the homepage domain.
+- Key changes made: Identified the GoDaddy WebsiteBuilder A record as the stale parking/build-site record to remove.
+
+## 2026-05-25 16:59 UTC+8
+- Core work summary: Retested DNS and public HTTP after removing the GoDaddy WebsiteBuilder record.
+- Key changes made: Confirmed authoritative DNS still returns old GoDaddy IPs and ECS public port 80 still times out externally.
+
+## 2026-05-25 17:03 UTC+8
+- Core work summary: Retested ECS public access and GoDaddy DNS propagation.
+- Key changes made: Confirmed authoritative DNS now points only to `47.237.216.32`; IP and forced-domain HTTP return Nginx 200, while local resolver still has stale GoDaddy cache.
+
+## 2026-05-25 17:04 UTC+8
+- Core work summary: Reverified public DNS and HTTP access for the deployed homepage.
+- Key changes made: Confirmed authoritative, Cloudflare, and Google DNS all resolve to `47.237.216.32`; root, `www`, and direct IP return Nginx 200.
+
+## 2026-05-25 17:05 UTC+8
+- Core work summary: Evaluated whether Docker is needed for the current Astro homepage deployment.
+- Key changes made: No deployment changes; recommended keeping the static Nginx deployment unless backend services are added later.
+
+## 2026-05-25 17:09 UTC+8
+- Core work summary: Added and verified a reusable one-command deployment script.
+- Key changes made: Added `scripts/deploy.sh`, `npm run deploy`, and a Vitest coverage check for the deployment flow.
+- Verification: Deploy script ran successfully against ECS; full Vitest suite, line-count check, lints, and public HTTP checks passed.
