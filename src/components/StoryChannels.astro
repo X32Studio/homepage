@@ -1,0 +1,196 @@
+---
+import type { SiteContent } from "@lib/content";
+import notesImage from "../../assets/notes.png";
+
+type Props = {
+  content: SiteContent;
+};
+
+const { content } = Astro.props;
+---
+
+<section class="section story-channels">
+  <div class="story-heading">
+    <p class="label">{content.channels.eyebrow}</p>
+    <h2 class="section-title">{content.channels.title}</h2>
+    <p class="body-copy">{content.channels.body}</p>
+  </div>
+  <figure class="story-image">
+    <img src={notesImage.src} alt="" loading="lazy" />
+    <figcaption>{content.channels.eyebrow} / Open field notebook</figcaption>
+  </figure>
+  <div class="channel-grid">
+    {
+      content.channels.items.map((item, index) => (
+        <article class={`channel-card channel-${item.key}`}>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          <strong>{item.status}</strong>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .story-channels {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .story-heading {
+    display: grid;
+    gap: 1rem;
+    max-width: 58rem;
+  }
+
+  .story-image {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    transform: perspective(1200px) rotateX(1.5deg);
+  }
+
+  .story-image::before {
+    background: linear-gradient(90deg, rgba(247, 184, 79, 0.22), transparent 18%, transparent 82%, rgba(247, 184, 79, 0.16));
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .story-image img {
+    aspect-ratio: 16 / 7;
+    filter: saturate(0.86) contrast(1.08) brightness(0.74);
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .story-image figcaption {
+    background: rgba(3, 4, 7, 0.76);
+    bottom: 0.9rem;
+    color: var(--color-paper);
+    font-size: 0.72rem;
+    font-weight: 900;
+    left: 0.9rem;
+    letter-spacing: 0.12em;
+    padding: 0.45rem 0.6rem;
+    position: absolute;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .channel-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .channel-card {
+    background:
+      linear-gradient(180deg, rgba(247, 241, 229, 0.08), rgba(247, 241, 229, 0.025)),
+      var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    display: grid;
+    gap: 0.8rem;
+    min-height: 17rem;
+    padding: 1rem;
+    position: relative;
+  }
+
+  .channel-card::before {
+    background: linear-gradient(90deg, rgba(247, 184, 79, 0.32), transparent);
+    content: "";
+    height: 1px;
+    left: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 3.25rem;
+  }
+
+  .channel-card::after {
+    color: rgba(247, 241, 229, 0.16);
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 3rem;
+    line-height: 1;
+    position: absolute;
+    right: 1rem;
+    top: 0.8rem;
+  }
+
+  .channel-notes::after {
+    content: "{ }";
+  }
+
+  .channel-tools::after {
+    content: "⌘";
+  }
+
+  .channel-collections::after {
+    content: "///";
+  }
+
+  .channel-logs::after {
+    content: "$_";
+  }
+
+  .channel-card span,
+  .channel-card strong {
+    color: var(--color-accent);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .channel-card h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+    margin: 0;
+    max-width: 8ch;
+  }
+
+  .channel-card p {
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .channel-card strong {
+    align-self: end;
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .channel-card {
+      transition:
+        border-color 180ms ease,
+        transform 240ms var(--ease-out);
+    }
+
+    .channel-card:hover {
+      border-color: rgba(191, 63, 29, 0.55);
+      transform: translateY(-0.45rem) rotate(-0.25deg);
+    }
+  }
+
+  @media (max-width: 980px) {
+    .channel-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 620px) {
+    .channel-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,7 +1,7 @@
 locale: zh
 meta:
   title: X32 Studio
-  description: 一个高密度的小型工作室，创造 agentic 产品、学习工具和工程实验。
+  description: 一个深空探索型工作室，探索 agentic 系统、技术工具、航行笔记和有用实验。
 navigation:
   - key: home
     label: 首页
@@ -13,15 +13,34 @@ navigation:
     label: 关于
     href: /zh/about/
 hero:
-  eyebrow: 独立 Agentic Studio
-  title: X32 Studio 创造小而锋利的系统，帮助人获得更大的杠杆。
-  subtitle: 我们是一对夫妻组成的高密度工作室，把 agentic 算法工程能力和产品判断结合起来，为极客、小白和 AI 原生工作流打造产品。
+  eyebrow: X32 Deep Space Mission
+  title: 深空，是我们测试下一代工具的地方。
+  subtitle: 一个夫妻二人小型船员组，探索 agentic 系统、手作软件、奇怪工具，以及来自有用技术边缘的航行笔记。
   primaryCta:
-    label: 查看 Labs
+    label: 选择任务模块
     href: /zh/products/
   secondaryCta:
-    label: 了解我们
+    label: 阅读船员日志
     href: /zh/about/
+  paths:
+    - intent: build
+      label: 发射系统
+      title: Geek Lab
+      description: 面向极客和工程师的技术实验、agent 工具和工程笔记，适合想在轨道上拆开机器的人。
+      href: /zh/products/#geek-lab
+      packageLabel: crate 01
+    - intent: learn
+      label: 训练探索者
+      title: Newbie Lab
+      description: 帮新探索者读懂仪表盘，用友好的产品靠近复杂技术，同时保留它的神秘感。
+      href: /zh/products/#newbie-lab
+      packageLabel: parcel 02
+    - intent: automate
+      label: 部署 Agent
+      title: Agentic Lab
+      description: AI 原生工作流、自治 agent、评估回路和实用系统，把判断变成长距离杠杆。
+      href: /zh/products/#agentic-lab
+      packageLabel: drop 03
   stats:
     - value: 2
       label: 创造者
@@ -30,36 +49,57 @@ hero:
     - value: 1
       label: 工作室
 studio:
-  kicker: 我们是谁
-  title: 很小的公司，很高的能量密度。
-  body: X32 Studio 有意保持小而清晰。一位创始人深入 agentic 算法与工程系统，另一位负责产品、定位和用户体验。我们能从想法快速走到可用作品，同时不丢掉判断力。
+  kicker: 船员组
+  title: 两个人，一艘船，很远的航程。
+  body: X32 Studio 像一艘紧凑的深空飞船。一位创始人负责 agentic 算法与工程系统导航，另一位负责产品方向、用户路径和信号判断。小船员组，长距离仪器。
   principles:
-    - 用高密度手艺替代规模幻觉
-    - 产品既要有用，也要让人学会
-    - Agentic 系统需要看得见边界
-    - 用有品味的界面表达技术想法
+    - 先探索，再优化
+    - 做仪器，不做噪音面板
+    - 让 agentic 系统保持可观测
+    - 把航行笔记变成可用作品
 labsIntro:
-  eyebrow: 产品线
-  title: 三个 Labs，一个共同的 studio 操作系统。
-  body: 每个 Lab 都承载一类长期产品和实验。后续新增条目只需要改内容配置，不需要重写页面结构。
+  eyebrow: 任务模块
+  title: X32 远征队的三个任务模块。
+  body: 每个模块对应一种靠近未知的距离：深度工程、友好入门、agentic 自动化。
 about:
-  eyebrow: 关于
-  title: 由一对喜欢难题和实用软件的夫妻共同完成。
-  body: 我们把算法深度和产品清晰度放在一起。Studio 的形式让我们始终靠近真实工作：研究、原型、写作、发布、学习、迭代。
+  eyebrow: 船员档案
+  title: 一个家庭船员组，为未知领域制造仪器。
+  body: 我们把算法深度和产品清晰度放在一起。任务式工作让我们始终靠近真实现场：观测、原型、发射、记录、回收、迭代。
   capabilities:
     - Agentic 算法设计
     - 产品策略与用户路径
     - 全栈原型开发
     - 技术叙事与表达
 links:
-  title: 在其他地方找到我们
+  title: 地面信号
   items:
     - label: GitHub
       href: https://github.com/x32studio
-      note: 代码、实验和开源作品
+      note: 代码、实验、任务模块和开源作品
     - label: Email
       href: mailto:hello@x32studio.com
-      note: 合作与产品交流
+      note: 任务联系、合作与产品交流
+channels:
+  eyebrow: 信号档案
+  title: 产品只是我们发回来的信号之一。
+  body: 这次远征会持续发布航行笔记、工具架、参考文件夹和构建日志，记录我们在深空里测试过的东西。
+  items:
+    - key: notes
+      title: Field Notes
+      description: 从 agentic 实验里回收的文章、技术笔记、产品观察和奇怪发现。
+      status: 第一批信号即将发出
+    - key: tools
+      title: Tool Shelf
+      description: 经得起航行的软件、键盘、编辑器、工作流和产品。
+      status: 仪器整理中
+    - key: collections
+      title: Folders
+      description: prompt、demo、论文、截图和手作技术素材的参考文件夹。
+      status: 档案即将开放
+    - key: logs
+      title: Build Logs
+      description: 任务短记录：哪些发射了，哪些烧毁了，哪些潜得太深，哪些最后带回了价值。
+      status: 持续记录中
 footer:
-  tagline: 小型工作室，认真创造系统。
+  tagline: 两个人船员组，从深空带回有用工具。
   copyright: X32 Studio

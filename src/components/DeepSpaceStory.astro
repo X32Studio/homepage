@@ -1,0 +1,480 @@
+---
+import type { Product, SiteContent } from "@lib/content";
+import agenticImage from "../../assets/agentic.png";
+import geekImage from "../../assets/geek.png";
+import heroVideo from "../../assets/hero.mp4";
+import heroPoster from "../../assets/homepage.png";
+import newbieImage from "../../assets/newbee.png";
+import notesImage from "../../assets/notes.png";
+
+type Props = {
+  content: SiteContent;
+  products: Product[];
+};
+
+const { content, products } = Astro.props;
+const productImages = {
+  agentic: agenticImage,
+  geek: geekImage,
+  newbie: newbieImage,
+};
+const labels =
+  content.locale === "zh"
+    ? {
+        enter: "进入",
+        scroll: "继续下潜",
+        modules: "选择任务舱",
+        archive: "打开航行笔记",
+        crew: "查看船员档案",
+        signal: "接收地面信号",
+      }
+    : {
+        enter: "Enter",
+        scroll: "Continue descent",
+        modules: "Choose a mission bay",
+        archive: "Open the field notebook",
+        crew: "View crew manifest",
+        signal: "Receive ground signal",
+      };
+---
+
+<article class="space-story" aria-labelledby="space-title">
+  <video class="story-video" autoplay muted loop playsinline poster={heroPoster.src} aria-hidden="true">
+    <source src={heroVideo} type="video/mp4" />
+  </video>
+  <div class="story-shade" aria-hidden="true"></div>
+
+  <section class="story-scene launch-scene" aria-labelledby="space-title">
+    <div class="hud hud-left" aria-hidden="true">
+      <span>* ACTIVE // X32</span>
+      <span>VECTOR: DEEP SPACE</span>
+      <span>CREW: 02</span>
+      <span>MODE: EXPLORE</span>
+    </div>
+    <div class="launch-copy">
+      <p class="mission-kicker">{content.hero.eyebrow}</p>
+      <h1 id="space-title">{content.hero.title}</h1>
+      <p>{content.hero.subtitle}</p>
+    </div>
+    <div class="orbital-map" aria-hidden="true">
+      <span class="orbit orbit-one"></span>
+      <span class="orbit orbit-two"></span>
+      <span class="craft"></span>
+      <span class="burn"></span>
+    </div>
+    <div class="scroll-cue">{labels.scroll}</div>
+  </section>
+
+  <section class="story-scene modules-scene" aria-labelledby="modules-title">
+    <div class="scene-copy">
+      <p class="mission-kicker">{labels.modules}</p>
+      <h2 id="modules-title">{content.labsIntro.title}</h2>
+      <p>{content.labsIntro.body}</p>
+    </div>
+    <div class="portal-field">
+      {products.map((product) => {
+        const image = productImages[product.lab];
+        return (
+          <a class={`portal portal-${product.lab}`} href={`/products/#${product.id}`}>
+            <span>{product.status}</span>
+            <img src={image.src} alt="" loading="lazy" />
+            <strong>{product.name}</strong>
+            <p>{product.summary}</p>
+            <em>{labels.enter} {product.name}</em>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="story-scene archive-scene" aria-labelledby="archive-title">
+    <figure class="notebook-portal">
+      <img src={notesImage.src} alt="" loading="lazy" />
+      <figcaption>{labels.archive}</figcaption>
+    </figure>
+    <div class="scene-copy">
+      <p class="mission-kicker">{content.channels.eyebrow}</p>
+      <h2 id="archive-title">{content.channels.title}</h2>
+      <p>{content.channels.body}</p>
+    </div>
+    <div class="signal-cluster">
+      {content.channels.items.map((item) => (
+        <article>
+          <span>{item.status}</span>
+          <strong>{item.title}</strong>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="story-scene crew-scene" aria-labelledby="crew-title">
+    <div class="scene-copy">
+      <p class="mission-kicker">{labels.crew}</p>
+      <h2 id="crew-title">{content.about.title}</h2>
+      <p>{content.about.body}</p>
+    </div>
+    <div class="crew-console">
+      {content.about.capabilities.map((item) => <span>{item}</span>)}
+    </div>
+    <div class="mission-rules">
+      {content.studio.principles.map((item, index) => (
+        <p>
+          <strong>{String(index + 1).padStart(2, "0")}</strong>
+          {item}
+        </p>
+      ))}
+    </div>
+  </section>
+
+  <section class="story-scene signal-scene" aria-labelledby="signal-title">
+    <div class="scene-copy">
+      <p class="mission-kicker">{labels.signal}</p>
+      <h2 id="signal-title">{content.links.title}</h2>
+    </div>
+    <div class="ground-links">
+      {content.links.items.map((item) => (
+        <a href={item.href}>
+          <span>Transmission</span>
+          <strong>{item.label}</strong>
+          <p>{item.note}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</article>
+
+<style>
+  .space-story {
+    background: #030407;
+    color: var(--color-ink);
+    margin: -4.6rem calc(50% - 50vw) 0;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    scroll-snap-type: y proximity;
+    width: 100vw;
+  }
+
+  .story-video,
+  .story-shade {
+    height: 100vh;
+    inset: 0;
+    position: fixed;
+    width: 100vw;
+  }
+
+  .story-video {
+    object-fit: cover;
+    opacity: 0.82;
+    z-index: 0;
+  }
+
+  .story-shade {
+    background:
+      radial-gradient(circle at 54% 34%, rgba(3, 4, 7, 0.04), rgba(3, 4, 7, 0.74) 60%),
+      linear-gradient(90deg, rgba(3, 4, 7, 0.96), rgba(3, 4, 7, 0.38), rgba(3, 4, 7, 0.86));
+    z-index: 1;
+  }
+
+  .story-scene {
+    align-items: center;
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    min-height: 100vh;
+    padding: clamp(6rem, 12vh, 9rem) var(--space-page) clamp(2rem, 7vh, 5rem);
+    position: relative;
+    scroll-snap-align: start;
+    z-index: 2;
+  }
+
+  .story-scene::before {
+    background:
+      linear-gradient(rgba(247, 241, 229, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247, 241, 229, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    content: "";
+    inset: 0;
+    mask-image: radial-gradient(circle at 50% 50%, black, transparent 72%);
+    position: absolute;
+    z-index: -1;
+  }
+
+  .launch-scene {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .launch-copy,
+  .scene-copy {
+    display: grid;
+    gap: 1rem;
+    max-width: 56rem;
+  }
+
+  .mission-kicker,
+  .hud span,
+  .portal span,
+  .portal em,
+  .signal-cluster span,
+  .ground-links span {
+    color: var(--color-accent-soft);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-body);
+    font-weight: 850;
+    letter-spacing: -0.09em;
+    line-height: 0.84;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  :global(html:lang(zh)) h1,
+  :global(html:lang(zh)) h2 {
+    font-family: var(--font-cjk);
+    font-weight: 850;
+    letter-spacing: -0.055em;
+    line-height: 0.94;
+    text-transform: none;
+  }
+
+  :global(html:lang(zh)) .mission-kicker,
+  :global(html:lang(zh)) .hud span,
+  :global(html:lang(zh)) .portal span,
+  :global(html:lang(zh)) .portal em,
+  :global(html:lang(zh)) .signal-cluster span,
+  :global(html:lang(zh)) .ground-links span {
+    font-family: var(--font-cjk);
+    letter-spacing: 0.08em;
+  }
+
+  h1 {
+    font-size: clamp(3.6rem, 10vw, 12rem);
+    max-width: 10ch;
+  }
+
+  h2 {
+    font-size: clamp(2.6rem, 7vw, 7.6rem);
+    max-width: 11ch;
+  }
+
+  .launch-copy p:last-child,
+  .scene-copy p:last-child,
+  .portal p,
+  .ground-links p {
+    color: var(--color-ink-soft);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  .hud {
+    display: grid;
+    gap: 0.55rem;
+    left: var(--space-page);
+    position: absolute;
+    top: clamp(6rem, 12vh, 9rem);
+  }
+
+  .launch-copy {
+    margin-top: clamp(5rem, 14vh, 10rem);
+  }
+
+  .scroll-cue {
+    bottom: 2rem;
+    color: var(--color-ink-soft);
+    font-size: 0.7rem;
+    font-weight: 900;
+    left: var(--space-page);
+    letter-spacing: 0.16em;
+    position: absolute;
+    text-transform: uppercase;
+  }
+
+  .orbital-map {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .orbit {
+    border: 1px solid rgba(247, 241, 229, 0.18);
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .orbit-one {
+    height: 44rem;
+    right: -9rem;
+    top: 10rem;
+    width: 44rem;
+  }
+
+  .orbit-two {
+    height: 22rem;
+    right: 10rem;
+    top: 21rem;
+    width: 22rem;
+  }
+
+  .craft {
+    background: var(--color-ink);
+    clip-path: polygon(0 45%, 78% 45%, 100% 0, 88% 50%, 100% 100%, 78% 55%, 0 55%);
+    height: 2rem;
+    position: absolute;
+    right: 24rem;
+    top: 26rem;
+    width: 5rem;
+  }
+
+  .burn {
+    background: radial-gradient(circle, var(--color-accent-soft), transparent 65%);
+    height: 7rem;
+    position: absolute;
+    right: 27rem;
+    top: 23.5rem;
+    width: 7rem;
+  }
+
+  .portal-field,
+  .signal-cluster,
+  .crew-console,
+  .mission-rules,
+  .ground-links {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .portal {
+    background: rgba(3, 4, 7, 0.64);
+    border: 1px solid rgba(247, 241, 229, 0.16);
+    border-radius: 999px 1.5rem 1.5rem 999px;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    min-height: 9rem;
+    padding: 0.75rem 1rem 0.75rem 0.75rem;
+  }
+
+  .portal img {
+    aspect-ratio: 1;
+    border-radius: 999px;
+    filter: brightness(0.72) contrast(1.1);
+    grid-row: span 4;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .portal strong,
+  .signal-cluster strong,
+  .ground-links strong {
+    color: var(--color-ink);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+  }
+
+  .notebook-portal {
+    border: 1px solid var(--color-line);
+    border-radius: 2rem;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .notebook-portal img {
+    aspect-ratio: 4 / 3;
+    filter: brightness(0.68) contrast(1.08);
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .notebook-portal figcaption {
+    background: rgba(3, 4, 7, 0.78);
+    bottom: 1rem;
+    color: var(--color-ink);
+    font-size: 0.72rem;
+    font-weight: 900;
+    left: 1rem;
+    letter-spacing: 0.12em;
+    padding: 0.45rem 0.6rem;
+    position: absolute;
+    text-transform: uppercase;
+  }
+
+  .signal-cluster,
+  .crew-console,
+  .ground-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .signal-cluster article,
+  .crew-console span,
+  .mission-rules p,
+  .ground-links a {
+    background: rgba(3, 4, 7, 0.58);
+    border: 1px solid rgba(247, 241, 229, 0.14);
+    border-radius: 1.2rem;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .crew-console span {
+    border-left: 2px solid var(--color-accent);
+    font-weight: 850;
+  }
+
+  .mission-rules strong {
+    color: var(--color-accent-soft);
+    display: inline-block;
+    margin-right: 0.8rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .craft {
+      animation: drift 7s ease-in-out infinite;
+    }
+
+    .portal,
+    .ground-links a {
+      transition:
+        border-color 180ms ease,
+        transform 240ms var(--ease-out);
+    }
+
+    .portal:hover,
+    .ground-links a:hover {
+      border-color: rgba(247, 184, 79, 0.6);
+      transform: translateY(-0.35rem);
+    }
+  }
+
+  @keyframes drift {
+    50% {
+      transform: translateY(-1rem) translateX(0.6rem);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .story-scene,
+    .archive-scene {
+      grid-template-columns: 1fr;
+    }
+
+    .portal,
+    .signal-cluster,
+    .crew-console,
+    .ground-links {
+      grid-template-columns: 1fr;
+    }
+
+    .portal img {
+      border-radius: 1rem;
+      grid-row: auto;
+    }
+  }
+</style>

@@ -27,6 +27,20 @@ const { content, full = false } = Astro.props;
     display: grid;
     gap: clamp(2rem, 5vw, 4rem);
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    position: relative;
+  }
+
+  .about-section::before {
+    color: rgba(247, 241, 229, 0.08);
+    content: "CREW // MANIFEST";
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: clamp(2rem, 7vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    position: absolute;
+    right: 0;
+    top: -1rem;
+    z-index: -1;
   }
 
   .about-section-full {
@@ -46,9 +60,11 @@ const { content, full = false } = Astro.props;
 
   .capability-grid span {
     border-left: 2px solid var(--color-accent);
+    background: rgba(247, 241, 229, 0.045);
+    border-radius: 0.8rem;
     color: var(--color-ink);
+    padding: 0.75rem 0.8rem;
     font-weight: 800;
-    padding-left: 0.8rem;
   }
 
   @media (max-width: 760px) {

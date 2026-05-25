@@ -1,7 +1,7 @@
 locale: en
 meta:
   title: X32 Studio
-  description: A compact studio building agentic products, learning tools, and engineering experiments with unusual density.
+  description: A deep-space studio exploring agentic systems, technical tools, field notes, and useful experiments.
 navigation:
   - key: home
     label: Home
@@ -13,15 +13,34 @@ navigation:
     label: About
     href: /about/
 hero:
-  eyebrow: Independent agentic studio
-  title: X32 Studio builds small, sharp systems for people who want leverage.
-  subtitle: A two-person studio pairing deep agentic engineering with product taste, shipping tools for builders, beginners, and AI-native workflows.
+  eyebrow: X32 Deep Space Mission
+  title: Deep space is where we test the next tools.
+  subtitle: A two-person crew exploring agentic systems, handmade software, strange tools, and field notes from the edge of useful technology.
   primaryCta:
-    label: Explore the labs
+    label: Choose a mission module
     href: /products/
   secondaryCta:
-    label: Read the studio note
+    label: Read the crew log
     href: /about/
+  paths:
+    - intent: build
+      label: Launch systems
+      title: Geek Lab
+      description: Engineering experiments, agent tooling, and low-level notes for people who want to open the machine in orbit.
+      href: /products/#geek-lab
+      packageLabel: crate 01
+    - intent: learn
+      label: Train explorers
+      title: Newbie Lab
+      description: Guided learning products that help newcomers read the instrument panel without flattening the mystery.
+      href: /products/#newbie-lab
+      packageLabel: parcel 02
+    - intent: automate
+      label: Deploy agents
+      title: Agentic Lab
+      description: Autonomous workflows, evaluation loops, and agentic systems designed for long-range leverage.
+      href: /products/#agentic-lab
+      packageLabel: drop 03
   stats:
     - value: 2
       label: Makers
@@ -30,36 +49,57 @@ hero:
     - value: 1
       label: Studio
 studio:
-  kicker: What we are
-  title: Tiny company, high agency.
-  body: X32 Studio is intentionally small. One founder goes deep on agentic algorithms and engineering systems; the other shapes products, positioning, and user experience. The result is a studio that can move from idea to artifact without losing the plot.
+  kicker: Mission crew
+  title: Two people, one vessel, unusual range.
+  body: X32 Studio is a compact deep-space craft. One founder navigates agentic algorithms and engineering systems; the other maps product direction, user journeys, and signal from noise. Small crew, long-range instruments.
   principles:
-    - Dense craft over headcount
-    - Products that teach while they work
-    - Agentic systems with visible edges
-    - Tasteful interfaces for technical ideas
+    - Explore before optimizing
+    - Build instruments, not dashboards
+    - Keep agentic systems observable
+    - Turn field notes into useful artifacts
 labsIntro:
-  eyebrow: Product lines
-  title: Three labs, one studio operating system.
-  body: Each lab is a shelf for ongoing products and experiments. New entries can be added through content files without redesigning the site.
+  eyebrow: Mission modules
+  title: Three modules for the X32 expedition.
+  body: "Each module handles a different distance from the unknown: deep engineering, friendly onboarding, and agentic automation."
 about:
-  eyebrow: About
-  title: Built by a couple who like hard problems and useful software.
-  body: "We combine algorithmic depth with product clarity. The studio format lets us stay close to the work: research, prototype, write, ship, learn, and refine."
+  eyebrow: Crew manifest
+  title: A family crew building instruments for the unknown.
+  body: "We combine algorithmic depth with product clarity. The mission format lets us stay close to the work: observe, prototype, launch, record, recover, and refine."
   capabilities:
     - Agentic algorithm design
     - Product strategy and user journeys
     - Full-stack prototypes
     - Technical storytelling
 links:
-  title: Find us elsewhere
+  title: Ground signals
   items:
     - label: GitHub
       href: https://github.com/x32studio
-      note: Code, experiments, and open-source work
+      note: Code, experiments, mission modules, and open-source artifacts
     - label: Email
       href: mailto:hello@x32studio.com
-      note: Collaborations and product conversations
+      note: Mission contact, collaborations, and product conversations
+channels:
+  eyebrow: Signal archive
+  title: Products are only one kind of signal.
+  body: The expedition will publish field notes, tool shelves, reference folders, and build logs from the things we test in deep space.
+  items:
+    - key: notes
+      title: Field Notes
+      description: Essays, technical notebooks, product observations, and strange learnings recovered from agentic experiments.
+      status: First transmission soon
+    - key: tools
+      title: Tool Shelf
+      description: Software, keyboards, editors, workflows, and products that survive the journey long enough to be remembered.
+      status: Curating instruments
+    - key: collections
+      title: Folders
+      description: Reference folders for prompts, demos, papers, screenshots, and handmade technical artifacts.
+      status: Opening the archive
+    - key: logs
+      title: Build Logs
+      description: "Short records from missions: what launched, what burned up, what dived too deep, and what came back useful."
+      status: Always recording
 footer:
-  tagline: Small studio. Serious systems.
+  tagline: Deep-space tools from a two-person crew.
   copyright: X32 Studio

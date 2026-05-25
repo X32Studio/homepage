@@ -25,6 +25,14 @@ export type SiteContent = {
     subtitle: string;
     primaryCta: LinkItem;
     secondaryCta: LinkItem;
+    paths: Array<{
+      intent: "build" | "learn" | "automate";
+      label: string;
+      title: string;
+      description: string;
+      href: string;
+      packageLabel: string;
+    }>;
     stats: Array<{
       value: string | number;
       label: string;
@@ -50,6 +58,17 @@ export type SiteContent = {
   links: {
     title: string;
     items: Array<LinkItem & { note: string }>;
+  };
+  channels: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    items: Array<{
+      key: "notes" | "tools" | "collections" | "logs";
+      title: string;
+      description: string;
+      status: string;
+    }>;
   };
   footer: {
     tagline: string;

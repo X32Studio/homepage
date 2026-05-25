@@ -1,0 +1,186 @@
+---
+import AboutSection from "@components/AboutSection.astro";
+import LabIndex from "@components/LabIndex.astro";
+import LinkDock from "@components/LinkDock";
+import StoryChannels from "@components/StoryChannels.astro";
+import type { Product, SiteContent } from "@lib/content";
+
+type Props = {
+  content: SiteContent;
+  products: Product[];
+};
+
+const { content, products } = Astro.props;
+const labels =
+  content.locale === "zh"
+    ? ["任务模块", "航行档案", "船员舱", "地面信号"]
+    : ["Mission modules", "Signal archive", "Crew deck", "Ground signal"];
+---
+
+<div class="mission-deck" aria-label="X32 deep-space mission deck">
+  <div class="deck-rail" aria-hidden="true">
+    <span>01</span>
+    <span>02</span>
+    <span>03</span>
+    <span>04</span>
+  </div>
+
+  <section class="mission-frame module-frame" aria-label={labels[0]}>
+    <div class="frame-header">
+      <span>Module 01</span>
+      <strong>{labels[0]}</strong>
+    </div>
+    <LabIndex content={content} products={products} compact />
+  </section>
+
+  <section class="mission-frame archive-frame" aria-label={labels[1]}>
+    <div class="frame-header">
+      <span>Module 02</span>
+      <strong>{labels[1]}</strong>
+    </div>
+    <StoryChannels content={content} />
+  </section>
+
+  <section class="mission-frame crew-frame" aria-label={labels[2]}>
+    <div class="frame-header">
+      <span>Module 03</span>
+      <strong>{labels[2]}</strong>
+    </div>
+    <AboutSection content={content} />
+  </section>
+
+  <section class="mission-frame signal-frame" aria-label={labels[3]}>
+    <div class="frame-header">
+      <span>Module 04</span>
+      <strong>{labels[3]}</strong>
+    </div>
+    <LinkDock title={content.links.title} items={content.links.items} />
+  </section>
+</div>
+
+<style>
+  .mission-deck {
+    display: grid;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    margin: clamp(2rem, 5vw, 4rem) 0;
+    position: relative;
+  }
+
+  .mission-deck::before {
+    background: linear-gradient(180deg, transparent, rgba(247, 184, 79, 0.4), transparent);
+    content: "";
+    height: 100%;
+    left: clamp(0.7rem, 2vw, 1.2rem);
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+
+  .deck-rail {
+    display: grid;
+    gap: 1rem;
+    left: 0;
+    position: absolute;
+    top: 2rem;
+    z-index: 2;
+  }
+
+  .deck-rail span {
+    align-items: center;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    color: var(--color-accent-soft);
+    display: flex;
+    font-size: 0.68rem;
+    font-weight: 900;
+    height: 2.1rem;
+    justify-content: center;
+    width: 2.1rem;
+  }
+
+  .mission-frame {
+    background:
+      linear-gradient(135deg, rgba(247, 241, 229, 0.075), rgba(247, 241, 229, 0.018)),
+      rgba(8, 12, 20, 0.76);
+    border: 1px solid var(--color-line);
+    border-radius: clamp(1.1rem, 2vw, 1.8rem);
+    margin-left: clamp(1.2rem, 4vw, 3rem);
+    overflow: hidden;
+    padding: clamp(1rem, 3vw, 2rem);
+    position: relative;
+  }
+
+  .mission-frame::before {
+    border: 1px solid rgba(247, 241, 229, 0.08);
+    border-radius: inherit;
+    content: "";
+    inset: 0.45rem;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .mission-frame::after {
+    background: radial-gradient(circle, rgba(247, 184, 79, 0.26), transparent 58%);
+    content: "";
+    height: 18rem;
+    pointer-events: none;
+    position: absolute;
+    right: -8rem;
+    top: -8rem;
+    width: 18rem;
+  }
+
+  .frame-header {
+    align-items: center;
+    border-bottom: 1px solid var(--color-line);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    padding-bottom: 0.85rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .frame-header span,
+  .frame-header strong {
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .frame-header span {
+    color: var(--color-accent-soft);
+  }
+
+  .frame-header strong {
+    color: var(--color-ink-soft);
+  }
+
+  :global(.mission-frame .section),
+  :global(.mission-frame .link-dock) {
+    border-top: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  :global(.mission-frame .site-footer) {
+    border: 0;
+  }
+
+  @media (max-width: 720px) {
+    .mission-frame {
+      margin-left: 1rem;
+    }
+
+    .deck-rail {
+      display: none;
+    }
+
+    .mission-deck::before {
+      left: 0;
+    }
+  }
+</style>

@@ -1,14 +1,15 @@
 :root {
-  --color-ink: #171411;
-  --color-ink-soft: #4b453d;
-  --color-paper: #f4efe5;
-  --color-paper-deep: #e6dccb;
-  --color-line: rgba(23, 20, 17, 0.18);
-  --color-accent: #bf3f1d;
-  --color-accent-soft: #f2b544;
-  --color-panel: rgba(255, 250, 239, 0.68);
+  --color-ink: #f7f1e5;
+  --color-ink-soft: #a9a292;
+  --color-paper: #030407;
+  --color-paper-deep: #090d14;
+  --color-line: rgba(247, 241, 229, 0.16);
+  --color-accent: #f06b3f;
+  --color-accent-soft: #f7b84f;
+  --color-panel: rgba(8, 12, 20, 0.72);
   --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
   --font-body: "Avenir Next", "Gill Sans", "Helvetica Neue", sans-serif;
+  --font-cjk: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
   --space-page: clamp(1rem, 3vw, 3rem);
   --max-width: 1180px;
   --radius-lg: 1.5rem;

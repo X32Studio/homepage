@@ -17,6 +17,7 @@
   top: 0;
   z-index: 10;
   backdrop-filter: blur(18px);
+  background: linear-gradient(180deg, rgba(3, 4, 7, 0.84), rgba(3, 4, 7, 0.28));
 }
 
 .brand-mark,
@@ -93,11 +94,24 @@
 }
 
 .link-dock-item {
+  background: rgba(8, 12, 20, 0.62);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   display: grid;
   gap: 0.5rem;
   padding: 1rem;
+  position: relative;
+}
+
+.link-dock-item::before {
+  background: var(--color-accent-soft);
+  border-radius: 999px;
+  content: "";
+  height: 0.46rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 0.46rem;
 }
 
 .link-dock-item span {
