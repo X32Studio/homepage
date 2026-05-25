@@ -63,6 +63,30 @@
 - Core work summary: Prepared current deep-space homepage work for git commit.
 - Key changes made: Reviewed repository changes and included the required session log entry.
 
+## 2026-05-25 16:20 UTC+8
+- Core work summary: Attempted to push local main branch to the homepage GitHub remote.
+- Key changes made: Verified clean local git state, remote URL, HTTPS failure, and missing SSH GitHub access.
+
+## 2026-05-25 16:18 UTC+8
+- Core work summary: Reviewed `homepage-git.md` remote setup instructions.
+- Key changes made: Confirmed the documented remote matches the configured `origin` URL.
+
+## 2026-05-25 16:19 UTC+8
+- Core work summary: Retried homepage push using the SSH remote URL.
+- Key changes made: Switched `origin` to `git@github.com:X32Studio/homepage.git`; push is blocked by missing GitHub SSH key access.
+
+## 2026-05-25 16:21 UTC+8
+- Core work summary: Explained how to add a GitHub SSH key for remote push access.
+- Key changes made: No code changes; provided key generation, upload, verification, and push commands.
+
+## 2026-05-25 16:22 UTC+8
+- Core work summary: Advised how to handle an existing default SSH key during GitHub setup.
+- Key changes made: No code changes; recommended keeping the existing key and uploading its public key.
+
+## 2026-05-25 16:26 UTC+8
+- Core work summary: Added a GitHub-ready README for the X32 Studio homepage.
+- Key changes made: Documented project purpose, stack, structure, commands, content editing, and remote push notes.
+
 ## 2026-05-24 17:24 UTC+8
 - Core work summary: Initialized current homepage code as a local git repository.
 - Key changes made: Created initial commit and configured homepage remote; push is blocked by GitHub repository access.
