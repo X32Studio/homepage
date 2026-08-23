@@ -9,15 +9,30 @@ type Props = {
 };
 
 const { content, locale, alternatePath } = Astro.props;
+const homeHref = locale === "en" ? "/" : "/zh/";
 ---
 
-<header class="site-header">
-  <a class="brand-mark" href={locale === "en" ? "/" : "/zh/"} aria-label="X32 Studio home">
-    <span class="brand-symbol">X32</span>
-    <span class="brand-word">Studio</span>
-  </a>
-  <nav class="site-nav" aria-label="Primary navigation">
+<header class="site-header" id="site-header">
+  <div class="container bar">
+    <a class="brand-mark" href={homeHref} aria-label="X32 Studio home">
+      <span class="brand-symbol">X32</span>
+      <span class="brand-word">Studio</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      {content.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <LanguageSwitch locale={locale} alternatePath={alternatePath} />
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation">
     {content.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
   </nav>
-  <LanguageSwitch locale={locale} alternatePath={alternatePath} />
 </header>
+
+<script>
+  const header = document.getElementById("site-header");
+  if (header) {
+    const update = () => header.classList.toggle("scrolled", window.scrollY > 12);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+</script>

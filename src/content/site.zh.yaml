@@ -1,105 +1,62 @@
 locale: zh
 meta:
-  title: X32 Studio
-  description: 一个深空探索型工作室，探索 agentic 系统、技术工具、航行笔记和有用实验。
+  title: X32 Studio — Agentic 系统、开发者工具与手作软件
+  description: X32 Studio 是一支精英 geek 小队，构建 agentic 系统与开发者工具。旗舰产品 Argus：持续深挖的深度研究 agent。
 navigation:
   - key: home
     label: 首页
     href: /zh/
-  - key: products
-    label: 产品
-    href: /zh/products/
+  - key: projects
+    label: 项目
+    href: /zh/projects/
+  - key: blog
+    label: 博客
+    href: /zh/blog/
   - key: about
     label: 关于
     href: /zh/about/
 hero:
-  eyebrow: X32 Deep Space Mission
-  title: 深空，是我们测试下一代工具的地方。
-  subtitle: 一个夫妻二人小型船员组，探索 agentic 系统、手作软件、奇怪工具，以及来自有用技术边缘的航行笔记。
+  eyebrow: 深空行动 · 2026 启航
+  title: 我们在地图尽头，
+  titleAccent: 种出会生长的软件。
+  subtitle: X32 Studio 是一支精英 geek 小队，专注 agentic 系统、开发者工具和手作软件——公开建造，能用了才发布。
   primaryCta:
-    label: 选择任务模块
-    href: /zh/products/
+    label: 探索项目
+    href: /zh/projects/
   secondaryCta:
-    label: 阅读船员日志
-    href: /zh/about/
-  paths:
-    - intent: build
-      label: 发射系统
-      title: Geek Lab
-      description: 面向极客和工程师的技术实验、agent 工具和工程笔记，适合想在轨道上拆开机器的人。
-      href: /zh/products/#geek-lab
-      packageLabel: crate 01
-    - intent: learn
-      label: 训练探索者
-      title: Newbie Lab
-      description: 帮新探索者读懂仪表盘，用友好的产品靠近复杂技术，同时保留它的神秘感。
-      href: /zh/products/#newbie-lab
-      packageLabel: parcel 02
-    - intent: automate
-      label: 部署 Agent
-      title: Agentic Lab
-      description: AI 原生工作流、自治 agent、评估回路和实用系统，把判断变成长距离杠杆。
-      href: /zh/products/#agentic-lab
-      packageLabel: drop 03
+    label: 读航行笔记
+    href: /zh/blog/
   stats:
-    - value: 2
-      label: 创造者
-    - value: 3
-      label: 产品线
+    - value: "∞"
+      label: 好奇心
+    - value: ★
+      label: 精英小队
     - value: 1
-      label: 工作室
-studio:
-  kicker: 船员组
-  title: 两个人，一艘船，很远的航程。
-  body: X32 Studio 像一艘紧凑的深空飞船。一位创始人负责 agentic 算法与工程系统导航，另一位负责产品方向、用户路径和信号判断。小船员组，长距离仪器。
-  principles:
-    - 先探索，再优化
-    - 做仪器，不做噪音面板
-    - 让 agentic 系统保持可观测
-    - 把航行笔记变成可用作品
-labsIntro:
-  eyebrow: 任务模块
-  title: X32 远征队的三个任务模块。
-  body: 每个模块对应一种靠近未知的距离：深度工程、友好入门、agentic 自动化。
-about:
-  eyebrow: 船员档案
-  title: 一个家庭船员组，为未知领域制造仪器。
-  body: 我们把算法深度和产品清晰度放在一起。任务式工作让我们始终靠近真实现场：观测、原型、发射、记录、回收、迭代。
+      label: 旗舰 agent
+aboutTeaser:
+  eyebrow: 团队
+  title: 一支精英小队，不寻常的射程。
+  body: 一支精英 geek 小队——agentic 算法、工程系统、产品方向、从噪声中提取信号，全都自己上手。仪器很远，一切都公开建造。
+  cta:
+    label: 认识团队
+    href: /zh/about/
   capabilities:
-    - Agentic 算法设计
-    - 产品策略与用户路径
-    - 全栈原型开发
-    - 技术叙事与表达
-links:
-  title: 地面信号
-  items:
+    - Agentic 系统设计
+    - 开发者工具
+    - 全栈原型
+    - 技术叙事
+blogIntro:
+  eyebrow: 航行笔记
+  title: 来自远征的信号。
+projectsIntro:
+  eyebrow: 仪器
+  title: 为使用而造，不是为观赏。
+  body: 这里的每个项目都是能用的仪器。克隆它、运行它、把它玩坏——然后告诉我们发生了什么。
+footer:
+  tagline: 来自有用技术边缘的手作软件。
+  copyright: X32 Studio
+  links:
     - label: GitHub
-      href: https://github.com/x32studio
-      note: 代码、实验、任务模块和开源作品
+      href: https://github.com/X32Studio
     - label: Email
       href: mailto:hello@x32studio.com
-      note: 任务联系、合作与产品交流
-channels:
-  eyebrow: 信号档案
-  title: 产品只是我们发回来的信号之一。
-  body: 这次远征会持续发布航行笔记、工具架、参考文件夹和构建日志，记录我们在深空里测试过的东西。
-  items:
-    - key: notes
-      title: Field Notes
-      description: 从 agentic 实验里回收的文章、技术笔记、产品观察和奇怪发现。
-      status: 第一批信号即将发出
-    - key: tools
-      title: Tool Shelf
-      description: 经得起航行的软件、键盘、编辑器、工作流和产品。
-      status: 仪器整理中
-    - key: collections
-      title: Folders
-      description: prompt、demo、论文、截图和手作技术素材的参考文件夹。
-      status: 档案即将开放
-    - key: logs
-      title: Build Logs
-      description: 任务短记录：哪些发射了，哪些烧毁了，哪些潜得太深，哪些最后带回了价值。
-      status: 持续记录中
-footer:
-  tagline: 两个人船员组，从深空带回有用工具。
-  copyright: X32 Studio

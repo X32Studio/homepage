@@ -1,36 +1,89 @@
-@media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    animation: rise-in 780ms var(--ease-out) both;
-  }
-
-  .reveal-delay-1 {
-    animation-delay: 120ms;
-  }
-
-  .reveal-delay-2 {
-    animation-delay: 240ms;
-  }
-
-  .hover-lift {
-    transition:
-      border-color 180ms ease,
-      transform 220ms var(--ease-out);
-  }
-
-  .hover-lift:hover {
-    border-color: rgba(191, 63, 29, 0.55);
-    transform: translateY(-4px);
-  }
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
 }
 
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+html:not(.js) .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal[data-delay="1"] {
+  transition-delay: 0.08s;
+}
+
+.reveal[data-delay="2"] {
+  transition-delay: 0.16s;
+}
+
+.reveal[data-delay="3"] {
+  transition-delay: 0.24s;
+}
+
+/* hero entrance */
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(30px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
+}
+
+.rise {
+  animation: rise-in 0.9s var(--ease-out) both;
+}
+
+.rise.d1 { animation-delay: 0.1s; }
+.rise.d2 { animation-delay: 0.22s; }
+.rise.d3 { animation-delay: 0.34s; }
+.rise.d4 { animation-delay: 0.46s; }
+
+@keyframes aurora-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-text {
+  background: var(--gradient-aurora);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aurora-shift 9s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(110, 231, 255, 0.5);
+  }
+
+  60% {
+    box-shadow: 0 0 0 8px rgba(110, 231, 255, 0);
+  }
+}
+
+.pulse-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  animation: pulse-dot 2.4s infinite;
 }

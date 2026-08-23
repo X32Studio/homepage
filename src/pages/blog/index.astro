@@ -1,0 +1,55 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getAlternateLocalePath, getSiteContent } from "@lib/content";
+import { getCollection } from "astro:content";
+
+const locale = "en";
+const content = getSiteContent(locale);
+const alternatePath = getAlternateLocalePath(locale, Astro.url.pathname);
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft && data.locale === locale)).sort(
+  (left, right) => right.data.pubDate.valueOf() - left.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout content={content} locale={locale} alternatePath={alternatePath} title="Blog">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow reveal">{content.blogIntro.eyebrow}</p>
+      <h1 class="page-title reveal" data-delay="1">{content.blogIntro.title}</h1>
+      <div class="post-list reveal" data-delay="2">
+        {
+          posts.map((post) => (
+            <article class="post-row">
+              <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toISOString().slice(0, 10)}</time>
+              <div>
+                <h3><a href={`/blog/${post.data.postSlug}/`}>{post.data.title}</a></h3>
+                <p>{post.data.description}</p>
+              </div>
+              <span class="lang-tag">EN</span>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: clamp(2.2rem, 5.4vw, 3.6rem);
+    margin-top: 0.9rem;
+  }
+
+  .post-list {
+    margin-top: clamp(2rem, 5vw, 3.2rem);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .post-list p {
+    color: var(--color-ink-soft);
+    font-size: 0.92rem;
+    margin-top: 0.25rem;
+    max-width: 60ch;
+  }
+</style>

@@ -1,10 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  getAlternateLocalePath,
-  getProductsByLab,
-  getSiteContent,
-  locales,
-} from "../src/lib/content";
+import { formatPostDate, getAlternateLocalePath, getSiteContent, locales } from "../src/lib/content";
 
 describe("site content", () => {
   it("loads bilingual site content with matching navigation", () => {
@@ -17,47 +12,34 @@ describe("site content", () => {
     );
     expect(english.meta.title).toContain("X32 Studio");
     expect(chinese.meta.title).toContain("X32 Studio");
-    expect(english.hero.title).toContain("Deep space");
-    expect(chinese.hero.title).toContain("深空");
+    expect(english.hero.title.length).toBeGreaterThan(0);
+    expect(chinese.hero.subtitle).toContain("agentic");
   });
 
-  it("groups products into the three lab lines", () => {
-    const groups = getProductsByLab("en");
-
-    expect(Object.keys(groups)).toEqual(["geek", "newbie", "agentic"]);
-    expect(groups.geek[0]?.name).toBe("Geek Lab");
-    expect(groups.newbie[0]?.name).toBe("Newbie Lab");
-    expect(groups.agentic[0]?.name).toBe("Agentic Lab");
-  });
-
-  it("creates alternate locale paths for core pages", () => {
-    expect(getAlternateLocalePath("en", "/products/")).toBe("/zh/products/");
-    expect(getAlternateLocalePath("zh", "/zh/about/")).toBe("/about/");
-  });
-
-  it("defines clear homepage paths for first-time visitors", () => {
+  it("navigates between home, projects, blog and about in both locales", () => {
     const english = getSiteContent("en");
     const chinese = getSiteContent("zh");
 
-    expect(english.hero.paths.map((path) => path.intent)).toEqual([
-      "build",
-      "learn",
-      "automate",
+    expect(english.navigation.map((item) => item.href)).toEqual([
+      "/",
+      "/projects/",
+      "/blog/",
+      "/about/",
     ]);
-    expect(chinese.hero.paths).toHaveLength(3);
-    expect(english.hero.paths[0]?.href).toBe("/products/#geek-lab");
+    expect(chinese.navigation.map((item) => item.href)).toEqual([
+      "/zh/",
+      "/zh/projects/",
+      "/zh/blog/",
+      "/zh/about/",
+    ]);
   });
 
-  it("defines future publishing channels for notes and collections", () => {
-    const english = getSiteContent("en");
-    const chinese = getSiteContent("zh");
+  it("maps alternate locale paths", () => {
+    expect(getAlternateLocalePath("en", "/")).toBe("/zh/");
+    expect(getAlternateLocalePath("zh", "/zh/projects/")).toBe("/projects/");
+  });
 
-    expect(english.channels.items.map((item) => item.key)).toEqual([
-      "notes",
-      "tools",
-      "collections",
-      "logs",
-    ]);
-    expect(chinese.channels.items).toHaveLength(4);
+  it("formats post dates as ISO day strings", () => {
+    expect(formatPostDate(new Date("2026-08-22T12:34:00Z"))).toBe("2026-08-22");
   });
 });

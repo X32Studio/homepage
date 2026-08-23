@@ -69,4 +69,4 @@ systemctl reload nginx
 REMOTE_SCRIPT
 
 log "Deployment complete"
-printf "Site: http://%s\n" "$REMOTE_HOST"
+printf "Site: https://x32studio.com\n"
