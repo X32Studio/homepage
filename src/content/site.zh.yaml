@@ -16,10 +16,10 @@ navigation:
     label: 关于
     href: /zh/about/
 hero:
-  eyebrow: X32-OPC // 一人公司 AI 工程工作室
-  title: 一人公司，
+  eyebrow: X32-OPC // Kang 和他的 Agent 团队
+  title: Kang 和他的 Agent 团队，
   titleAccent: 全栈 Agentic 工程射程。
-  subtitle: X32 Studio 是康瑞源 Ruiyuan Kang (k-r33) 的一人 AI 工程工作室，专注构建自主交付闭环、系统化 agentic 技能架构与长程研究仪器——公开建造，验证通过才发布。
+  subtitle: X32 Studio 是康瑞源 Ruiyuan Kang (k-r33) 与他的 Agent 团队的一人 AI 工程工作室，专注构建自主交付闭环、系统化 agentic 技能架构与长程研究仪器——公开建造，验证通过才发布。
   primaryCta:
     label: 探索 X32 工程栈
     href: "#agentic-stack"
