@@ -1,4 +1,5 @@
 ---
+import ChaosToOrderBand from "@components/ChaosToOrderBand.astro";
 import Hero from "@components/Hero.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import StackSection from "@components/StackSection.astro";
@@ -33,6 +34,7 @@ const langTag = locale === "zh" ? "中文" : "EN";
 
 <BaseLayout content={content} locale={locale} alternatePath={alternatePath}>
   <Hero content={content} />
+  <ChaosToOrderBand locale={locale} />
   <StackSection locale={locale} />
 
   <section class="section">

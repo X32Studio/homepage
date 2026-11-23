@@ -73,55 +73,81 @@
 
     function drawOrbitalBackdrop(t: number) {
       if (!ctx) return;
-      const cx = width * 0.84 + pointerX * 14 * dpr;
-      const cy = height * 0.22 + pointerY * 10 * dpr - scrollY * 0.04 * dpr;
-      const baseR = Math.min(width, height) * 0.36;
-      const angle = reducedMotion ? 0.42 : t * 0.000055;
+      const cx = width * 0.8 + pointerX * 18 * dpr;
+      const cy = height * 0.24 + pointerY * 12 * dpr - scrollY * 0.05 * dpr;
+      const baseR = Math.min(width, height) * 0.4;
+      const angle = reducedMotion ? 0.5 : t * 0.00009;
 
       ctx.save();
       ctx.translate(cx, cy);
 
-      // Outer dashed telemetry ring
-      ctx.strokeStyle = "rgba(110, 231, 255, 0.085)";
+      // Precision crosshair axes
+      ctx.strokeStyle = "rgba(0, 240, 255, 0.12)";
       ctx.lineWidth = 1 * dpr;
-      ctx.setLineDash([4 * dpr, 9 * dpr]);
+      ctx.beginPath();
+      ctx.moveTo(-baseR * 1.18, 0);
+      ctx.lineTo(baseR * 1.18, 0);
+      ctx.moveTo(0, -baseR * 1.18);
+      ctx.lineTo(0, baseR * 1.18);
+      ctx.stroke();
+
+      // Rotating radar sweep wedge
+      const sweepGrad = ctx.createRadialGradient(0, 0, baseR * 0.08, 0, 0, baseR);
+      sweepGrad.addColorStop(0, "rgba(0, 240, 255, 0.16)");
+      sweepGrad.addColorStop(0.6, "rgba(0, 240, 255, 0.05)");
+      sweepGrad.addColorStop(1, "rgba(0, 240, 255, 0)");
+      ctx.fillStyle = sweepGrad;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.arc(0, 0, baseR, angle - 0.35, angle);
+      ctx.closePath();
+      ctx.fill();
+
+      // Outer dashed telemetry ring
+      ctx.strokeStyle = "rgba(0, 240, 255, 0.24)";
+      ctx.lineWidth = 1.2 * dpr;
+      ctx.setLineDash([4 * dpr, 8 * dpr]);
       ctx.beginPath();
       ctx.arc(0, 0, baseR, 0, Math.PI * 2);
       ctx.stroke();
 
-      // Slowly rotating primary orbital arc
+      // Primary bright orbital arc
       ctx.setLineDash([]);
-      ctx.strokeStyle = "rgba(110, 231, 255, 0.16)";
-      ctx.lineWidth = 1.25 * dpr;
+      ctx.strokeStyle = "rgba(0, 240, 255, 0.46)";
+      ctx.lineWidth = 1.8 * dpr;
       ctx.beginPath();
-      ctx.arc(0, 0, baseR * 0.72, angle, angle + Math.PI * 0.72);
+      ctx.arc(0, 0, baseR * 0.72, angle, angle + Math.PI * 0.74);
       ctx.stroke();
 
-      // Secondary counter-rotating violet ephemeris arc
-      ctx.strokeStyle = "rgba(139, 124, 248, 0.14)";
-      ctx.lineWidth = 1.1 * dpr;
+      // Secondary counter-rotating ember tactical arc
+      ctx.strokeStyle = "rgba(255, 77, 0, 0.42)";
+      ctx.lineWidth = 1.5 * dpr;
       ctx.beginPath();
-      ctx.arc(0, 0, baseR * 0.5, -angle * 1.35 + 1.1, -angle * 1.35 + 2.75);
+      ctx.arc(0, 0, baseR * 0.48, -angle * 1.45 + 1.0, -angle * 1.45 + 2.55);
       ctx.stroke();
 
       // Polar tick marks around outer ring
-      ctx.strokeStyle = "rgba(110, 231, 255, 0.13)";
-      ctx.lineWidth = 1 * dpr;
-      for (let i = 0; i < 24; i += 1) {
-        const theta = (i / 24) * Math.PI * 2 + angle * 0.25;
-        const inner = baseR * (i % 6 === 0 ? 0.94 : 0.975);
+      ctx.strokeStyle = "rgba(0, 240, 255, 0.32)";
+      ctx.lineWidth = 1.1 * dpr;
+      for (let i = 0; i < 36; i += 1) {
+        const theta = (i / 36) * Math.PI * 2 + angle * 0.2;
+        const inner = baseR * (i % 9 === 0 ? 0.91 : 0.965);
         ctx.beginPath();
         ctx.moveTo(Math.cos(theta) * inner, Math.sin(theta) * inner);
         ctx.lineTo(Math.cos(theta) * baseR, Math.sin(theta) * baseR);
         ctx.stroke();
       }
 
-      // Active orbital satellite node
-      const satX = Math.cos(angle + Math.PI * 0.72) * baseR * 0.72;
-      const satY = Math.sin(angle + Math.PI * 0.72) * baseR * 0.72;
-      ctx.fillStyle = "rgba(110, 231, 255, 0.55)";
+      // Active orbital satellite node + halo
+      const satX = Math.cos(angle + Math.PI * 0.74) * baseR * 0.72;
+      const satY = Math.sin(angle + Math.PI * 0.74) * baseR * 0.72;
+      ctx.fillStyle = "rgba(0, 240, 255, 0.22)";
       ctx.beginPath();
-      ctx.arc(satX, satY, 2.3 * dpr, 0, Math.PI * 2);
+      ctx.arc(satX, satY, 9 * dpr, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#00f0ff";
+      ctx.beginPath();
+      ctx.arc(satX, satY, 2.8 * dpr, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();

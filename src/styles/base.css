@@ -20,7 +20,7 @@ body {
 }
 
 ::selection {
-  background: rgba(110, 231, 255, 0.28);
+  background: rgba(0, 240, 255, 0.34);
   color: #ffffff;
 }
 
@@ -41,9 +41,9 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 

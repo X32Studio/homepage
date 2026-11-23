@@ -212,7 +212,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
       <div className="stack-topology">
         <div className="bus-rail" aria-hidden="true">
           <svg viewBox="0 0 64 356" fill="none" className="bus-svg">
-            <line x1="22" y1="46" x2="22" y2="310" stroke="rgba(110,231,255,0.22)" strokeWidth="1.5" />
+            <line x1="22" y1="46" x2="22" y2="310" stroke="rgba(0,240,255,0.28)" strokeWidth="1.5" />
 
             {[0, 1, 2].map((idx) => {
               const isFlowActive =
@@ -225,16 +225,16 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
                   y1={NODE_Y[idx]}
                   x2="22"
                   y2={NODE_Y[idx + 1]}
-                  stroke={isFlowActive ? "#6ee7ff" : "rgba(110,231,255,0.16)"}
-                  strokeWidth={isFlowActive ? "2.6" : "1.5"}
+                  stroke={isFlowActive ? "#00f0ff" : "rgba(0,240,255,0.18)"}
+                  strokeWidth={isFlowActive ? "3" : "1.5"}
                 />
               );
             })}
 
             <path
               d="M 28 310 C 56 310, 56 46, 28 46"
-              stroke={feedbackHighlighted ? "#8b7cf8" : "rgba(139,124,248,0.28)"}
-              strokeWidth={feedbackHighlighted ? "2.2" : "1.25"}
+              stroke={feedbackHighlighted ? "#ff4d00" : "rgba(255,77,0,0.34)"}
+              strokeWidth={feedbackHighlighted ? "2.4" : "1.3"}
               strokeDasharray="4 4"
               fill="none"
             />
@@ -245,15 +245,15 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
               return (
                 <g key={cy}>
                   {isSelected && (
-                    <circle cx="22" cy={cy} r="10" fill="rgba(110,231,255,0.16)" stroke="#6ee7ff" strokeWidth="1" />
+                    <circle cx="22" cy={cy} r="10" fill="rgba(0,240,255,0.22)" stroke="#00f0ff" strokeWidth="1.2" />
                   )}
                   <circle
                     cx="22"
                     cy={cy}
-                    r={isSelected ? "5" : isLinked ? "4" : "3.2"}
-                    fill={isSelected ? "#6ee7ff" : isLinked ? "#8b7cf8" : "#243052"}
-                    stroke={isSelected ? "#eef2ff" : "#6ee7ff"}
-                    strokeOpacity={isSelected ? "1" : "0.45"}
+                    r={isSelected ? "5.2" : isLinked ? "4" : "3.2"}
+                    fill={isSelected ? "#00f0ff" : isLinked ? "#ff4d00" : "#182235"}
+                    stroke={isSelected ? "#ffffff" : "#00f0ff"}
+                    strokeOpacity={isSelected ? "1" : "0.55"}
                     strokeWidth="1.2"
                   />
                 </g>

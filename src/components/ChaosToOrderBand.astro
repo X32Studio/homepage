@@ -1,0 +1,277 @@
+---
+import type { Locale } from "@lib/content";
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const isZh = locale === "zh";
+
+const copy = isZh
+  ? {
+      eyebrow: "SIGNAL // 为什么是 SELF-LOOP · 从乌合之众到可信组织",
+      heading: "算力廉价。人最稀缺的瓶颈是 Attention。",
+      chaosTag: "[!] WITHOUT SELF-LOOP // CHAOTIC AGENT MOB · 乌合之众",
+      chaosRows: [
+        { code: "01", label: "自写自测", detail: "同一个 Agent 改代码又改测试，悄悄糊弄绿灯", badge: "FAKE PASS" },
+        { code: "02", label: "前提漂移", detail: "错误假设上盲目打第 7 个补丁，越改越烂", badge: "LOOP #7" },
+        { code: "03", label: "人力耗尽", detail: "被迫全程盯盘救火，在混乱中精疲力尽", badge: "BURNOUT" },
+      ],
+      orderTag: "[✓] WITH SELF-LOOP v0.4.10 // TRUSTWORTHY AGENT ORG · 可信交付组织",
+      orderRows: [
+        { code: "01", label: "跨厂商三权分立", detail: "Frame Reviewer + Critic / Actor / 跨厂商 Judge 独立验收", badge: "LOCKED" },
+        { code: "02", label: "机械硬门禁", detail: "前提审计 exit 7 + 精确 Git 树 CI 回执，代码说话", badge: "VERIFIED" },
+        { code: "03", label: "街边喝咖啡", detail: "Agent 组织自主交付，仅把战略拍板打包交给你", badge: "COFFEE MODE" },
+      ],
+      footerAxiom: "CODE GATES OVER PROMPT OBEDIENCE // 能否把 Agent Swarm 整编成可信组织，决定 AI 时代人的能力上限。",
+    }
+  : {
+      eyebrow: "SIGNAL // WHY SELF-LOOP · CHAOS MOB TO AGENT ORG",
+      heading: "Compute is cheap. Human attention is the only bottleneck.",
+      chaosTag: "[!] WITHOUT SELF-LOOP // CHAOTIC AGENT MOB",
+      chaosRows: [
+        { code: "01", label: "SELF-GRADING", detail: "Same model writes code and tests, gaming checks silently", badge: "FAKE PASS" },
+        { code: "02", label: "PREMISE DRIFT", detail: "Blindly stacks patch #7 on top of a broken assumption", badge: "LOOP #7" },
+        { code: "03", label: "HUMAN COST", detail: "100% terminal babysitting in chaos until burnout", badge: "BURNOUT" },
+      ],
+      orderTag: "[✓] WITH SELF-LOOP v0.4.10 // TRUSTWORTHY AGENT ORG",
+      orderRows: [
+        { code: "01", label: "SEPARATION", detail: "Frame Reviewer + Cross-Vendor Critic / Actor / Judge", badge: "LOCKED" },
+        { code: "02", label: "HARD GATES", detail: "Premise-attack exit 7 + exact-tree CI landing receipts", badge: "VERIFIED" },
+        { code: "03", label: "HUMAN MODE", detail: "Street-side coffee while agents ship — only strategy batched", badge: "COFFEE MODE" },
+      ],
+      footerAxiom: "CODE GATES OVER PROMPT OBEDIENCE // HOW YOU GOVERN YOUR AGENT SWARM DEFINES YOUR LEVERAGE.",
+    };
+---
+
+<section class="section contrast-section" aria-label={copy.heading}>
+  <div class="container">
+    <div class="contrast-head reveal">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h2>{copy.heading}</h2>
+    </div>
+
+    <div class="contrast-grid reveal" data-delay="1">
+      <article class="contrast-panel is-chaos">
+        <div class="panel-bar mono-metric">
+          <span class="bar-dot is-danger" aria-hidden="true"></span>
+          <span>{copy.chaosTag}</span>
+        </div>
+        <ul class="signal-rows">
+          {
+            copy.chaosRows.map((row) => (
+              <li>
+                <span class="row-code mono-metric">{row.code}</span>
+                <div class="row-main">
+                  <strong>{row.label}</strong>
+                  <p>{row.detail}</p>
+                </div>
+                <span class="row-badge is-danger mono-metric">{row.badge}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+
+      <article class="contrast-panel is-order">
+        <div class="panel-bar mono-metric">
+          <span class="bar-dot is-ok" aria-hidden="true"></span>
+          <span>{copy.orderTag}</span>
+        </div>
+        <ul class="signal-rows">
+          {
+            copy.orderRows.map((row) => (
+              <li>
+                <span class="row-code mono-metric">{row.code}</span>
+                <div class="row-main">
+                  <strong>{row.label}</strong>
+                  <p>{row.detail}</p>
+                </div>
+                <span class="row-badge is-ok mono-metric">{row.badge}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+    </div>
+
+    <div class="axiom-strip mono-metric reveal" data-delay="2">
+      <span class="axiom-arrow" aria-hidden="true">&gt;_</span>
+      <span>{copy.footerAxiom}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contrast-section {
+    padding-block: clamp(2rem, 5vw, 3.8rem);
+  }
+
+  .contrast-head {
+    margin-bottom: 1.75rem;
+  }
+
+  .contrast-head h2 {
+    margin-top: 0.65rem;
+    font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+    color: #ffffff;
+  }
+
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .contrast-panel {
+    position: relative;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line-subtle);
+    box-shadow: var(--shadow-deck);
+    overflow: hidden;
+  }
+
+  .contrast-panel.is-chaos {
+    border-top: 2px solid var(--color-crimson);
+    border-color: rgba(255, 46, 76, 0.34);
+    background: linear-gradient(180deg, rgba(255, 46, 76, 0.08) 0%, rgba(7, 10, 16, 0.96) 36%);
+  }
+
+  .contrast-panel.is-order {
+    border-top: 2px solid var(--color-emerald);
+    border-color: rgba(0, 255, 157, 0.38);
+    background: linear-gradient(180deg, rgba(0, 240, 255, 0.08) 0%, rgba(7, 10, 16, 0.96) 36%);
+    box-shadow: var(--shadow-deck), 0 0 32px rgba(0, 240, 255, 0.12);
+  }
+
+  .panel-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.78rem 1.15rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--color-line-subtle);
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .is-chaos .panel-bar {
+    color: #ff6b81;
+  }
+
+  .is-order .panel-bar {
+    color: var(--color-emerald);
+  }
+
+  .bar-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .bar-dot.is-danger {
+    background: var(--color-crimson);
+    box-shadow: 0 0 10px rgba(255, 46, 76, 0.9);
+  }
+
+  .bar-dot.is-ok {
+    background: var(--color-emerald);
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.9);
+  }
+
+  .signal-rows {
+    list-style: none;
+    display: grid;
+  }
+
+  .signal-rows li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem 1.15rem;
+    border-bottom: 1px solid rgba(148, 163, 214, 0.1);
+  }
+
+  .signal-rows li:last-child {
+    border-bottom: 0;
+  }
+
+  .row-code {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--color-ink-faint);
+  }
+
+  .row-main strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+  }
+
+  .row-main p {
+    font-size: 0.84rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.18rem;
+    line-height: 1.45;
+  }
+
+  .row-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.24rem 0.52rem;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+
+  .row-badge.is-danger {
+    color: #ff6b81;
+    background: rgba(255, 46, 76, 0.12);
+  }
+
+  .row-badge.is-ok {
+    color: var(--color-cyan);
+    background: rgba(0, 240, 255, 0.1);
+  }
+
+  .axiom-strip {
+    margin-top: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.15rem;
+    border: 1px solid var(--color-line-bright);
+    border-left: 3px solid var(--color-ember);
+    background: #000000;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+  }
+
+  .axiom-arrow {
+    color: var(--color-ember);
+    font-weight: 700;
+  }
+
+  @media (max-width: 860px) {
+    .contrast-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .signal-rows li {
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+    }
+
+    .row-badge {
+      justify-self: start;
+    }
+  }
+</style>

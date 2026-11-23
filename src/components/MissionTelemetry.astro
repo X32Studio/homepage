@@ -179,20 +179,22 @@ const { telemetry } = Astro.props;
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.55rem 0.72rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-line-subtle);
-    background: rgba(4, 6, 13, 0.58);
+    padding: 0.6rem 0.78rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0, 240, 255, 0.16);
+    border-left: 2px solid rgba(0, 240, 255, 0.35);
+    background: #020408;
     transition:
-      border-color 0.2s var(--ease-out),
-      background 0.2s var(--ease-out),
-      transform 0.2s var(--ease-out);
+      border-color 0.18s var(--ease-out),
+      background 0.18s var(--ease-out),
+      transform 0.18s var(--ease-out);
   }
 
   .layer-row:hover {
-    border-color: var(--color-line-bright);
-    background: rgba(110, 231, 255, 0.07);
-    transform: translateX(3px);
+    border-color: var(--color-cyan);
+    border-left: 3px solid var(--color-cyan);
+    background: rgba(0, 240, 255, 0.1);
+    transform: translateX(4px);
   }
 
   .layer-num {

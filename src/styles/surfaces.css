@@ -1,4 +1,4 @@
-/* Cards, project grids, buttons, and telemetry list surfaces */
+/* Razor-sharp tactical cards, project grids, buttons, and telemetry list surfaces */
 
 .card {
   position: relative;
@@ -10,12 +10,11 @@
   background: var(--color-panel);
   border: 1px solid var(--color-line);
   box-shadow: var(--shadow-deck);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   transition:
-    transform 0.3s var(--ease-out),
-    border-color 0.3s var(--ease-out),
-    background 0.3s var(--ease-out);
+    transform 0.22s var(--ease-out),
+    border-color 0.22s var(--ease-out),
+    background 0.22s var(--ease-out),
+    box-shadow 0.22s var(--ease-out);
   overflow: hidden;
 }
 
@@ -23,16 +22,17 @@
   content: "";
   position: absolute;
   inset: 0 0 auto;
-  height: 1.5px;
+  height: 2px;
   background: var(--gradient-telemetry);
-  opacity: 0.25;
-  transition: opacity 0.3s var(--ease-out);
+  opacity: 0.45;
+  transition: opacity 0.22s var(--ease-out);
 }
 
 .card:hover {
   transform: translateY(-4px);
-  border-color: var(--color-line-bright);
+  border-color: var(--color-cyan);
   background: var(--color-panel-bright);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.9), 0 0 26px rgba(0, 240, 255, 0.14);
 }
 
 .card:hover::before {
@@ -65,45 +65,48 @@
 .project-card .glyph {
   display: grid;
   place-items: center;
-  width: 2.45rem;
-  height: 2.45rem;
-  border-radius: var(--radius-md);
-  background: rgba(110, 231, 255, 0.08);
-  border: 1px solid var(--color-line-bright);
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid var(--color-cyan);
   font-family: var(--font-mono);
-  font-size: 0.88rem;
-  font-weight: 600;
+  font-size: 0.86rem;
+  font-weight: 700;
   color: var(--color-cyan);
 }
 
 .project-card .layer-code {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-ink-faint);
 }
 
 .status-chip {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-cyan);
-  border: 1px solid rgba(110, 231, 255, 0.24);
-  background: rgba(110, 231, 255, 0.06);
+  color: var(--color-emerald);
+  border: 1px solid rgba(0, 255, 157, 0.42);
+  background: rgba(0, 255, 157, 0.08);
   border-radius: var(--radius-sm);
   padding: 0.24rem 0.62rem;
   white-space: nowrap;
 }
 
 .project-card h3 {
-  font-size: 1.35rem;
+  font-size: 1.42rem;
+  color: #ffffff;
 }
 
 .project-card .tagline {
   color: var(--color-ink-soft);
-  font-size: 0.96rem;
+  font-size: 0.95rem;
   min-height: 2.7em;
 }
 
@@ -116,10 +119,10 @@
 
 .project-card .tags span {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: #c4b5fd;
-  background: rgba(139, 124, 248, 0.1);
-  border: 1px solid rgba(139, 124, 248, 0.2);
+  font-size: 0.69rem;
+  color: var(--color-cyan);
+  background: rgba(0, 240, 255, 0.07);
+  border: 1px solid rgba(0, 240, 255, 0.24);
   border-radius: var(--radius-sm);
   padding: 0.18rem 0.52rem;
 }
@@ -139,55 +142,59 @@
   gap: 0.42rem;
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--color-ink-soft);
-  transition: color 0.2s var(--ease-out);
+  font-weight: 600;
+  color: var(--color-ink);
+  transition: color 0.18s var(--ease-out);
 }
 
 .project-card .card-links a:hover {
   color: var(--color-cyan);
 }
 
-/* buttons */
+/* Razor chamfered buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
   font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 0.84rem;
-  letter-spacing: 0.04em;
-  border-radius: var(--radius-md);
-  padding: 0.78rem 1.35rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  padding: 0.84rem 1.45rem;
   border: 1px solid transparent;
   transition:
-    transform 0.2s var(--ease-out),
-    box-shadow 0.2s var(--ease-out),
-    border-color 0.2s var(--ease-out),
-    background 0.2s var(--ease-out),
-    color 0.2s var(--ease-out);
+    transform 0.18s var(--ease-out),
+    box-shadow 0.18s var(--ease-out),
+    border-color 0.18s var(--ease-out),
+    background 0.18s var(--ease-out),
+    color 0.18s var(--ease-out);
 }
 
 .btn-primary {
-  color: #04060d;
-  background: linear-gradient(100deg, #6ee7ff 0%, #9cefff 55%, #b8b0ff 100%);
-  box-shadow: 0 0 28px rgba(110, 231, 255, 0.22);
+  color: #020305;
+  background: var(--color-cyan);
+  clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 11px, 100% 100%, 0 100%);
+  box-shadow: 0 0 26px rgba(0, 240, 255, 0.38);
 }
 
 .btn-primary:hover {
+  background: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 10px 32px rgba(110, 231, 255, 0.34);
+  box-shadow: 0 0 38px rgba(0, 240, 255, 0.62);
 }
 
 .btn-ghost {
-  color: var(--color-ink);
+  color: #ffffff;
   border-color: var(--color-line-bright);
-  background: rgba(9, 14, 29, 0.72);
+  background: rgba(2, 3, 5, 0.86);
 }
 
 .btn-ghost:hover {
   border-color: var(--color-cyan);
-  background: rgba(110, 231, 255, 0.09);
+  background: rgba(0, 240, 255, 0.14);
   color: var(--color-cyan);
   transform: translateY(-2px);
 }
@@ -198,28 +205,28 @@
   grid-template-columns: auto 1fr auto;
   align-items: baseline;
   gap: 1.5rem;
-  padding: 1.15rem 0.6rem;
+  padding: 1.15rem 0.75rem;
   border-bottom: 1px solid var(--color-line-subtle);
-  transition: background 0.2s var(--ease-out), padding-left 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  transition: background 0.18s var(--ease-out), padding-left 0.18s var(--ease-out), border-color 0.18s var(--ease-out);
 }
 
 .post-row:hover {
-  background: rgba(110, 231, 255, 0.045);
-  border-bottom-color: var(--color-line-bright);
-  padding-left: 1rem;
+  background: rgba(0, 240, 255, 0.06);
+  border-bottom-color: var(--color-cyan);
+  padding-left: 1.15rem;
 }
 
 .post-row time {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   font-size: 0.78rem;
-  color: var(--color-ink-faint);
+  color: var(--color-cyan);
   min-width: 6.4rem;
 }
 
 .post-row h3 {
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.12rem;
+  font-weight: 600;
 }
 
 .post-row h3 a:hover {
@@ -229,11 +236,13 @@
 .post-row .lang-tag {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  color: var(--color-cyan);
-  border: 1px solid var(--color-line);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-ember);
+  border: 1px solid rgba(255, 77, 0, 0.45);
+  background: rgba(255, 77, 0, 0.08);
   border-radius: var(--radius-sm);
-  padding: 0.14rem 0.45rem;
+  padding: 0.14rem 0.48rem;
   text-transform: uppercase;
 }
 

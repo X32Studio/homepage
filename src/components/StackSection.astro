@@ -105,29 +105,31 @@ const layers = getStackLayers(locale);
     gap: 0.22rem;
     min-height: 5.05rem;
     padding: 0.9rem 1.05rem;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     border: 1px solid var(--color-line-subtle);
-    background: rgba(9, 14, 29, 0.68);
+    border-left: 2px solid rgba(0, 240, 255, 0.24);
+    background: rgba(5, 8, 14, 0.9);
     transition:
-      border-color 0.2s var(--ease-out),
-      background 0.2s var(--ease-out),
-      transform 0.2s var(--ease-out);
+      border-color 0.18s var(--ease-out),
+      background 0.18s var(--ease-out),
+      transform 0.18s var(--ease-out);
   }
 
   .stack-tab:hover {
     border-color: var(--color-line-bright);
-    background: rgba(14, 21, 42, 0.86);
+    background: rgba(10, 16, 28, 0.96);
   }
 
   .stack-tab.is-linked {
-    border-color: rgba(139, 124, 248, 0.38);
+    border-color: rgba(255, 77, 0, 0.36);
   }
 
   .stack-tab.is-active {
     border-color: var(--color-cyan);
-    background: linear-gradient(125deg, rgba(110, 231, 255, 0.12), rgba(14, 21, 42, 0.94) 68%);
-    box-shadow: 0 0 28px rgba(110, 231, 255, 0.12);
-    transform: translateX(3px);
+    border-left: 4px solid var(--color-cyan);
+    background: linear-gradient(120deg, rgba(0, 240, 255, 0.16), rgba(7, 10, 16, 0.98) 64%);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.18);
+    transform: translateX(4px);
   }
 
   .tab-head {
