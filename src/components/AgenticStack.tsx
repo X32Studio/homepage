@@ -1,31 +1,115 @@
 import { useEffect, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import type { StackCopy, StackLayer, StackLayerId } from "@lib/stack";
+import {
+  clearPendingLayerSelection,
+  consumePendingLayerSelection,
+  copyCommandToClipboard,
+  parseLayerFromHash,
+  STACK_EVENT,
+  type PendingLayerRequest,
+} from "@lib/stack-selection";
 
 type AgenticStackProps = {
   copy: StackCopy;
   layers: StackLayer[];
 };
 
+type CopyFeedback = {
+  id: StackLayerId;
+  state: "copied" | "failed";
+};
+
 const NODE_Y = [46, 134, 222, 310];
+const PANEL_ID = "stack-inspector-panel";
+
+function selectNodeText(el: HTMLElement | null) {
+  if (!el || typeof window === "undefined" || typeof document === "undefined") return;
+  try {
+    const selection = window.getSelection?.();
+    if (!selection) return;
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  } catch {
+    // Selection API unavailable in non-DOM environments
+  }
+}
 
 export default function AgenticStack({ copy, layers }: AgenticStackProps) {
   const [activeId, setActiveId] = useState<StackLayerId>(layers[0]?.id ?? "self-loop");
-  const [copiedId, setCopiedId] = useState<StackLayerId | null>(null);
+  const [copyFeedback, setCopyFeedback] = useState<CopyFeedback | null>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const codeRef = useRef<HTMLElement | null>(null);
+  const copyTimerRef = useRef<number | null>(null);
+  const pendingFocusIdRef = useRef<StackLayerId | null>(null);
 
   useEffect(() => {
+    const validIds = layers.map((layer) => layer.id);
+
+    const applySelection = (targetId: StackLayerId, shouldFocus: boolean) => {
+      if (shouldFocus) {
+        pendingFocusIdRef.current = targetId;
+      }
+      setActiveId((current) => {
+        if (current === targetId && shouldFocus) {
+          const idx = layers.findIndex((layer) => layer.id === targetId);
+          if (idx >= 0) {
+            tabRefs.current[idx]?.focus({ preventScroll: true });
+            pendingFocusIdRef.current = null;
+          }
+        }
+        return targetId;
+      });
+    };
+
+    const initial = consumePendingLayerSelection(validIds);
+    if (initial) {
+      applySelection(initial.id, initial.focus);
+    }
+
     const onSelectLayer = (event: Event) => {
-      const customEvent = event as CustomEvent<{ id?: StackLayerId }>;
+      const customEvent = event as CustomEvent<Partial<PendingLayerRequest>>;
       const targetId = customEvent.detail?.id;
-      if (targetId && layers.some((layer) => layer.id === targetId)) {
-        setActiveId(targetId);
+      if (targetId && validIds.includes(targetId)) {
+        clearPendingLayerSelection();
+        applySelection(targetId, customEvent.detail?.focus !== false);
       }
     };
 
-    window.addEventListener("x32:select-layer", onSelectLayer);
-    return () => window.removeEventListener("x32:select-layer", onSelectLayer);
+    const onHashChange = () => {
+      const fromHash = parseLayerFromHash(window.location.hash, validIds);
+      if (fromHash) {
+        clearPendingLayerSelection();
+        applySelection(fromHash, true);
+      }
+    };
+
+    window.addEventListener(STACK_EVENT, onSelectLayer);
+    window.addEventListener("hashchange", onHashChange);
+    return () => {
+      window.removeEventListener(STACK_EVENT, onSelectLayer);
+      window.removeEventListener("hashchange", onHashChange);
+    };
   }, [layers]);
+
+  useEffect(() => {
+    if (pendingFocusIdRef.current !== activeId) return;
+    const idx = layers.findIndex((layer) => layer.id === activeId);
+    if (idx >= 0) {
+      tabRefs.current[idx]?.focus({ preventScroll: true });
+    }
+    pendingFocusIdRef.current = null;
+  }, [activeId, layers]);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
 
   const activeIndex = Math.max(
     0,
@@ -35,12 +119,18 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
   const upstreamLayer = layers.find((item) => item.id === activeLayer.connections.upstream);
   const downstreamLayer = layers.find((item) => item.id === activeLayer.connections.downstream);
 
+  function selectLayer(nextId: StackLayerId, focusTab = false) {
+    if (focusTab) {
+      pendingFocusIdRef.current = nextId;
+    }
+    setActiveId(nextId);
+  }
+
   function activateIndex(nextIndex: number) {
     const bounded = (nextIndex + layers.length) % layers.length;
     const next = layers[bounded];
     if (!next) return;
-    setActiveId(next.id);
-    tabRefs.current[bounded]?.focus();
+    selectLayer(next.id, true);
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
@@ -60,32 +150,42 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
   }
 
   async function handleCopy(command: string, id: StackLayerId) {
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(command);
-      }
-      setCopiedId(id);
-      window.setTimeout(() => {
-        setCopiedId((current) => (current === id ? null : current));
-      }, 1800);
-    } catch {
-      setCopiedId(id);
+    if (copyTimerRef.current !== null) {
+      window.clearTimeout(copyTimerRef.current);
+      copyTimerRef.current = null;
     }
+
+    const copied = await copyCommandToClipboard(command);
+    if (!copied) {
+      selectNodeText(codeRef.current);
+    }
+
+    const state: CopyFeedback["state"] = copied ? "copied" : "failed";
+    setCopyFeedback({ id, state });
+    copyTimerRef.current = window.setTimeout(() => {
+      setCopyFeedback((current) => (current?.id === id ? null : current));
+      copyTimerRef.current = null;
+    }, copied ? 1800 : 3200);
   }
 
   const upstreamIndex = layers.findIndex((l) => l.id === activeLayer.connections.upstream);
   const downstreamIndex = layers.findIndex((l) => l.id === activeLayer.connections.downstream);
   const feedbackHighlighted = activeIndex === 0 || activeIndex === layers.length - 1;
+  const activeCopyState = copyFeedback?.id === activeLayer.id ? copyFeedback.state : null;
+  const copyButtonLabel =
+    activeCopyState === "copied"
+      ? copy.copiedLabel
+      : activeCopyState === "failed"
+        ? copy.copyFailedLabel
+        : copy.copyLabel;
 
   return (
     <div className="stack-explorer">
       <div className="stack-topology">
         <div className="bus-rail" aria-hidden="true">
           <svg viewBox="0 0 64 356" fill="none" className="bus-svg">
-            {/* Vertical telemetry bus spine */}
             <line x1="22" y1="46" x2="22" y2="310" stroke="rgba(110,231,255,0.22)" strokeWidth="1.5" />
 
-            {/* Adjacent forward edges */}
             {[0, 1, 2].map((idx) => {
               const isFlowActive =
                 (activeIndex === idx && downstreamIndex === idx + 1) ||
@@ -103,7 +203,6 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
               );
             })}
 
-            {/* Closed feedback loop L4 -> L1 */}
             <path
               d="M 28 310 C 56 310, 56 46, 28 46"
               stroke={feedbackHighlighted ? "#8b7cf8" : "rgba(139,124,248,0.28)"}
@@ -112,7 +211,6 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
               fill="none"
             />
 
-            {/* Layer nodes */}
             {NODE_Y.map((cy, idx) => {
               const isSelected = idx === activeIndex;
               const isLinked = idx === upstreamIndex || idx === downstreamIndex;
@@ -154,10 +252,10 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
                 role="tab"
                 id={`stack-tab-${layer.id}`}
                 aria-selected={isSelected}
-                aria-controls={`stack-panel-${layer.id}`}
+                aria-controls={PANEL_ID}
                 tabIndex={isSelected ? 0 : -1}
                 className={`stack-tab ${isSelected ? "is-active" : ""} ${isRelated ? "is-linked" : ""}`}
-                onClick={() => setActiveId(layer.id)}
+                onClick={() => selectLayer(layer.id)}
                 onKeyDown={(event) => handleKeyDown(event, index)}
               >
                 <span className="tab-head">
@@ -175,7 +273,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
       <div
         className="hud-frame stack-inspector"
         role="tabpanel"
-        id={`stack-panel-${activeLayer.id}`}
+        id={PANEL_ID}
         aria-labelledby={`stack-tab-${activeLayer.id}`}
       >
         <div className="inspector-head">
@@ -209,14 +307,18 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
             <span className="mono-metric">{activeLayer.commandLabel}</span>
             <button
               type="button"
-              className="copy-btn mono-metric"
+              className={`copy-btn mono-metric ${activeCopyState ? `is-${activeCopyState}` : ""}`}
               onClick={() => handleCopy(activeLayer.command, activeLayer.id)}
             >
-              {copiedId === activeLayer.id ? copy.copiedLabel : copy.copyLabel}
+              {copyButtonLabel}
             </button>
           </div>
+          <span className="sr-only" role="status" aria-live="polite">
+            {activeCopyState ? copyButtonLabel : ""}
+          </span>
           <div className="cmd-block">
-            <code>$ {activeLayer.command}</code>
+            <span className="cmd-prompt" aria-hidden="true">$</span>
+            <code ref={codeRef}>{activeLayer.command}</code>
           </div>
         </div>
 
@@ -266,7 +368,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
               <button
                 type="button"
                 className="jump-pill mono-metric"
-                onClick={() => setActiveId(upstreamLayer.id)}
+                onClick={() => selectLayer(upstreamLayer.id, true)}
               >
                 {copy.upstreamLabel}: {upstreamLayer.code} {upstreamLayer.name}
               </button>
@@ -275,7 +377,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
               <button
                 type="button"
                 className="jump-pill mono-metric"
-                onClick={() => setActiveId(downstreamLayer.id)}
+                onClick={() => selectLayer(downstreamLayer.id, true)}
               >
                 {copy.downstreamLabel}: {downstreamLayer.code} {downstreamLayer.name}
               </button>

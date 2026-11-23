@@ -7,6 +7,13 @@ import { createSourceFile, forEachChild, isArrayLiteralExpression, isVariableDec
 import { parse as parseYaml } from "yaml";
 import { beforeAll, expect, it } from "vitest";
 import { getSiteContent } from "../src/lib/content";
+import { getStackCopy, getStackLayers, type StackLayerId } from "../src/lib/stack";
+import {
+  consumePendingLayerSelection,
+  copyCommandToClipboard,
+  parseLayerFromHash,
+  requestLayerSelection,
+} from "../src/lib/stack-selection";
 
 type Node = DefaultTreeAdapterTypes.Node;
 type Element = DefaultTreeAdapterTypes.Element;
@@ -256,4 +263,76 @@ it("V2-F4-04 enforces the 500-line ceiling across source and tests", () => {
   const oversized = [...files("src"), ...files("tests")]
     .filter((file) => /\.(astro|css|js|mjs|ts|tsx)$/.test(file) && read(file).split(/\r?\n/).length > 500);
   expect(oversized).toEqual([]);
+});
+
+it("V2-R2-01 persists cold-entry hero layer selection across hydration and resolves all tab aria-controls in both locales", () => {
+  const validIds: StackLayerId[] = ["self-loop", "skills-system", "argus", "agent-dao"];
+
+  for (const route of homes) {
+    const page = html(route);
+    const jumps = elements(page, (el) => el.tagName === "a" && Boolean(attr(el, "data-stack-jump")));
+    expect(jumps.map((el) => attr(el, "data-stack-jump")), route).toEqual(validIds);
+    expect(jumps.map((el) => attr(el, "href")), route).toEqual(validIds.map((id) => `#agentic-stack-${id}`));
+
+    const [stack] = elements(page, (el) => attr(el, "id") === "agentic-stack");
+    expect(stack, route).toBeDefined();
+    for (const id of validIds) {
+      expect(elements(stack, (el) => attr(el, "id") === `agentic-stack-${id}`), `${route} anchor ${id}`).toHaveLength(1);
+    }
+
+    const tabs = elements(stack, (el) => attr(el, "role") === "tab");
+    const panelIds = new Set(elements(stack, (el) => attr(el, "role") === "tabpanel").map((el) => attr(el, "id")));
+    for (const tab of tabs) {
+      expect(panelIds.has(attr(tab, "aria-controls")), `${route} ${attr(tab, "id")} aria-controls`).toBe(true);
+    }
+  }
+
+  // Simulate cold-entry click on Argus before AgenticStack mounts
+  const win = Object.assign(new EventTarget(), { location: { hash: "#agentic-stack-argus" } });
+  const doc = { documentElement: { dataset: {} as DOMStringMap } } as unknown as Document;
+  requestLayerSelection("argus", win as unknown as Window, doc);
+  expect(doc.documentElement.dataset.x32StackLayer).toBe("argus");
+  const consumed = consumePendingLayerSelection(validIds, win as unknown as Window, doc);
+  expect(consumed).toEqual({ id: "argus", focus: true });
+  expect(doc.documentElement.dataset.x32StackLayer).toBeUndefined();
+  expect(parseLayerFromHash("#agentic-stack-agent-dao", validIds)).toBe("agent-dao");
+  expect(parseLayerFromHash("#agentic-stack-unknown", validIds)).toBeNull();
+});
+
+it("V2-R2-02 publishes the verified v0.4.10 demo command for self-loop in both locales", () => {
+  for (const locale of locales) {
+    const selfLoop = getStackLayers(locale).find((layer) => layer.id === "self-loop");
+    expect(selfLoop, locale).toBeDefined();
+    expect(selfLoop!.command, locale).not.toMatch(/self-loop\s+--/);
+    expect(selfLoop!.command, locale).toContain("https://github.com/X32Studio/self-loop.git");
+    expect(selfLoop!.command, locale).toContain("npm run demo");
+  }
+  for (const route of homes) {
+    const pageText = text(html(route));
+    expect(pageText, route).not.toMatch(/self-loop\s+--phase/);
+    expect(pageText, route).toContain("npm run demo");
+  }
+});
+
+it("V2-R2-03 reports clipboard success only when writeText resolves and exposes honest failure labels", async () => {
+  expect(await copyCommandToClipboard("npm run demo", {})).toBe(false);
+  expect(
+    await copyCommandToClipboard("npm run demo", {
+      clipboard: { writeText: async () => { throw new Error("denied"); } },
+    }),
+  ).toBe(false);
+
+  let written = "";
+  expect(
+    await copyCommandToClipboard("npm run demo", {
+      clipboard: { writeText: async (value: string) => { written = value; } },
+    }),
+  ).toBe(true);
+  expect(written).toBe("npm run demo");
+
+  for (const locale of locales) {
+    const copy = getStackCopy(locale);
+    expect(copy.copyFailedLabel.trim().length, locale).toBeGreaterThan(0);
+    expect(copy.copyFailedLabel, locale).not.toBe(copy.copiedLabel);
+  }
 });

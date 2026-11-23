@@ -60,6 +60,7 @@ export type StackCopy = {
   downstreamLabel: string;
   copyLabel: string;
   copiedLabel: string;
+  copyFailedLabel: string;
   allProjectsLabel: string;
   allProjectsHref: string;
 };
@@ -80,6 +81,7 @@ const STACK_COPY: Record<Locale, StackCopy> = {
     downstreamLabel: "Downstream",
     copyLabel: "Copy",
     copiedLabel: "Copied",
+    copyFailedLabel: "Copy failed — select text",
     allProjectsLabel: "Inspect full catalog →",
     allProjectsHref: "/projects/",
   },
@@ -98,6 +100,7 @@ const STACK_COPY: Record<Locale, StackCopy> = {
     downstreamLabel: "下游驱动",
     copyLabel: "复制",
     copiedLabel: "已复制",
+    copyFailedLabel: "复制失败，请手动复制",
     allProjectsLabel: "查看完整项目档案 →",
     allProjectsHref: "/zh/projects/",
   },
@@ -118,8 +121,8 @@ const STACK_LAYERS: Record<Locale, StackLayer[]> = {
         input: "Purpose (P-NNNN) + Blueprint + Hard Constraints",
         output: "Verified Commits, Test Evidence & Audit Records",
       },
-      commandLabel: "EXECUTION LOOP",
-      command: "self-loop --phase v2 --roles critic,actor,judge --verify \"npm test && npm run build\"",
+      commandLabel: "QUICK START DEMO (v0.4.10)",
+      command: "git clone https://github.com/X32Studio/self-loop.git && cd self-loop && npm run demo",
       guarantees: [
         "Role separation: Actor owns implementation, Critic & Judge enforce independent verification.",
         "Immutable decision & round logs prevent context drift across long multi-round deliveries.",
@@ -274,8 +277,8 @@ const STACK_LAYERS: Record<Locale, StackLayer[]> = {
         input: "目标规格 (P-NNNN) + 蓝图 + 硬性约束",
         output: "已验证 Commit、测试证据与审计记录",
       },
-      commandLabel: "执行闭环",
-      command: "self-loop --phase v2 --roles critic,actor,judge --verify \"npm test && npm run build\"",
+      commandLabel: "5 秒闭环演示 (v0.4.10)",
+      command: "git clone https://github.com/X32Studio/self-loop.git && cd self-loop && npm run demo",
       guarantees: [
         "三权分立：Actor 专注实现，Critic 与 Judge 执行独立审查与验收。",
         "只追加的决策与轮次日志，杜绝长周期多轮迭代中的上下文漂移。",

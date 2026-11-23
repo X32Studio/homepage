@@ -13,6 +13,11 @@ const layers = getStackLayers(locale);
 ---
 
 <section class="section stack-section" id="agentic-stack">
+  {
+    layers.map((layer) => (
+      <span id={`agentic-stack-${layer.id}`} class="stack-anchor" aria-hidden="true" />
+    ))
+  }
   <div class="container">
     <div class="section-head reveal">
       <div>
@@ -30,6 +35,20 @@ const layers = getStackLayers(locale);
 </section>
 
 <style>
+  .stack-section {
+    position: relative;
+  }
+
+  .stack-anchor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    scroll-margin-top: 5rem;
+  }
+
   .stack-lede {
     color: var(--color-ink-soft);
     max-width: 62ch;
@@ -242,6 +261,40 @@ const layers = getStackLayers(locale);
   .copy-btn:hover {
     background: rgba(110, 231, 255, 0.18);
     border-color: var(--color-cyan);
+  }
+
+  .copy-btn.is-copied {
+    border-color: var(--color-emerald);
+    background: rgba(52, 211, 153, 0.14);
+    color: var(--color-emerald);
+  }
+
+  .copy-btn.is-failed {
+    border-color: var(--color-ember);
+    background: rgba(251, 146, 60, 0.14);
+    color: var(--color-ember);
+  }
+
+  .cmd-prompt {
+    color: var(--color-ink-faint);
+    user-select: none;
+    margin-right: 0.45rem;
+  }
+
+  .cmd-block code {
+    user-select: all;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .instrument-figure {

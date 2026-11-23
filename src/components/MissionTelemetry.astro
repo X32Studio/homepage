@@ -27,7 +27,7 @@ const { telemetry } = Astro.props;
           <li>
             <a
               class="layer-row"
-              href="#agentic-stack"
+              href={`#agentic-stack-${layer.id}`}
               data-stack-jump={layer.id}
             >
               <span class="layer-num mono-metric">{layer.code}</span>
@@ -64,6 +64,9 @@ const { telemetry } = Astro.props;
 </aside>
 
 <script>
+  import type { StackLayerId } from "@lib/stack";
+  import { requestLayerSelection } from "@lib/stack-selection";
+
   const clockEl = document.querySelector<HTMLElement>("[data-utc-clock]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -101,9 +104,9 @@ const { telemetry } = Astro.props;
 
   for (const anchor of document.querySelectorAll<HTMLAnchorElement>("[data-stack-jump]")) {
     anchor.addEventListener("click", () => {
-      const layerId = anchor.dataset.stackJump;
+      const layerId = anchor.dataset.stackJump as StackLayerId | undefined;
       if (layerId) {
-        window.dispatchEvent(new CustomEvent("x32:select-layer", { detail: { id: layerId } }));
+        requestLayerSelection(layerId);
       }
     });
   }

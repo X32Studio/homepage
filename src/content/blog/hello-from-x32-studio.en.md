@@ -14,4 +14,4 @@ I believe one engineer equipped with long-range agentic instruments can out-ship
 
 This site is our ground station. Projects get documented here, field notes get published here, and everything we learn comes back into the next launch.
 
-If you want to talk — collaborations, product conversations, or just trading notes on agents — reach us at hello@x32studio.com.
+If you want to talk — collaborations, product conversations, or just trading notes on agents — reach us at kang@x32studio.com.
