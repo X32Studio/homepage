@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#050814" />
+      <stop offset="100%" stop-color="#0c1428" />
+    </linearGradient>
+    <linearGradient id="arc" x1="160" y1="60" x2="480" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6ee7ff" />
+      <stop offset="55%" stop-color="#8b7cf8" />
+      <stop offset="100%" stop-color="#ff9a62" />
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#6ee7ff" stroke-opacity="0.08" stroke-width="1" />
+    </pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)" />
+  <rect width="640" height="360" fill="url(#grid)" />
+
+  <circle cx="320" cy="182" r="112" stroke="#6ee7ff" stroke-opacity="0.16" stroke-dasharray="4 6" stroke-width="1.2" />
+  <circle cx="320" cy="182" r="84" stroke="url(#arc)" stroke-width="2.2" stroke-dasharray="170 28 140 28 140 28" />
+  <circle cx="320" cy="182" r="46" stroke="#8b7cf8" stroke-opacity="0.35" stroke-width="1" />
+
+  <!-- Critic Node -->
+  <rect x="64" y="148" width="124" height="68" rx="8" fill="#090f20" stroke="#6ee7ff" stroke-opacity="0.55" />
+  <text x="80" y="174" fill="#6ee7ff" font-family="monospace" font-size="11" letter-spacing="1.6">ROLE 01</text>
+  <text x="80" y="198" fill="#eef2ff" font-family="sans-serif" font-size="17" font-weight="600">CRITIC</text>
+
+  <!-- Actor Node -->
+  <rect x="258" y="34" width="124" height="68" rx="8" fill="#090f20" stroke="#8b7cf8" stroke-opacity="0.7" />
+  <text x="274" y="60" fill="#c4b5fd" font-family="monospace" font-size="11" letter-spacing="1.6">ROLE 02</text>
+  <text x="274" y="84" fill="#eef2ff" font-family="sans-serif" font-size="17" font-weight="600">ACTOR</text>
+
+  <!-- Judge Node -->
+  <rect x="452" y="148" width="124" height="68" rx="8" fill="#090f20" stroke="#ff9a62" stroke-opacity="0.7" />
+  <text x="468" y="174" fill="#ff9a62" font-family="monospace" font-size="11" letter-spacing="1.6">ROLE 03</text>
+  <text x="468" y="198" fill="#eef2ff" font-family="sans-serif" font-size="17" font-weight="600">JUDGE</text>
+
+  <!-- Verified Output Pill -->
+  <rect x="208" y="276" width="224" height="44" rx="6" fill="#07131e" stroke="#34d399" stroke-opacity="0.55" />
+  <circle cx="228" cy="298" r="4.5" fill="#34d399" />
+  <text x="242" y="302" fill="#34d399" font-family="monospace" font-size="12" letter-spacing="1.2">SELF-LOOP // v0.4.10</text>
+
+  <!-- Center glyph -->
+  <text x="320" y="180" text-anchor="middle" fill="#6ee7ff" font-family="monospace" font-size="11" letter-spacing="1.8">AUTONOMOUS</text>
+  <text x="320" y="198" text-anchor="middle" fill="#eef2ff" font-family="monospace" font-size="13" font-weight="600">DELIVERY LOOP</text>
+</svg>

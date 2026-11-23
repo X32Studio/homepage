@@ -3,11 +3,11 @@ name: Argus
 tagline: Grow a research tree from a messy field.
 github: https://github.com/X32Studio/Argus
 status: Open source · v0.x
-glyph: A
+glyph: L3
 cover: /assets/argus-dashboard.webp
 locale: en
 featured: true
-order: 1
+order: 3
 tags:
   - deep research
   - claude code skill

@@ -1,11 +1,14 @@
 ---
-import type { SiteContent } from "@lib/content";
+import type { Locale, SiteContent } from "@lib/content";
 
 type Props = {
   content: SiteContent;
+  locale?: Locale;
 };
 
-const { content } = Astro.props;
+const { content, locale } = Astro.props;
+const activeLocale = locale ?? content.locale;
+const homeHref = activeLocale === "zh" ? "/zh/" : "/";
 const year = new Date().getFullYear();
 ---
 
@@ -13,19 +16,29 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a class="brand-mark" href="/">
+        <a class="brand-mark" href={homeHref} aria-label="X32 Studio home">
           <span class="brand-symbol">X32</span>
           <span class="brand-word">Studio</span>
         </a>
         <p class="tagline">{content.footer.tagline}</p>
       </div>
       <div class="footer-links">
-        {content.footer.links.map((link) => <a href={link.href} rel="noopener">{link.label}</a>)}
+        {
+          content.footer.links.map((link) => (
+            <a
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
       </div>
     </div>
     <div class="meta-row">
       <span>© {year} {content.footer.copyright}</span>
-      <span>Deep space operations · x32studio.com</span>
+      <span>{content.footer.metaLine}</span>
     </div>
   </div>
 </footer>

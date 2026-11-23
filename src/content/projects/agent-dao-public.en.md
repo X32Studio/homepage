@@ -4,10 +4,10 @@ tagline: Why agents will not disappear — only change form.
 github: https://github.com/X32Studio/agent-dao-public
 docs: https://github.com/X32Studio/agent-dao-public
 status: Essay · PDF
-glyph: D
+glyph: L4
 cover: /assets/agent-dao.webp
 featured: true
-order: 3
+order: 4
 locale: en
 tags:
   - essay

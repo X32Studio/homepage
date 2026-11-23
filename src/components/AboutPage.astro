@@ -1,0 +1,344 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getAlternateLocalePath, getSiteContent, type Locale } from "@lib/content";
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = getSiteContent(locale);
+const alternatePath = getAlternateLocalePath(locale, Astro.url.pathname);
+
+const dossier =
+  locale === "zh"
+    ? {
+        pageTitle: "关于",
+        eyebrow: "COMMAND // 一人公司 AI 工程工作室",
+        headline: "一人公司，全栈 Agentic 工程射程。",
+        intro:
+          "X32 Studio 是由康瑞源 Ruiyuan Kang（k-r33）独立运营的一人 AI 工程工作室（OPC）。我的工作横跨战略定义到生产交付，将个人工程判断固化为自主闭环（self-loop）、无冲突技能体系（System of Skills）、持久研究仪器（Argus）与第一性原理长文（Agent DAO）。",
+        credentialsHeading: "创始人核实履历 · Ruiyuan Kang (k-r33)",
+        credentials: [
+          {
+            slot: "01 // CURRENT",
+            title: "AI 创业公司 CxO · DRI & OPC",
+            org: "Strategy → Delivery · 组织智能与碳硅混合智能",
+            summary:
+              "担任直接负责人（DRI）并以一人公司（OPC）方法论推进端到端工程与产品落地，专注构建面向未来的组织智能（Organizational Intelligence）与碳硅混合智能（Carbon–Silicon Hybrid Intelligence）。",
+          },
+          {
+            slot: "02 // PREVIOUS",
+            title: "前 AI Agent 部门负责人",
+            org: "阿联酋国家技术创新研究院（Technology Innovation Institute, TII, UAE）",
+            summary:
+              "在阿联酋国家技术创新研究院（TII）领导 AI Agent 部门，主导国家级前沿 agentic AI 研究与工程化项目落地。",
+          },
+          {
+            slot: "03 // STUDIO",
+            title: "X32 Studio 创始人",
+            org: "一人公司 AI 工程工作室 · 公开开源建造",
+            summary:
+              "独立维护 X32 Agentic 工程栈全部四层开源产物，用真实代码、自动化测试与可追溯日志证明一人工作室的工程密度。",
+          },
+        ],
+        channelsHeading: "身份认证与公开代码通道",
+        channels: [
+          { label: "GitHub · @k-r33", value: "github.com/k-r33", href: "https://github.com/k-r33" },
+          { label: "个人站点 · Home", value: "k-r33.github.io", href: "https://k-r33.github.io" },
+          {
+            label: "交付引擎 · self-loop v0.4.10",
+            value: "github.com/X32Studio/self-loop",
+            href: "https://github.com/X32Studio/self-loop",
+          },
+          { label: "工作室组织 · X32Studio", value: "github.com/X32Studio", href: "https://github.com/X32Studio" },
+          { label: "直接联络 · Signal", value: "hello@x32studio.com", href: "mailto:hello@x32studio.com" },
+        ],
+        doctrineHeading: "OPC 工程准则",
+        doctrine: [
+          {
+            code: "D-01",
+            title: "一人负责到底（DRI）",
+            detail: "战略、架构、代码与验证不经过多层转述；判断与交付在同一闭环里直接对齐。",
+          },
+          {
+            code: "D-02",
+            title: "仪器优先于仪表盘",
+            detail: "可克隆、可复现、可组合的工程仪器，远比只供观赏的展示页面更有长期复利。",
+          },
+          {
+            code: "D-03",
+            title: "把判断沉淀进闭环",
+            detail: "通过 self-loop、System of Skills 与 Argus，把单人经验编码为跨轮次持续运转的外部结构。",
+          },
+          {
+            code: "D-04",
+            title: "验证通过才发布",
+            detail: "拒绝 PPT 路线图与空洞指标；每一项工程主张都在公开仓库和自动化检查下接受检验。",
+          },
+        ],
+      }
+    : {
+        pageTitle: "About",
+        eyebrow: "COMMAND // ONE-PERSON AI STUDIO",
+        headline: "One engineer. Full-stack agentic leverage.",
+        intro:
+          "X32 Studio is the independent one-person AI engineering studio (OPC) founded and operated by Ruiyuan Kang (k-r33). Spanning strategy to production delivery, the studio encodes architectural judgment into autonomous loops (self-loop), non-colliding skill systems (System of Skills), persistent research instruments (Argus), and first-principles writing (Agent DAO).",
+        credentialsHeading: "Founder Dossier · Ruiyuan Kang (k-r33)",
+        credentials: [
+          {
+            slot: "01 // CURRENT",
+            title: "AI Startup CxO · DRI & OPC",
+            org: "Strategy → Delivery · Organizational & Carbon–Silicon Hybrid Intelligence",
+            summary:
+              "Operating as Directly Responsible Individual (DRI) and One-Person Company (OPC) architect from strategy to shipped systems — building future Organizational Intelligence and Carbon–Silicon Hybrid Intelligence.",
+          },
+          {
+            slot: "02 // PREVIOUS",
+            title: "Former Head of AI Agent Department",
+            org: "Technology Innovation Institute (TII, UAE)",
+            summary:
+              "Led the AI Agent Department at the UAE's Technology Innovation Institute (TII), directing large-scale agentic AI research and engineering initiatives.",
+          },
+          {
+            slot: "03 // STUDIO",
+            title: "Founder @ X32 Studio",
+            org: "One-Person AI Engineering Studio · Open Source",
+            summary:
+              "Architect and sole builder of the 4-layer X32 Agentic Stack — shipping verifiable repositories, tests, and audit trails in public.",
+          },
+        ],
+        channelsHeading: "Verified Identity & Code Channels",
+        channels: [
+          { label: "GitHub · @k-r33", value: "github.com/k-r33", href: "https://github.com/k-r33" },
+          { label: "Personal Site", value: "k-r33.github.io", href: "https://k-r33.github.io" },
+          {
+            label: "Delivery Engine · self-loop v0.4.10",
+            value: "github.com/X32Studio/self-loop",
+            href: "https://github.com/X32Studio/self-loop",
+          },
+          { label: "Studio Org · X32Studio", value: "github.com/X32Studio", href: "https://github.com/X32Studio" },
+          { label: "Direct Signal", value: "hello@x32studio.com", href: "mailto:hello@x32studio.com" },
+        ],
+        doctrineHeading: "Operating Doctrine",
+        doctrine: [
+          {
+            code: "D-01",
+            title: "Single-point DRI ownership",
+            detail: "Strategy, architecture, code, and verification stay inside one tight loop with zero handoff distortion.",
+          },
+          {
+            code: "D-02",
+            title: "Instruments over dashboards",
+            detail: "Tools you can clone, run, and compose outperform vanity demos and passive metrics.",
+          },
+          {
+            code: "D-03",
+            title: "Encode judgment into systems",
+            detail: "self-loop, System of Skills, and Argus turn individual engineering taste into compounding agentic leverage.",
+          },
+          {
+            code: "D-04",
+            title: "Verify before shipping",
+            detail: "No vaporware or roadmap theater — every claim is backed by public repositories and automated checks.",
+          },
+        ],
+      };
+---
+
+<BaseLayout content={content} locale={locale} alternatePath={alternatePath} title={dossier.pageTitle}>
+  <section class="section">
+    <div class="container">
+      <div class="dossier-head reveal">
+        <p class="eyebrow">{dossier.eyebrow}</p>
+        <h1 class="page-title">{dossier.headline}</h1>
+        <p class="intro">{dossier.intro}</p>
+      </div>
+
+      <div class="block reveal" data-delay="1">
+        <p class="block-label mono-metric">{dossier.credentialsHeading}</p>
+        <div class="credential-grid">
+          {
+            dossier.credentials.map((item) => (
+              <article class="hud-frame credential-card">
+                <span class="telemetry-chip is-cyan">{item.slot}</span>
+                <h2>{item.title}</h2>
+                <p class="org mono-metric">{item.org}</p>
+                <p class="summary">{item.summary}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="block reveal" data-delay="2">
+        <p class="block-label mono-metric">{dossier.channelsHeading}</p>
+        <div class="channel-grid">
+          {
+            dossier.channels.map((channel) => (
+              <a
+                class="channel-card"
+                href={channel.href}
+                target={channel.href.startsWith("http") ? "_blank" : undefined}
+                rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              >
+                <span class="channel-label mono-metric">{channel.label}</span>
+                <strong class="channel-value mono-metric">{channel.value} ↗</strong>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="block reveal" data-delay="3">
+        <p class="block-label mono-metric">{dossier.doctrineHeading}</p>
+        <div class="doctrine-grid">
+          {
+            dossier.doctrine.map((rule) => (
+              <article class="doctrine-card">
+                <span class="mono-metric doctrine-code">{rule.code}</span>
+                <h3>{rule.title}</h3>
+                <p>{rule.detail}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .dossier-head {
+    max-width: 52rem;
+  }
+
+  .page-title {
+    font-size: clamp(2.1rem, 5vw, 3.5rem);
+    margin-top: 0.85rem;
+  }
+
+  .intro {
+    margin-top: 1.25rem;
+    font-size: 1.04rem;
+    color: var(--color-ink-soft);
+    max-width: 66ch;
+  }
+
+  .block {
+    margin-top: clamp(2.4rem, 5vw, 3.5rem);
+  }
+
+  .block-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+    margin-bottom: 1rem;
+  }
+
+  .credential-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .credential-card {
+    padding: 1.45rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .credential-card h2 {
+    font-size: 1.25rem;
+    margin-top: 0.25rem;
+  }
+
+  .credential-card .org {
+    font-size: 0.76rem;
+    color: #c4b5fd;
+  }
+
+  .credential-card .summary {
+    font-size: 0.92rem;
+    color: var(--color-ink-soft);
+  }
+
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(14.5rem, 100%), 1fr));
+    gap: 0.9rem;
+  }
+
+  .channel-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 1.15rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line);
+    background: var(--color-panel);
+    transition: border-color 0.2s var(--ease-out), transform 0.2s var(--ease-out), background 0.2s var(--ease-out);
+  }
+
+  .channel-card:hover {
+    border-color: var(--color-cyan);
+    background: var(--color-panel-bright);
+    transform: translateY(-2px);
+  }
+
+  .channel-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-faint);
+    text-transform: uppercase;
+  }
+
+  .channel-value {
+    font-size: 0.84rem;
+    color: var(--color-cyan);
+  }
+
+  .doctrine-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+
+  .doctrine-card {
+    padding: 1.25rem 1.35rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line-subtle);
+    background: rgba(9, 14, 29, 0.66);
+  }
+
+  .doctrine-code {
+    font-size: 0.72rem;
+    color: var(--color-ember);
+    letter-spacing: 0.12em;
+  }
+
+  .doctrine-card h3 {
+    font-size: 1.08rem;
+    margin-top: 0.35rem;
+  }
+
+  .doctrine-card p {
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.4rem;
+  }
+
+  @media (max-width: 900px) {
+    .credential-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .doctrine-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

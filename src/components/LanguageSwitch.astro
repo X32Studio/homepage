@@ -8,8 +8,12 @@ type Props = {
 
 const { locale, alternatePath } = Astro.props;
 const label = locale === "en" ? "中文" : "EN";
+const currentCode = locale === "en" ? "EN" : "ZH";
+const ariaLabel = locale === "en" ? "Switch to Chinese" : "切换到英文";
 ---
 
-<a class="language-switch" href={alternatePath} aria-label="Switch language">
-  {label}
+<a class="language-switch" href={alternatePath} aria-label={ariaLabel} hreflang={locale === "en" ? "zh" : "en"}>
+  <span class="lang-code" aria-hidden="true">{currentCode}</span>
+  <span aria-hidden="true">/</span>
+  <span>{label}</span>
 </a>

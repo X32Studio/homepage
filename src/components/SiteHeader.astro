@@ -10,21 +10,57 @@ type Props = {
 
 const { content, locale, alternatePath } = Astro.props;
 const homeHref = locale === "en" ? "/" : "/zh/";
+
+function normalizePath(path: string): string {
+  const cleaned = path.replace(/\/+$/, "");
+  return cleaned === "" ? "/" : `${cleaned}/`;
+}
+
+const currentPath = normalizePath(Astro.url.pathname);
+
+function isActiveNav(href: string): boolean {
+  const target = normalizePath(href);
+  if (target === "/" || target === "/zh/") {
+    return currentPath === target;
+  }
+  return currentPath === target || currentPath.startsWith(target);
+}
 ---
 
 <header class="site-header" id="site-header">
   <div class="container bar">
-    <a class="brand-mark" href={homeHref} aria-label="X32 Studio home">
-      <span class="brand-symbol">X32</span>
-      <span class="brand-word">Studio</span>
-    </a>
-    <nav class="site-nav" aria-label="Primary navigation">
-      {content.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    <div class="brand-cluster">
+      <a class="brand-mark" href={homeHref} aria-label="X32 Studio home">
+        <span class="brand-symbol">X32</span>
+        <span class="brand-word">Studio</span>
+      </a>
+      <span class="hud-callsign" aria-hidden="true">
+        <span class="status-led"></span>
+        X32 // OPC-DECK
+      </span>
+    </div>
+
+    <nav class="site-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
+      {
+        content.navigation.map((item) => (
+          <a href={item.href} aria-current={isActiveNav(item.href) ? "page" : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
     </nav>
+
     <LanguageSwitch locale={locale} alternatePath={alternatePath} />
   </div>
-  <nav class="mobile-nav" aria-label="Mobile navigation">
-    {content.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+
+  <nav class="mobile-nav" aria-label={locale === "zh" ? "移动端导航" : "Mobile navigation"}>
+    {
+      content.navigation.map((item) => (
+        <a href={item.href} aria-current={isActiveNav(item.href) ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
   </nav>
 </header>
 

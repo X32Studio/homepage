@@ -3,7 +3,7 @@ name: Skills System Guide
 tagline: Stop trigger conflicts — organize agent skills as one coherent system.
 github: https://github.com/X32Studio/best-practice-for-skills-system
 status: Open source · guide
-glyph: S
+glyph: L2
 cover: /assets/skills-system.webp
 locale: en
 featured: true

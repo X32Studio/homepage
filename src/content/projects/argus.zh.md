@@ -3,11 +3,11 @@ name: Argus
 tagline: 从混乱的信息场里，种出一棵不断生长的研究树。
 github: https://github.com/X32Studio/Argus
 status: 开源 · v0.x
-glyph: A
+glyph: L3
 cover: /assets/argus-dashboard.webp
 locale: zh
 featured: true
-order: 1
+order: 3
 tags:
   - 深度研究
   - Claude Code skill

@@ -1,0 +1,67 @@
+---
+import ProjectCard from "@components/ProjectCard.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getAlternateLocalePath, getSiteContent, type Locale } from "@lib/content";
+import { getCollection, render } from "astro:content";
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = getSiteContent(locale);
+const alternatePath = getAlternateLocalePath(locale, Astro.url.pathname);
+
+const projects = await getCollection(
+  "projects",
+  ({ data }) => data.visibility === "public" && data.locale === locale,
+);
+projects.sort((left, right) => left.data.order - right.data.order);
+
+const renderedProjects = await Promise.all(
+  projects.map(async (project) => ({
+    project,
+    Content: (await render(project)).Content,
+  })),
+);
+
+const pageTitle = locale === "zh" ? "项目" : "Projects";
+---
+
+<BaseLayout content={content} locale={locale} alternatePath={alternatePath} title={pageTitle}>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow reveal">{content.projectsIntro.eyebrow}</p>
+      <h1 class="page-title reveal" data-delay="1">{content.projectsIntro.title}</h1>
+      <p class="lede reveal" data-delay="2">{content.projectsIntro.body}</p>
+      <div class="project-grid">
+        {
+          renderedProjects.map(({ project, Content }, index) => (
+            <div class="reveal" data-delay={String((index % 4) + 1)}>
+              <ProjectCard project={project}>
+                <Content />
+              </ProjectCard>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: clamp(2.1rem, 5vw, 3.5rem);
+    margin-top: 0.85rem;
+  }
+
+  .lede {
+    color: var(--color-ink-soft);
+    max-width: 60ch;
+    margin-top: 1rem;
+  }
+
+  .project-grid {
+    margin-top: clamp(2.2rem, 5.5vw, 3.4rem);
+  }
+</style>

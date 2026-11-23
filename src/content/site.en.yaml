@@ -1,7 +1,7 @@
 locale: en
 meta:
-  title: X32 Studio — Agentic Systems, Developer Tools & Handmade Software
-  description: X32 Studio is an elite geek studio building agentic systems, developer tools, and handmade software. Home of Argus, the deep-research agent.
+  title: X32 Studio — One-Person AI Engineering Studio & Agentic Stack
+  description: X32 Studio is a one-person AI engineering studio founded by Ruiyuan Kang (k-r33) — building self-loop, System of Skills, Argus, and Agent DAO for Organizational Intelligence and Carbon-Silicon Hybrid Intelligence.
 navigation:
   - key: home
     label: Home
@@ -16,47 +16,94 @@ navigation:
     label: About
     href: /about/
 hero:
-  eyebrow: Deep space operations · est. 2026
-  title: We grow software where the map ends.
-  titleAccent: Deep research. Real tools.
-  subtitle: X32 Studio is an elite geek crew building agentic systems, developer tools, and handmade software — documented in public, shipped when it works.
+  eyebrow: X32-OPC // One-Person AI Engineering Studio
+  title: One engineer.
+  titleAccent: Full-stack agentic velocity.
+  subtitle: X32 Studio is the independent one-person AI engineering studio of Ruiyuan Kang (k-r33) — building autonomous delivery loops, coherent skill architectures, and persistent research instruments in public.
   primaryCta:
-    label: Explore projects
-    href: /projects/
+    label: Inspect X32 Stack
+    href: "#agentic-stack"
   secondaryCta:
-    label: Read field notes
-    href: /blog/
+    label: self-loop on GitHub
+    href: https://github.com/X32Studio/self-loop
   stats:
-    - value: "∞"
-      label: Curiosity
-    - value: ★
-      label: "★ Elite crew"
-    - value: 1
-      label: Flagship agent
+    - value: "1"
+      label: DRI & OPC Founder
+    - value: "4"
+      label: Stack Layers
+    - value: v0.4.10
+      label: self-loop Engine
+  telemetry:
+    callsign: SYS.ONLINE // X32-OPC-01
+    orbitLabel: MISSION CONTROL · STRATEGY -> DELIVERY
+    stackHeading: ACTIVE STACK TOPOLOGY
+    layers:
+      - id: self-loop
+        code: "01"
+        name: self-loop
+        tag: v0.4.10
+        role: Delivery Engine
+      - id: skills-system
+        code: "02"
+        name: System of Skills
+        tag: SPEC
+        role: Skill Architecture
+      - id: argus
+        code: "03"
+        name: Argus
+        tag: TREE
+        role: Deep Research
+      - id: agent-dao
+        code: "04"
+        name: Agent DAO
+        tag: THESIS
+        role: First-Principles
+    founderLabel: COMMAND // FOUNDER CALLSIGN
+    founderName: Ruiyuan Kang
+    founderHandle: k-r33
+    founderTitle: AI Startup CxO · DRI & OPC
+    founderPrevious: Former Head of AI Agent Dept @ TII (UAE)
+    links:
+      - label: github.com/k-r33
+        href: https://github.com/k-r33
+      - label: X32Studio/self-loop
+        href: https://github.com/X32Studio/self-loop
 aboutTeaser:
-  eyebrow: The crew
-  title: One elite geek crew, unusual range.
-  body: A small elite geek crew — we navigate agentic algorithms, engineering systems, product direction, and signal from noise ourselves. Long-range instruments, everything built in the open.
+  eyebrow: Founder Dossier · One-Person Company (OPC)
+  title: Ruiyuan Kang (k-r33) — Strategy to Delivery, solo by design.
+  roleLine: AI Startup CxO · DRI & OPC — building Organizational Intelligence & Carbon–Silicon Hybrid Intelligence
+  previousLine: Former Head of AI Agent Department, Technology Innovation Institute (TII, UAE) · Founder @ X32 Studio
+  body: X32 Studio operates as a one-person AI engineering studio ("一人公司"). Instead of scaling headcount, I encode architectural judgment into autonomous delivery loops, non-colliding skill systems, and persistent research instruments — shipping verifiable open-source systems end to end.
   cta:
-    label: Meet the crew
+    label: Read Founder Dossier
     href: /about/
+  secondaryCta:
+    label: GitHub @k-r33
+    href: https://github.com/k-r33
   capabilities:
-    - Agentic system design
-    - Developer tooling
-    - Full-stack prototypes
-    - Technical storytelling
+    - Strategy → Delivery (DRI & OPC)
+    - Organizational Intelligence
+    - Carbon–Silicon Hybrid Intelligence
+    - Autonomous Agentic Engineering
 blogIntro:
   eyebrow: Field notes
-  title: Signals from the expedition.
+  title: Signals from the engineering deck.
 projectsIntro:
   eyebrow: Instruments
-  title: Built to be used, not just admired.
-  body: Every project here is a working instrument. Clone it, run it, break it — then tell us what happened.
+  title: Working systems, verified in the open.
+  body: Every repository here is a live layer of the X32 Agentic Stack — inspect the architecture, run the loop, and verify every claim against source code.
 footer:
-  tagline: Handmade software from the edge of useful technology.
-  copyright: X32 Studio
+  tagline: One-person AI engineering studio by Ruiyuan Kang (k-r33) — autonomous loops, skill systems, and deep-research instruments.
+  copyright: X32 Studio · Ruiyuan Kang (k-r33)
+  metaLine: X32 // OPC-DECK · x32studio.com
   links:
-    - label: GitHub
+    - label: GitHub / k-r33
+      href: https://github.com/k-r33
+    - label: k-r33.github.io
+      href: https://k-r33.github.io
+    - label: self-loop
+      href: https://github.com/X32Studio/self-loop
+    - label: X32Studio Org
       href: https://github.com/X32Studio
-    - label: Email
+    - label: hello@x32studio.com
       href: mailto:hello@x32studio.com

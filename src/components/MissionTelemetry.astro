@@ -1,0 +1,285 @@
+---
+import type { HeroTelemetry } from "@lib/content";
+
+type Props = {
+  telemetry: HeroTelemetry;
+};
+
+const { telemetry } = Astro.props;
+---
+
+<aside class="hud-frame telemetry-console" aria-label={telemetry.callsign}>
+  <div class="console-head">
+    <div class="callsign-row">
+      <span class="status-led" aria-hidden="true"></span>
+      <span class="callsign mono-metric">{telemetry.callsign}</span>
+    </div>
+    <span class="utc-readout mono-metric" data-utc-clock>UTC · SYNC</span>
+  </div>
+
+  <p class="orbit-sub mono-metric">{telemetry.orbitLabel}</p>
+
+  <div class="stack-index">
+    <p class="index-label mono-metric">{telemetry.stackHeading}</p>
+    <ul class="layer-list">
+      {
+        telemetry.layers.map((layer) => (
+          <li>
+            <a
+              class="layer-row"
+              href="#agentic-stack"
+              data-stack-jump={layer.id}
+            >
+              <span class="layer-num mono-metric">{layer.code}</span>
+              <span class="layer-main">
+                <strong>{layer.name}</strong>
+                <span class="layer-role">{layer.role}</span>
+              </span>
+              <span class="layer-tag mono-metric">[{layer.tag}]</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="founder-strip">
+    <p class="founder-eyebrow mono-metric">{telemetry.founderLabel}</p>
+    <div class="founder-id">
+      <strong>{telemetry.founderName}</strong>
+      <span class="telemetry-chip is-cyan">{telemetry.founderHandle}</span>
+    </div>
+    <p class="founder-title">{telemetry.founderTitle}</p>
+    <p class="founder-prev">{telemetry.founderPrevious}</p>
+    <div class="founder-links">
+      {
+        telemetry.links.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer">
+            {link.label} ↗
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</aside>
+
+<script>
+  const clockEl = document.querySelector<HTMLElement>("[data-utc-clock]");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (clockEl && !reducedMotion) {
+    let timer: number | null = null;
+
+    const renderClock = () => {
+      const now = new Date();
+      const hh = String(now.getUTCHours()).padStart(2, "0");
+      const mm = String(now.getUTCMinutes()).padStart(2, "0");
+      const ss = String(now.getUTCSeconds()).padStart(2, "0");
+      clockEl.textContent = `UTC ${hh}:${mm}:${ss}`;
+    };
+
+    const startClock = () => {
+      if (timer !== null || document.hidden) return;
+      renderClock();
+      timer = window.setInterval(renderClock, 1000);
+    };
+
+    const stopClock = () => {
+      if (timer !== null) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopClock();
+      else startClock();
+    });
+
+    startClock();
+  }
+
+  for (const anchor of document.querySelectorAll<HTMLAnchorElement>("[data-stack-jump]")) {
+    anchor.addEventListener("click", () => {
+      const layerId = anchor.dataset.stackJump;
+      if (layerId) {
+        window.dispatchEvent(new CustomEvent("x32:select-layer", { detail: { id: layerId } }));
+      }
+    });
+  }
+</script>
+
+<style>
+  .telemetry-console {
+    padding: 1.3rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.05rem;
+  }
+
+  .console-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-line-subtle);
+  }
+
+  .callsign-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-width: 0;
+  }
+
+  .callsign {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--color-emerald);
+    text-transform: uppercase;
+  }
+
+  .utc-readout {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--color-cyan);
+    padding: 0.18rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(110, 231, 255, 0.24);
+    background: rgba(110, 231, 255, 0.06);
+    white-space: nowrap;
+  }
+
+  .orbit-sub {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--color-ink-faint);
+    text-transform: uppercase;
+  }
+
+  .index-label {
+    font-size: 0.67rem;
+    letter-spacing: 0.14em;
+    color: var(--color-ink-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .layer-list {
+    list-style: none;
+    display: grid;
+    gap: 0.42rem;
+  }
+
+  .layer-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.72rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line-subtle);
+    background: rgba(4, 6, 13, 0.58);
+    transition:
+      border-color 0.2s var(--ease-out),
+      background 0.2s var(--ease-out),
+      transform 0.2s var(--ease-out);
+  }
+
+  .layer-row:hover {
+    border-color: var(--color-line-bright);
+    background: rgba(110, 231, 255, 0.07);
+    transform: translateX(3px);
+  }
+
+  .layer-num {
+    font-size: 0.72rem;
+    color: var(--color-cyan);
+  }
+
+  .layer-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .layer-main strong {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.2;
+  }
+
+  .layer-role {
+    font-size: 0.74rem;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .layer-tag {
+    font-size: 0.68rem;
+    color: #c4b5fd;
+    white-space: nowrap;
+  }
+
+  .founder-strip {
+    margin-top: 0.1rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid var(--color-line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .founder-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    color: var(--color-ink-faint);
+  }
+
+  .founder-id {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+  }
+
+  .founder-id strong {
+    font-size: 1rem;
+    color: var(--color-ink);
+  }
+
+  .founder-title {
+    font-size: 0.84rem;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .founder-prev {
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+  }
+
+  .founder-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.95rem;
+    margin-top: 0.4rem;
+  }
+
+  .founder-links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-cyan);
+    border-bottom: 1px solid rgba(110, 231, 255, 0.3);
+    padding-bottom: 0.08rem;
+    transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
+  }
+
+  .founder-links a:hover {
+    color: #ffffff;
+    border-color: var(--color-cyan);
+  }
+</style>

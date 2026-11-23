@@ -4,10 +4,10 @@ tagline: 为什么 agent 不会消失——只会改变形态。
 github: https://github.com/X32Studio/agent-dao-public
 docs: https://github.com/X32Studio/agent-dao-public
 status: 长文 · PDF
-glyph: D
+glyph: L4
 cover: /assets/agent-dao.webp
 featured: true
-order: 3
+order: 4
 locale: zh
 tags:
   - 长文

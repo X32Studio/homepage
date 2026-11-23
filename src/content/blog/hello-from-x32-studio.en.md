@@ -8,9 +8,9 @@ tags:
   - studio
 ---
 
-X32 Studio is an elite geek crew building at the edge of useful technology: agentic systems, developer tools, and handmade software that solves real problems.
+X32 Studio is a one-person AI engineering studio founded by Ruiyuan Kang (`k-r33`), building at the edge of useful technology: agentic systems, developer tools, and handmade software that solves real problems.
 
-We believe small teams with long-range instruments can move faster than big rooms full of dashboards. Our first public instrument is [Argus](https://github.com/X32Studio/Argus) — an agent that grows a research tree from a messy field of information, one deep pass at a time.
+I believe one engineer equipped with long-range agentic instruments can out-ship big rooms full of dashboards. Our early public instrument is [Argus](https://github.com/X32Studio/Argus) — an agent that grows a research tree from a messy field of information, one deep pass at a time.
 
 This site is our ground station. Projects get documented here, field notes get published here, and everything we learn comes back into the next launch.
 

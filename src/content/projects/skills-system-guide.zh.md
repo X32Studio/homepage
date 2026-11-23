@@ -3,7 +3,7 @@ name: Skills System Guide
 tagline: 告别触发冲突——把 agent skills 组织成一个连贯系统。
 github: https://github.com/X32Studio/best-practice-for-skills-system
 status: 开源 · 指南
-glyph: S
+glyph: L2
 cover: /assets/skills-system.webp
 locale: zh
 featured: true

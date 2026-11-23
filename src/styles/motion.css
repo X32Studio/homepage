@@ -1,10 +1,11 @@
-/* scroll reveal */
+/* Scroll reveal & subtle aerospace telemetry motion */
+
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
+  transform: translateY(22px);
   transition:
-    opacity 0.7s var(--ease-out),
-    transform 0.7s var(--ease-out);
+    opacity 0.65s var(--ease-out),
+    transform 0.65s var(--ease-out);
 }
 
 .reveal.is-visible {
@@ -18,22 +19,25 @@ html:not(.js) .reveal {
 }
 
 .reveal[data-delay="1"] {
-  transition-delay: 0.08s;
+  transition-delay: 0.07s;
 }
 
 .reveal[data-delay="2"] {
-  transition-delay: 0.16s;
+  transition-delay: 0.14s;
 }
 
 .reveal[data-delay="3"] {
-  transition-delay: 0.24s;
+  transition-delay: 0.21s;
 }
 
-/* hero entrance */
+.reveal[data-delay="4"] {
+  transition-delay: 0.28s;
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
 
   to {
@@ -43,13 +47,13 @@ html:not(.js) .reveal {
 }
 
 .rise {
-  animation: rise-in 0.9s var(--ease-out) both;
+  animation: rise-in 0.75s var(--ease-out) both;
 }
 
-.rise.d1 { animation-delay: 0.1s; }
-.rise.d2 { animation-delay: 0.22s; }
-.rise.d3 { animation-delay: 0.34s; }
-.rise.d4 { animation-delay: 0.46s; }
+.rise.d1 { animation-delay: 0.08s; }
+.rise.d2 { animation-delay: 0.16s; }
+.rise.d3 { animation-delay: 0.24s; }
+.rise.d4 { animation-delay: 0.32s; }
 
 @keyframes aurora-shift {
   0%, 100% {
@@ -63,11 +67,11 @@ html:not(.js) .reveal {
 
 .gradient-text {
   background: var(--gradient-aurora);
-  background-size: 220% 100%;
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: aurora-shift 9s ease-in-out infinite;
+  animation: aurora-shift 11s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
@@ -75,14 +79,24 @@ html:not(.js) .reveal {
     box-shadow: 0 0 0 0 rgba(110, 231, 255, 0.5);
   }
 
-  60% {
-    box-shadow: 0 0 0 8px rgba(110, 231, 255, 0);
+  65% {
+    box-shadow: 0 0 0 7px rgba(110, 231, 255, 0);
+  }
+}
+
+@keyframes led-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+  }
+
+  65% {
+    box-shadow: 0 0 0 7px rgba(52, 211, 153, 0);
   }
 }
 
 .pulse-dot {
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 0.52rem;
+  height: 0.52rem;
   border-radius: 50%;
   background: var(--color-cyan);
   animation: pulse-dot 2.4s infinite;

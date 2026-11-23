@@ -1,7 +1,7 @@
 locale: zh
 meta:
-  title: X32 Studio — Agentic 系统、开发者工具与手作软件
-  description: X32 Studio 是一支精英 geek 小队，构建 agentic 系统与开发者工具。旗舰产品 Argus：持续深挖的深度研究 agent。
+  title: X32 Studio — 一人公司 AI 工程工作室与 Agentic 工程栈
+  description: X32 Studio 是由康瑞源 Ruiyuan Kang (k-r33) 创立的一人 AI 工程工作室，公开构建 self-loop、System of Skills、Argus 与 Agent DAO，探索组织智能与碳硅混合智能。
 navigation:
   - key: home
     label: 首页
@@ -16,47 +16,94 @@ navigation:
     label: 关于
     href: /zh/about/
 hero:
-  eyebrow: 深空行动 · 2026 启航
-  title: 我们在地图尽头，
-  titleAccent: 种出会生长的软件。
-  subtitle: X32 Studio 是一支精英 geek 小队，专注 agentic 系统、开发者工具和手作软件——公开建造，能用了才发布。
+  eyebrow: X32-OPC // 一人公司 AI 工程工作室
+  title: 一人公司，
+  titleAccent: 全栈 Agentic 工程射程。
+  subtitle: X32 Studio 是康瑞源 Ruiyuan Kang (k-r33) 的一人 AI 工程工作室，专注构建自主交付闭环、系统化 agentic 技能架构与长程研究仪器——公开建造，验证通过才发布。
   primaryCta:
-    label: 探索项目
-    href: /zh/projects/
+    label: 探索 X32 工程栈
+    href: "#agentic-stack"
   secondaryCta:
-    label: 读航行笔记
-    href: /zh/blog/
+    label: GitHub · self-loop
+    href: https://github.com/X32Studio/self-loop
   stats:
-    - value: "∞"
-      label: 好奇心
-    - value: ★
-      label: 精英小队
-    - value: 1
-      label: 旗舰 agent
+    - value: "1"
+      label: DRI & OPC 创始人
+    - value: "4"
+      label: Agentic 栈层级
+    - value: v0.4.10
+      label: self-loop 引擎
+  telemetry:
+    callsign: SYS.ONLINE // X32-OPC-01
+    orbitLabel: 任务控制舱 · STRATEGY -> DELIVERY
+    stackHeading: 当前工程栈拓扑
+    layers:
+      - id: self-loop
+        code: "01"
+        name: self-loop
+        tag: v0.4.10
+        role: 自主交付引擎
+      - id: skills-system
+        code: "02"
+        name: System of Skills
+        tag: SPEC
+        role: 技能架构规范
+      - id: argus
+        code: "03"
+        name: Argus
+        tag: TREE
+        role: 深度研究仪器
+      - id: agent-dao
+        code: "04"
+        name: Agent DAO
+        tag: THESIS
+        role: 第一性原理长文
+    founderLabel: COMMAND // 创始人呼号
+    founderName: Ruiyuan Kang
+    founderHandle: k-r33
+    founderTitle: AI 创业公司 CxO · DRI & OPC
+    founderPrevious: 前阿联酋国家技术创新研究院 TII AI Agent 部门负责人
+    links:
+      - label: github.com/k-r33
+        href: https://github.com/k-r33
+      - label: X32Studio/self-loop
+        href: https://github.com/X32Studio/self-loop
 aboutTeaser:
-  eyebrow: 团队
-  title: 一支精英小队，不寻常的射程。
-  body: 一支精英 geek 小队——agentic 算法、工程系统、产品方向、从噪声中提取信号，全都自己上手。仪器很远，一切都公开建造。
+  eyebrow: 创始人档案 · 一人公司 (OPC)
+  title: Ruiyuan Kang (k-r33) — 从战略到交付的端到端穿透。
+  roleLine: AI 创业公司 CxO · DRI & OPC — 构建面向未来的组织智能与碳硅混合智能
+  previousLine: 前阿联酋国家技术创新研究院（TII）AI Agent 部门负责人 · X32 Studio 创始人
+  body: X32 Studio 以一人 AI 工程工作室（一人公司 / OPC）的方式运转：不靠堆砌人力，而是把工程判断沉淀为自主交付引擎、无冲突技能拓扑与持久研究仪器，在公开仓库中端到端交付可验证的系统。
   cta:
-    label: 认识团队
+    label: 查看创始人档案
     href: /zh/about/
+  secondaryCta:
+    label: GitHub @k-r33
+    href: https://github.com/k-r33
   capabilities:
-    - Agentic 系统设计
-    - 开发者工具
-    - 全栈原型
-    - 技术叙事
+    - Strategy → Delivery（DRI & OPC）
+    - 组织智能（Organizational Intelligence）
+    - 碳硅混合智能（Carbon–Silicon Hybrid Intelligence）
+    - 自主 Agentic 工程系统
 blogIntro:
   eyebrow: 航行笔记
-  title: 来自远征的信号。
+  title: 来自工程控制舱的信号。
 projectsIntro:
-  eyebrow: 仪器
-  title: 为使用而造，不是为观赏。
-  body: 这里的每个项目都是能用的仪器。克隆它、运行它、把它玩坏——然后告诉我们发生了什么。
+  eyebrow: 公开仪器
+  title: 为真实交付而造，在开源中接受验证。
+  body: 这里的每一个仓库都是 X32 Agentic 工程栈的实装层级——直接看架构、跑闭环、用源码验证每一项工程主张。
 footer:
-  tagline: 来自有用技术边缘的手作软件。
-  copyright: X32 Studio
+  tagline: Ruiyuan Kang (k-r33) 的一人 AI 工程工作室——自主交付闭环、技能系统与长程深度研究仪器。
+  copyright: X32 Studio · Ruiyuan Kang (k-r33)
+  metaLine: X32 // OPC-DECK · x32studio.com
   links:
-    - label: GitHub
+    - label: GitHub / k-r33
+      href: https://github.com/k-r33
+    - label: k-r33.github.io
+      href: https://k-r33.github.io
+    - label: self-loop
+      href: https://github.com/X32Studio/self-loop
+    - label: X32Studio Org
       href: https://github.com/X32Studio
-    - label: Email
+    - label: hello@x32studio.com
       href: mailto:hello@x32studio.com

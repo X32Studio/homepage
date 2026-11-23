@@ -1,0 +1,186 @@
+/* Deep-space telemetry substrate & aerospace HUD primitives */
+
+.telemetry-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(64% 44% at 72% 4%, rgba(110, 231, 255, 0.09), transparent 70%),
+    radial-gradient(48% 36% at 14% 12%, rgba(139, 124, 248, 0.07), transparent 68%),
+    linear-gradient(to right, rgba(110, 231, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(110, 231, 255, 0.045) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.16) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.16) 100%);
+  opacity: 0.9;
+}
+
+.hud-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--color-panel);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-deck);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hud-frame::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, var(--color-cyan) 12px, transparent 12px) 0 0 / 16px 16px no-repeat,
+    linear-gradient(to bottom, var(--color-cyan) 12px, transparent 12px) 0 0 / 16px 16px no-repeat,
+    linear-gradient(to left, var(--color-cyan) 12px, transparent 12px) 100% 0 / 16px 16px no-repeat,
+    linear-gradient(to bottom, var(--color-cyan) 12px, transparent 12px) 100% 0 / 16px 16px no-repeat,
+    linear-gradient(to right, var(--color-violet) 12px, transparent 12px) 0 100% / 16px 16px no-repeat,
+    linear-gradient(to top, var(--color-violet) 12px, transparent 12px) 0 100% / 16px 16px no-repeat,
+    linear-gradient(to left, var(--color-violet) 12px, transparent 12px) 100% 100% / 16px 16px no-repeat,
+    linear-gradient(to top, var(--color-violet) 12px, transparent 12px) 100% 100% / 16px 16px no-repeat;
+  background-size: 12px 1.5px, 1.5px 12px, 12px 1.5px, 1.5px 12px, 12px 1.5px, 1.5px 12px, 12px 1.5px, 1.5px 12px;
+  opacity: 0.72;
+}
+
+.telemetry-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line);
+  background: rgba(9, 14, 29, 0.78);
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+.telemetry-chip.is-cyan {
+  color: var(--color-cyan);
+  border-color: rgba(110, 231, 255, 0.34);
+  background: rgba(110, 231, 255, 0.08);
+}
+
+.telemetry-chip.is-violet {
+  color: #c4b5fd;
+  border-color: rgba(139, 124, 248, 0.38);
+  background: rgba(139, 124, 248, 0.1);
+}
+
+.telemetry-chip.is-ember {
+  color: var(--color-ember);
+  border-color: rgba(255, 154, 98, 0.38);
+  background: rgba(255, 154, 98, 0.1);
+}
+
+.telemetry-chip.is-live {
+  color: var(--color-emerald);
+  border-color: rgba(52, 211, 153, 0.34);
+  background: rgba(52, 211, 153, 0.08);
+}
+
+.status-led {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-emerald);
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+  animation: led-pulse 2.6s ease-out infinite;
+  flex-shrink: 0;
+}
+
+.status-led.is-cyan {
+  background: var(--color-cyan);
+  box-shadow: 0 0 0 0 rgba(110, 231, 255, 0.55);
+  animation-name: pulse-dot;
+}
+
+.mono-metric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.1rem;
+  padding: 0.25rem 0.72rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line-bright);
+  background: rgba(110, 231, 255, 0.06);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+  transition:
+    border-color 0.2s var(--ease-out),
+    background 0.2s var(--ease-out),
+    color 0.2s var(--ease-out);
+}
+
+.language-switch:hover {
+  border-color: var(--color-cyan);
+  background: rgba(110, 231, 255, 0.14);
+  color: var(--color-cyan);
+}
+
+.language-switch .lang-code {
+  color: var(--color-ink-faint);
+  font-size: 0.66rem;
+}
+
+.cmd-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.75rem 0.95rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-line);
+  background: rgba(4, 6, 13, 0.85);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-cyan);
+  overflow-x: auto;
+}
+
+.cmd-block code {
+  white-space: nowrap;
+}
+
+.hud-divider {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, var(--color-line-bright), var(--color-line-subtle) 65%, transparent);
+}
+
+.hud-callsign {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line-subtle);
+  background: rgba(9, 13, 26, 0.65);
+}
+
+@media (max-width: 720px) {
+  .hud-callsign {
+    display: none;
+  }
+}

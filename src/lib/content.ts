@@ -10,6 +10,27 @@ export type NavLink = {
   href: string;
 };
 
+export type TelemetryLayerIndex = {
+  id: "self-loop" | "skills-system" | "argus" | "agent-dao";
+  code: string;
+  name: string;
+  tag: string;
+  role: string;
+};
+
+export type HeroTelemetry = {
+  callsign: string;
+  orbitLabel: string;
+  stackHeading: string;
+  layers: TelemetryLayerIndex[];
+  founderLabel: string;
+  founderName: string;
+  founderHandle: string;
+  founderTitle: string;
+  founderPrevious: string;
+  links: Array<{ label: string; href: string }>;
+};
+
 export type SiteContent = {
   locale: Locale;
   meta: {
@@ -25,12 +46,16 @@ export type SiteContent = {
     primaryCta: { label: string; href: string };
     secondaryCta: { label: string; href: string };
     stats: Array<{ value: string | number; label: string }>;
+    telemetry: HeroTelemetry;
   };
   aboutTeaser: {
     eyebrow: string;
     title: string;
+    roleLine: string;
+    previousLine: string;
     body: string;
     cta: { label: string; href: string };
+    secondaryCta: { label: string; href: string };
     capabilities: string[];
   };
   blogIntro: {
@@ -45,6 +70,7 @@ export type SiteContent = {
   footer: {
     tagline: string;
     copyright: string;
+    metaLine: string;
     links: Array<{ label: string; href: string }>;
   };
 };
