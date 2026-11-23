@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
-import type { StackCopy, StackLayer, StackLayerId } from "@lib/stack";
+import type { StackCopy, StackLayer, StackLayerId } from "../lib/stack";
 import {
   clearPendingLayerSelection,
   consumePendingLayerSelection,
@@ -8,7 +8,7 @@ import {
   parseLayerFromHash,
   STACK_EVENT,
   type PendingLayerRequest,
-} from "@lib/stack-selection";
+} from "../lib/stack-selection";
 
 type AgenticStackProps = {
   copy: StackCopy;
@@ -43,15 +43,26 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const codeRef = useRef<HTMLElement | null>(null);
   const copyTimerRef = useRef<number | null>(null);
+  const copySeqRef = useRef(0);
+  const activeIdRef = useRef<StackLayerId>(activeId);
+  const isMountedRef = useRef(true);
   const pendingFocusIdRef = useRef<StackLayerId | null>(null);
 
+  activeIdRef.current = activeId;
+
   useEffect(() => {
+    isMountedRef.current = true;
     const validIds = layers.map((layer) => layer.id);
 
     const applySelection = (targetId: StackLayerId, shouldFocus: boolean) => {
+      if (targetId !== activeIdRef.current) {
+        copySeqRef.current += 1;
+        setCopyFeedback(null);
+      }
       if (shouldFocus) {
         pendingFocusIdRef.current = targetId;
       }
+      activeIdRef.current = targetId;
       setActiveId((current) => {
         if (current === targetId && shouldFocus) {
           const idx = layers.findIndex((layer) => layer.id === targetId);
@@ -89,6 +100,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
     window.addEventListener(STACK_EVENT, onSelectLayer);
     window.addEventListener("hashchange", onHashChange);
     return () => {
+      isMountedRef.current = false;
       window.removeEventListener(STACK_EVENT, onSelectLayer);
       window.removeEventListener("hashchange", onHashChange);
     };
@@ -105,6 +117,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
 
   useEffect(() => {
     return () => {
+      isMountedRef.current = false;
       if (copyTimerRef.current !== null) {
         window.clearTimeout(copyTimerRef.current);
       }
@@ -120,9 +133,18 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
   const downstreamLayer = layers.find((item) => item.id === activeLayer.connections.downstream);
 
   function selectLayer(nextId: StackLayerId, focusTab = false) {
+    if (nextId !== activeIdRef.current) {
+      copySeqRef.current += 1;
+      setCopyFeedback(null);
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+        copyTimerRef.current = null;
+      }
+    }
     if (focusTab) {
       pendingFocusIdRef.current = nextId;
     }
+    activeIdRef.current = nextId;
     setActiveId(nextId);
   }
 
@@ -155,8 +177,14 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
       copyTimerRef.current = null;
     }
 
+    const requestSeq = ++copySeqRef.current;
     const copied = await copyCommandToClipboard(command);
-    if (!copied) {
+
+    if (!isMountedRef.current || requestSeq !== copySeqRef.current || activeIdRef.current !== id) {
+      return;
+    }
+
+    if (!copied && codeRef.current?.dataset?.layerId === id) {
       selectNodeText(codeRef.current);
     }
 
@@ -318,7 +346,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
           </span>
           <div className="cmd-block">
             <span className="cmd-prompt" aria-hidden="true">$</span>
-            <code ref={codeRef}>{activeLayer.command}</code>
+            <code ref={codeRef} data-layer-id={activeLayer.id}>{activeLayer.command}</code>
           </div>
         </div>
 

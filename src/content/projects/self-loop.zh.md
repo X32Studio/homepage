@@ -1,6 +1,6 @@
 ---
 name: self-loop
-tagline: 多角色自主工程交付引擎——将 Critic、Actor 与 Judge 组织成可验证的闭环。
+tagline: 把混乱的 Agent 乌合之众整编为可信赖、能直接交付的 Agent 组织——守住人的 Attention，让你街边喝咖啡时照常交付。
 github: https://github.com/X32Studio/self-loop
 status: 开源 · v0.4.10
 glyph: L1
@@ -10,13 +10,13 @@ featured: true
 order: 1
 visibility: public
 tags:
+  - Agent 组织
   - 自主交付引擎
-  - 多角色闭环
   - v0.4.10
 ---
 
-**self-loop** 是 X32 Agentic 工程栈的第 1 层：一套自主软件交付引擎，把清晰的目标规格与硬性工程约束转化为经独立验证的代码提交、测试证据与完整决策记录。
+**self-loop** 是 X32 Agentic 工程栈的第 1 层：在 AI 时代，人最宝贵也最大的瓶颈是 **Attention（注意力）**，能否管控好自己的 Agent Swarm 决定了不同人的能力上限。
 
-`self-loop` 拒绝让同一个 Agent 自写自测，而是把 **Critic**（蓝图与攻击用例）、**Actor**（限定目录内的实现交付）与 **Judge**（独立留存验收）在干净的 worktree 与只追加日志中彻底隔离。
+没有治理的 Agent 群落只是混乱的乌合之众，会让你在反复救火中精疲力尽。`self-loop` 用第一性帧评审、跨厂商 **Critic / Actor / Judge** 独立验收与 Git/CI 硬门禁，把它们整编为可信赖、能直接交付的 Agent 组织——让你直接坐在街边喝咖啡，只在真正需要人类拍板时介入。
 
-**输入目标与约束，输出经验证的生产代码。**
+**输入混乱群落与目标，输出可信赖的 Agent 组织与经验证的生产代码。**
