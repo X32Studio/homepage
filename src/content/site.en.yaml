@@ -31,7 +31,7 @@ hero:
       label: DRI & OPC Founder
     - value: "4"
       label: Stack Layers
-    - value: v0.4.10
+    - value: v0.8.0
       label: self-loop Engine
   telemetry:
     callsign: SYS.ONLINE // X32-OPC-01
@@ -41,8 +41,8 @@ hero:
       - id: self-loop
         code: "01"
         name: self-loop
-        tag: v0.4.10
-        role: Delivery Engine
+        tag: v0.8.0
+        role: Delivery & Dispatch Engine
       - id: skills-system
         code: "02"
         name: System of Skills
@@ -51,8 +51,8 @@ hero:
       - id: argus
         code: "03"
         name: Argus
-        tag: TREE
-        role: Deep Research
+        tag: v2.0
+        role: Deep Exploration & JEV
       - id: agent-dao
         code: "04"
         name: Agent DAO

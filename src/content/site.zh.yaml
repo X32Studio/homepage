@@ -31,7 +31,7 @@ hero:
       label: DRI & OPC 创始人
     - value: "4"
       label: Agentic 栈层级
-    - value: v0.4.10
+    - value: v0.8.0
       label: self-loop 引擎
   telemetry:
     callsign: SYS.ONLINE // X32-OPC-01
@@ -41,8 +41,8 @@ hero:
       - id: self-loop
         code: "01"
         name: self-loop
-        tag: v0.4.10
-        role: 自主交付引擎
+        tag: v0.8.0
+        role: 自主交付与并行调度引擎
       - id: skills-system
         code: "02"
         name: System of Skills
@@ -51,8 +51,8 @@ hero:
       - id: argus
         code: "03"
         name: Argus
-        tag: TREE
-        role: 深度研究仪器
+        tag: v2.0
+        role: 深度探索与 JEV 决策引擎
       - id: agent-dao
         code: "04"
         name: Agent DAO

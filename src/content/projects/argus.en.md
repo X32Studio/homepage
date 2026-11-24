@@ -1,21 +1,21 @@
 ---
 name: Argus
-tagline: Grow a research tree from a messy field.
+tagline: Universal deep exploration & two-layer JEV decision-intelligence engine.
 github: https://github.com/X32Studio/Argus
-status: Open source · v0.x
+status: Open source · v2.0.0
 glyph: L3
 cover: /assets/argus-dashboard.webp
 locale: en
 featured: true
 order: 3
 tags:
-  - deep research
-  - claude code skill
-  - knowledge graph
+  - decision intelligence
+  - JEV routing
+  - v2.0.0
 ---
 
-Argus takes a broad topic and keeps digging through it, round after round. Each pass adds sources, notes, relationships, open questions, and report updates to the same growing research tree — so when you come back, you never start from zero.
+**Argus 2.0** unifies every form of deep exploration into four native archetypes — rare primary-source needle hunts (`hunt`), broad competitive & market matrices (`intel`), high-stakes bets with calibrated probabilities and Flip Triggers (`decision`), and compounding multi-week knowledge trees (`research`).
 
-Everything is packaged as one Claude Code skill. One window, one command, and Argus leads you through setup, dashboard launch, the research loop, and report updates.
+Powered by a two-layer **JEV Decision-Model** router (zero-output-token noise screening that preserves ambiguous 0.35–0.70 signals + conflict-preserving adjudication that locks direct contradictions as `CONTESTED` instead of faking consensus), Argus exposes a dual-entry `gather` / `search` context CLI with SHA-256 provenance and an interactive Decision Board.
 
 **Many eyes. Never asleep.**
