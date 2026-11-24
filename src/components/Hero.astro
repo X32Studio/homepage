@@ -114,8 +114,12 @@ const playText = isZh ? "恢复动态" : "Play motion";
   const toggleText = toggle?.querySelector<HTMLElement>("[data-toggle-text]");
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  const syncToggleState = (paused: boolean) => {
-    if (!toggle) return;
+  const syncToggleState = () => {
+    if (!video || !toggle) return;
+    const reduced = motionQuery.matches;
+    toggle.disabled = reduced;
+    toggle.hidden = reduced;
+    const paused = reduced || video.paused || video.ended;
     toggle.setAttribute("aria-pressed", String(paused));
     const nextLabel = paused ? toggle.dataset.playLabel : toggle.dataset.pauseLabel;
     const nextText = paused ? toggle.dataset.playText : toggle.dataset.pauseText;
@@ -124,26 +128,36 @@ const playText = isZh ? "恢复动态" : "Play motion";
   };
 
   if (video) {
-    if (motionQuery.matches) {
-      video.pause();
-      syncToggleState(true);
-    }
-
-    motionQuery.addEventListener?.("change", (event) => {
-      if (event.matches) {
+    const applyMotionPreference = () => {
+      if (motionQuery.matches) {
         video.pause();
-        syncToggleState(true);
       }
-    });
+      syncToggleState();
+    };
 
-    toggle?.addEventListener("click", () => {
+    video.addEventListener("play", syncToggleState);
+    video.addEventListener("pause", syncToggleState);
+    video.addEventListener("ended", syncToggleState);
+    applyMotionPreference();
+
+    motionQuery.addEventListener?.("change", applyMotionPreference);
+
+    toggle?.addEventListener("click", async () => {
+      if (motionQuery.matches) {
+        video.pause();
+        syncToggleState();
+        return;
+      }
       if (video.paused) {
-        void video.play().catch(() => {});
-        syncToggleState(false);
+        try {
+          await video.play();
+        } catch {
+          // Autoplay or playback rejected; reflect actual paused state below
+        }
       } else {
         video.pause();
-        syncToggleState(true);
       }
+      syncToggleState();
     });
   }
 </script>
@@ -352,6 +366,10 @@ const playText = isZh ? "恢复动态" : "Play motion";
 
   @media screen and (prefers-reduced-motion: reduce) {
     .hero-video {
+      display: none;
+    }
+
+    .motion-toggle {
       display: none;
     }
   }
