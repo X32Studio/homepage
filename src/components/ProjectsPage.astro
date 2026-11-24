@@ -31,7 +31,7 @@ const pageTitle = locale === "zh" ? "项目" : "Projects";
 <BaseLayout content={content} locale={locale} alternatePath={alternatePath} title={pageTitle}>
   <section class="section">
     <div class="container">
-      <p class="eyebrow reveal">{content.projectsIntro.eyebrow}</p>
+      <span class="section-index reveal">{content.projectsIntro.eyebrow}</span>
       <h1 class="page-title reveal" data-delay="1">{content.projectsIntro.title}</h1>
       <p class="lede reveal" data-delay="2">{content.projectsIntro.body}</p>
       <div class="project-grid">
@@ -51,17 +51,17 @@ const pageTitle = locale === "zh" ? "项目" : "Projects";
 
 <style>
   .page-title {
-    font-size: clamp(2.1rem, 5vw, 3.5rem);
-    margin-top: 0.85rem;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    max-width: 22ch;
   }
 
   .lede {
     color: var(--color-ink-soft);
     max-width: 60ch;
-    margin-top: 1rem;
+    margin-top: 1.05rem;
   }
 
   .project-grid {
-    margin-top: clamp(2.2rem, 5.5vw, 3.4rem);
+    margin-top: clamp(2.4rem, 5.5vw, 3.6rem);
   }
 </style>

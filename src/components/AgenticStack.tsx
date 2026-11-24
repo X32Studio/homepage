@@ -212,7 +212,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
       <div className="stack-topology">
         <div className="bus-rail" aria-hidden="true">
           <svg viewBox="0 0 64 356" fill="none" className="bus-svg">
-            <line x1="22" y1="46" x2="22" y2="310" stroke="rgba(0,240,255,0.28)" strokeWidth="1.5" />
+            <line x1="22" y1="46" x2="22" y2="310" stroke="rgba(243,244,246,0.16)" strokeWidth="1" />
 
             {[0, 1, 2].map((idx) => {
               const isFlowActive =
@@ -225,17 +225,17 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
                   y1={NODE_Y[idx]}
                   x2="22"
                   y2={NODE_Y[idx + 1]}
-                  stroke={isFlowActive ? "#00f0ff" : "rgba(0,240,255,0.18)"}
-                  strokeWidth={isFlowActive ? "3" : "1.5"}
+                  stroke={isFlowActive ? "#c9b896" : "rgba(243,244,246,0.12)"}
+                  strokeWidth={isFlowActive ? "2" : "1"}
                 />
               );
             })}
 
             <path
               d="M 28 310 C 56 310, 56 46, 28 46"
-              stroke={feedbackHighlighted ? "#ff4d00" : "rgba(255,77,0,0.34)"}
-              strokeWidth={feedbackHighlighted ? "2.4" : "1.3"}
-              strokeDasharray="4 4"
+              stroke={feedbackHighlighted ? "#c9b896" : "rgba(201,184,150,0.28)"}
+              strokeWidth={feedbackHighlighted ? "1.6" : "1"}
+              strokeDasharray="3 4"
               fill="none"
             />
 
@@ -245,16 +245,22 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
               return (
                 <g key={cy}>
                   {isSelected && (
-                    <circle cx="22" cy={cy} r="10" fill="rgba(0,240,255,0.22)" stroke="#00f0ff" strokeWidth="1.2" />
+                    <circle
+                      cx="22"
+                      cy={cy}
+                      r="9.5"
+                      fill="rgba(201,184,150,0.14)"
+                      stroke="#c9b896"
+                      strokeWidth="1"
+                    />
                   )}
                   <circle
                     cx="22"
                     cy={cy}
-                    r={isSelected ? "5.2" : isLinked ? "4" : "3.2"}
-                    fill={isSelected ? "#00f0ff" : isLinked ? "#ff4d00" : "#182235"}
-                    stroke={isSelected ? "#ffffff" : "#00f0ff"}
-                    strokeOpacity={isSelected ? "1" : "0.55"}
-                    strokeWidth="1.2"
+                    r={isSelected ? "4.5" : isLinked ? "3.6" : "3"}
+                    fill={isSelected ? "#c9b896" : isLinked ? "#f3f4f6" : "#11141a"}
+                    stroke={isSelected ? "#f3f4f6" : "rgba(243,244,246,0.45)"}
+                    strokeWidth="1"
                   />
                 </g>
               );
@@ -299,15 +305,15 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
       </div>
 
       <div
-        className="hud-frame stack-inspector"
+        className="arch-panel stack-inspector"
         role="tabpanel"
         id={PANEL_ID}
         aria-labelledby={`stack-tab-${activeLayer.id}`}
       >
         <div className="inspector-head">
           <div className="inspector-meta">
-            <span className="telemetry-chip is-cyan">
-              {activeLayer.code} // {activeLayer.badge}
+            <span className="inspector-chip mono-metric">
+              {activeLayer.code} · {activeLayer.badge}
             </span>
             <span className="inspector-role mono-metric">{activeLayer.role}</span>
           </div>
@@ -363,11 +369,11 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
               <figcaption className="mono-metric">{activeLayer.visual.caption}</figcaption>
             </figure>
           ) : (
-            <div className="telemetry-matrix">
+            <div className="spec-matrix">
               <p className="matrix-title mono-metric">{activeLayer.visual.title}</p>
               <div className="matrix-grid">
                 {activeLayer.visual.readouts.map((item) => (
-                  <div key={item.label} className={`matrix-cell tone-${item.tone}`}>
+                  <div key={item.label} className="matrix-cell">
                     <span className="mono-metric">{item.label}</span>
                     <strong>{item.value}</strong>
                   </div>
@@ -378,7 +384,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
         </div>
 
         <div className="guarantees">
-          <p className="sub-heading mono-metric">{copy.guaranteesLabel}</p>
+          <p className="sub-heading">{copy.guaranteesLabel}</p>
           <ul>
             {activeLayer.guarantees.map((line) => (
               <li key={line}>{line}</li>
@@ -388,7 +394,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
 
         <div className="composition-bar">
           <div>
-            <p className="sub-heading mono-metric">{copy.compositionLabel}</p>
+            <p className="sub-heading">{copy.compositionLabel}</p>
             <p className="composition-text">{activeLayer.connections.summary}</p>
           </div>
           <div className="jump-pills">
@@ -423,7 +429,7 @@ export default function AgenticStack({ copy, layers }: AgenticStackProps) {
             {activeLayer.links.primary.label} ↗
           </a>
           {activeLayer.links.secondary && (
-            <a className="btn btn-ghost" href={activeLayer.links.secondary.href}>
+            <a className="btn btn-secondary" href={activeLayer.links.secondary.href}>
               {activeLayer.links.secondary.label} →
             </a>
           )}

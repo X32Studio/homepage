@@ -1,13 +1,11 @@
 ---
 import SiteFooter from "@components/SiteFooter.astro";
 import SiteHeader from "@components/SiteHeader.astro";
-import Starfield from "@components/Starfield.astro";
 import type { Locale, SiteContent } from "@lib/content";
 import "@fontsource-variable/space-grotesk";
 import "@fontsource-variable/jetbrains-mono";
 import "@styles/tokens.css";
 import "@styles/base.css";
-import "@styles/hud.css";
 import "@styles/layout.css";
 import "@styles/motion.css";
 import "@styles/surfaces.css";
@@ -71,7 +69,7 @@ const structuredData = {
     <script is:inline>
       document.documentElement.classList.add("js");
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta
@@ -80,7 +78,7 @@ const structuredData = {
     />
     <meta name="author" content="Ruiyuan Kang (k-r33) · X32 Studio" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#04060d" />
+    <meta name="theme-color" content="#07080a" />
     <link rel="canonical" href={canonicalUrl} />
     <link
       rel="alternate"
@@ -108,11 +106,9 @@ const structuredData = {
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   </head>
   <body>
-    <div class="telemetry-grid" aria-hidden="true"></div>
-    <Starfield />
     <div class="page-shell">
       <SiteHeader content={content} locale={locale} alternatePath={alternatePath} />
-      <main>
+      <main id="top">
         <slot />
       </main>
       <SiteFooter content={content} locale={locale} />

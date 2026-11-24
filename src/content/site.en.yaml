@@ -1,7 +1,7 @@
 locale: en
 meta:
-  title: X32 Studio — One-Person AI Engineering Studio & Agentic Stack
-  description: X32 Studio is a one-person AI engineering studio founded by Ruiyuan Kang (k-r33) — building self-loop, System of Skills, Argus, and Agent DAO for Organizational Intelligence and Carbon-Silicon Hybrid Intelligence.
+  title: X32 Studio — Autonomous Engineering Systems & Agentic Stack
+  description: X32 Studio is a one-person AI engineering studio founded by Ruiyuan Kang (k-r33), building self-loop, System of Skills, Argus, and Agent DAO for Organizational Intelligence and Carbon-Silicon Hybrid Intelligence.
 navigation:
   - key: home
     label: Home
@@ -16,15 +16,15 @@ navigation:
     label: About
     href: /about/
 hero:
-  eyebrow: X32-OPC // Kang & his Agent Team
-  title: Kang & his Agent Team.
-  titleAccent: Order out of agent chaos.
-  subtitle: X32 Studio is the one-person AI engineering studio of Ruiyuan Kang (k-r33) and his agent team — turning chaotic agent mobs into a trustworthy delivery organization so human attention stays on strategy while verified software ships.
+  eyebrow: One-Person AI Engineering Studio · Ruiyuan Kang (k-r33)
+  title: Autonomous engineering systems
+  titleAccent: for a one-person firm.
+  subtitle: X32 Studio turns unmanaged coding agents into a governed delivery organization, keeping human attention on strategy while verified software ships through self-loop, System of Skills, and Argus.
   primaryCta:
-    label: Inspect X32 Stack
+    label: Inspect architecture
     href: "#agentic-stack"
   secondaryCta:
-    label: self-loop on GitHub
+    label: View self-loop on GitHub
     href: https://github.com/X32Studio/self-loop
   stats:
     - value: "1"
@@ -32,70 +32,72 @@ hero:
     - value: "4"
       label: Stack Layers
     - value: v0.8.0
-      label: self-loop Engine
+      label: self-loop Release
   telemetry:
-    callsign: SYS.ONLINE // X32-OPC-01
-    orbitLabel: MISSION CONTROL · STRATEGY -> DELIVERY
-    stackHeading: ACTIVE STACK TOPOLOGY
+    callsign: X32 Studio · Architecture Index
+    orbitLabel: Strategy to verified delivery
+    stackHeading: Four-layer system topology
     layers:
       - id: self-loop
         code: "01"
         name: self-loop
-        tag: v0.8.0
-        role: Delivery & Dispatch Engine
+        tag: Delivery Engine
+        role: Parallel dispatch & cross-vendor judging
       - id: skills-system
         code: "02"
         name: System of Skills
-        tag: SPEC
-        role: Skill Architecture
+        tag: Specification
+        role: Non-colliding skill architecture
       - id: argus
         code: "03"
         name: Argus
-        tag: v2.0
-        role: Deep Exploration & JEV
+        tag: Research Engine
+        role: Persistent exploration & JEV decisions
       - id: agent-dao
         code: "04"
         name: Agent DAO
-        tag: THESIS
-        role: First-Principles
-    founderLabel: COMMAND // FOUNDER CALLSIGN
+        tag: Monograph
+        role: First-principles theory
+    founderLabel: Principal & Founder
     founderName: Ruiyuan Kang
     founderHandle: k-r33
     founderTitle: AI Startup CxO · DRI & OPC
-    founderPrevious: Former Head of AI Agent Dept @ TII (UAE)
+    founderPrevious: Former Head of AI Agent Dept, TII (UAE)
     links:
       - label: github.com/k-r33
         href: https://github.com/k-r33
+      - label: k-r33.github.io
+        href: https://k-r33.github.io
       - label: X32Studio/self-loop
         href: https://github.com/X32Studio/self-loop
 aboutTeaser:
   eyebrow: Founder Dossier · One-Person Company (OPC)
-  title: Ruiyuan Kang (k-r33) — Strategy to Delivery, solo by design.
-  roleLine: AI Startup CxO · DRI & OPC — building Organizational Intelligence & Carbon–Silicon Hybrid Intelligence
-  previousLine: Former Head of AI Agent Department, Technology Innovation Institute (TII, UAE) · Founder @ X32 Studio
-  body: X32 Studio operates as a one-person AI engineering studio ("一人公司"). Instead of scaling headcount, I encode architectural judgment into autonomous delivery loops, non-colliding skill systems, and persistent research instruments — shipping verifiable open-source systems end to end.
+  title: "Ruiyuan Kang (k-r33): Strategy to delivery, solo by design."
+  roleLine: AI Startup CxO · DRI & OPC · Organizational Intelligence & Carbon–Silicon Hybrid Intelligence
+  previousLine: Former Head of AI Agent Department, Technology Innovation Institute (TII, UAE) · Founder, X32 Studio
+  body: X32 Studio operates as a one-person AI engineering firm (OPC). Instead of scaling headcount, architectural judgment is encoded into autonomous delivery loops, non-colliding skill graphs, and persistent research instruments that ship verifiable open-source systems end to end.
   cta:
-    label: Read Founder Dossier
+    label: Read founder dossier
     href: /about/
   secondaryCta:
     label: GitHub @k-r33
     href: https://github.com/k-r33
   capabilities:
-    - Strategy → Delivery (DRI & OPC)
+    - Strategy to Delivery (DRI & OPC)
     - Organizational Intelligence
     - Carbon–Silicon Hybrid Intelligence
-    - Autonomous Agentic Engineering
+    - Governed Agent Coding Teams
 blogIntro:
-  eyebrow: Field notes
-  title: Signals from the engineering deck.
+  eyebrow: Research & Engineering Notes
+  title: Engineering dispatches.
 projectsIntro:
-  eyebrow: Instruments
-  title: Working systems, verified in the open.
-  body: Every repository here is a live layer of the X32 Agentic Stack — inspect the architecture, run the loop, and verify every claim against source code.
+  eyebrow: Public Systems
+  title: Working systems, verified in public.
+  body: Each repository forms a live layer of the X32 Agentic Stack. Inspect the architecture, execute the loop, and verify every claim against source code.
 footer:
-  tagline: One-person AI engineering studio by Ruiyuan Kang (k-r33) — autonomous loops, skill systems, and deep-research instruments.
+  tagline: "One-person AI engineering studio founded by Ruiyuan Kang (k-r33): governed delivery engines, skill systems, and persistent research instruments."
   copyright: X32 Studio · Ruiyuan Kang (k-r33)
-  metaLine: X32 // OPC-DECK · x32studio.com
+  metaLine: x32studio.com · Open-source systems
   links:
     - label: GitHub / k-r33
       href: https://github.com/k-r33

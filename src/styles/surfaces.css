@@ -1,48 +1,36 @@
-/* Razor-sharp tactical cards, project grids, buttons, and telemetry list surfaces */
+/* Institutional hairline panels, project cards, buttons, and editorial lists */
+
+.arch-panel {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--color-panel);
+  border: 1px solid var(--color-line);
+}
 
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
-  padding: 1.55rem;
+  gap: 1rem;
+  padding: 1.65rem;
   border-radius: var(--radius-lg);
   background: var(--color-panel);
   border: 1px solid var(--color-line);
-  box-shadow: var(--shadow-deck);
   transition:
-    transform 0.22s var(--ease-out),
     border-color 0.22s var(--ease-out),
-    background 0.22s var(--ease-out),
-    box-shadow 0.22s var(--ease-out);
+    background 0.22s var(--ease-out);
   overflow: hidden;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 2px;
-  background: var(--gradient-telemetry);
-  opacity: 0.45;
-  transition: opacity 0.22s var(--ease-out);
-}
-
 .card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-cyan);
+  border-color: var(--color-line-bright);
   background: var(--color-panel-bright);
-  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.9), 0 0 26px rgba(0, 240, 255, 0.14);
-}
-
-.card:hover::before {
-  opacity: 1;
 }
 
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(21rem, 100%), 1fr));
-  gap: 1.35rem;
+  gap: 1.5rem;
 }
 
 .project-card {
@@ -59,55 +47,52 @@
 .project-card .glyph-cluster {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
 }
 
 .project-card .glyph {
   display: grid;
   place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: var(--radius-sm);
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid var(--color-cyan);
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-line-bright);
   font-family: var(--font-mono);
-  font-size: 0.86rem;
-  font-weight: 700;
-  color: var(--color-cyan);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
 }
 
 .project-card .layer-code {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 0.76rem;
+  font-weight: 500;
   color: var(--color-ink-faint);
 }
 
 .status-chip {
   font-family: var(--font-mono);
-  font-size: 0.67rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-emerald);
-  border: 1px solid rgba(0, 255, 157, 0.42);
-  background: rgba(0, 255, 157, 0.08);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  border: 1px solid var(--color-line);
+  background: var(--color-bg-raised);
   border-radius: var(--radius-sm);
-  padding: 0.24rem 0.62rem;
+  padding: 0.22rem 0.6rem;
   white-space: nowrap;
 }
 
 .project-card h3 {
-  font-size: 1.42rem;
-  color: #ffffff;
+  font-size: 1.45rem;
+  color: var(--color-ink);
 }
 
 .project-card .tagline {
   color: var(--color-ink-soft);
-  font-size: 0.95rem;
-  min-height: 2.7em;
+  font-size: 0.96rem;
+  line-height: 1.58;
+  min-height: 2.8em;
 }
 
 .project-card .tags {
@@ -119,18 +104,18 @@
 
 .project-card .tags span {
   font-family: var(--font-mono);
-  font-size: 0.69rem;
-  color: var(--color-cyan);
-  background: rgba(0, 240, 255, 0.07);
-  border: 1px solid rgba(0, 240, 255, 0.24);
+  font-size: 0.74rem;
+  color: var(--color-ink-soft);
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-line-subtle);
   border-radius: var(--radius-sm);
-  padding: 0.18rem 0.52rem;
+  padding: 0.2rem 0.55rem;
 }
 
 .project-card .card-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 1.35rem;
   border-top: 1px solid var(--color-line-subtle);
   padding-top: 1rem;
   margin-top: 0.25rem;
@@ -139,111 +124,122 @@
 .project-card .card-links a {
   display: inline-flex;
   align-items: center;
-  gap: 0.42rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
+  gap: 0.45rem;
+  font-size: 0.86rem;
+  font-weight: 500;
   color: var(--color-ink);
   transition: color 0.18s var(--ease-out);
 }
 
 .project-card .card-links a:hover {
-  color: var(--color-cyan);
+  color: var(--color-accent);
 }
 
-/* Razor chamfered buttons */
+/* Institutional rectangular buttons — single system, zero chamfer or glow */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  min-height: 2.85rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
   border-radius: var(--radius-sm);
-  padding: 0.84rem 1.45rem;
+  padding: 0.72rem 1.45rem;
   border: 1px solid transparent;
   transition:
-    transform 0.18s var(--ease-out),
-    box-shadow 0.18s var(--ease-out),
-    border-color 0.18s var(--ease-out),
     background 0.18s var(--ease-out),
+    border-color 0.18s var(--ease-out),
     color 0.18s var(--ease-out);
 }
 
 .btn-primary {
-  color: #020305;
-  background: var(--color-cyan);
-  clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 11px, 100% 100%, 0 100%);
-  box-shadow: 0 0 26px rgba(0, 240, 255, 0.38);
+  color: var(--color-bg);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
 }
 
 .btn-primary:hover {
-  background: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 0 38px rgba(0, 240, 255, 0.62);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
 }
 
-.btn-ghost {
-  color: #ffffff;
+.btn-secondary {
+  color: var(--color-ink);
   border-color: var(--color-line-bright);
-  background: rgba(2, 3, 5, 0.86);
+  background: rgba(7, 8, 10, 0.55);
 }
 
-.btn-ghost:hover {
-  border-color: var(--color-cyan);
-  background: rgba(0, 240, 255, 0.14);
-  color: var(--color-cyan);
-  transform: translateY(-2px);
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
 }
 
-/* blog list */
+.cmd-block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.55rem;
+  padding: 0.88rem 1.05rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-line);
+  border-left: 2px solid var(--color-accent);
+  background: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  color: var(--color-ink);
+  overflow-x: auto;
+}
+
+.cmd-block code {
+  white-space: nowrap;
+}
+
+/* Editorial notes list */
 .post-row {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: baseline;
-  gap: 1.5rem;
-  padding: 1.15rem 0.75rem;
+  gap: 1.75rem;
+  padding: 1.25rem 0.6rem;
   border-bottom: 1px solid var(--color-line-subtle);
-  transition: background 0.18s var(--ease-out), padding-left 0.18s var(--ease-out), border-color 0.18s var(--ease-out);
+  transition: background 0.18s var(--ease-out), border-color 0.18s var(--ease-out);
 }
 
 .post-row:hover {
-  background: rgba(0, 240, 255, 0.06);
-  border-bottom-color: var(--color-cyan);
-  padding-left: 1.15rem;
+  background: rgba(243, 244, 246, 0.025);
+  border-bottom-color: var(--color-line-bright);
 }
 
 .post-row time {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  font-size: 0.78rem;
-  color: var(--color-cyan);
+  font-size: 0.82rem;
+  color: var(--color-ink-faint);
   min-width: 6.4rem;
 }
 
 .post-row h3 {
-  font-size: 1.12rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 500;
 }
 
 .post-row h3 a:hover {
-  color: var(--color-cyan);
+  color: var(--color-accent);
 }
 
 .post-row .lang-tag {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--color-ember);
-  border: 1px solid rgba(255, 77, 0, 0.45);
-  background: rgba(255, 77, 0, 0.08);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--color-ink-faint);
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-sm);
-  padding: 0.14rem 0.48rem;
-  text-transform: uppercase;
+  padding: 0.16rem 0.5rem;
 }
 
 @media (max-width: 560px) {
@@ -255,6 +251,6 @@
   .section-head {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 0.85rem;
   }
 }

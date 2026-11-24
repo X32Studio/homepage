@@ -7,21 +7,23 @@
 html {
   scroll-behavior: smooth;
   background: var(--color-bg);
+  color-scheme: dark;
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: 1.03125rem;
+  font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(0, 240, 255, 0.34);
-  color: #ffffff;
+  background: rgba(201, 184, 150, 0.28);
+  color: var(--color-ink);
 }
 
 a {
@@ -31,7 +33,7 @@ a {
 
 img,
 svg,
-canvas {
+video {
   display: block;
   max-width: 100%;
 }
@@ -41,9 +43,10 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.032em;
+  color: var(--color-ink);
   text-wrap: balance;
 }
 
@@ -55,12 +58,19 @@ button {
   font: inherit;
   color: inherit;
   cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+.mono-metric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-cyan);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
 }
 
 @media (prefers-reduced-motion: reduce) {

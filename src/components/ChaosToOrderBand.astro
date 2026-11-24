@@ -10,53 +10,62 @@ const isZh = locale === "zh";
 
 const copy = isZh
   ? {
-      eyebrow: "SIGNAL // 为什么是 SELF-LOOP · 从乌合之众到可信组织",
+      index: "01 · 工程治理前提",
       heading: "算力廉价。人最稀缺的瓶颈是 Attention。",
-      chaosTag: "[!] WITHOUT SELF-LOOP // CHAOTIC AGENT MOB · 乌合之众",
+      subtitle: "没有代码门禁与角色分离的多 Agent 协作只会放大返工；X32 Studio 用可验证的工程治理将零散 Agent 群落整编为可信交付组织。",
+      chaosTag: "无治理的 Agent 群落",
+      chaosMeta: "结构性失效模式",
       chaosRows: [
-        { code: "01", label: "自写自测", detail: "同一个 Agent 改代码又改测试，悄悄糊弄绿灯", badge: "FAKE PASS" },
-        { code: "02", label: "前提漂移", detail: "错误假设上盲目打第 7 个补丁，越改越烂", badge: "LOOP #7" },
-        { code: "03", label: "人力耗尽", detail: "被迫全程盯盘救火，在混乱中精疲力尽", badge: "BURNOUT" },
+        { code: "01", label: "自写自测", detail: "同一个模型既改业务代码又改测试断言，悄无声息糊弄绿灯。", state: "伪通过" },
+        { code: "02", label: "前提漂移", detail: "在错误架构假设上连续打补丁，复杂度失控且无人叫停。", state: "死循环" },
+        { code: "03", label: "注意力耗尽", detail: "人类被迫全程盯盘救火，吞噬战略与系统架构时间。", state: "高损耗" },
       ],
-      orderTag: "[✓] WITH SELF-LOOP v0.8.0 // TRUSTWORTHY AGENT ORG · 可信交付组织",
+      orderTag: "self-loop 治理架构",
+      orderMeta: "可验证的 Agent 交付组织",
       orderRows: [
-        { code: "01", label: "三引擎解耦调度", detail: "规划 + 并行 Actor 调度合入 + 跨厂商 Critic / Judge 独立验收", badge: "LOCKED" },
-        { code: "02", label: "双循环与硬门禁", detail: "前提审计 exit 7 + SSOT 漂移门禁 + 防腐扫描 + 精确 CI 回执", badge: "VERIFIED" },
-        { code: "03", label: "街边喝咖啡", detail: "Agent 组织自主交付，仅把战略拍板打包交给你", badge: "COFFEE MODE" },
+        { code: "01", label: "三引擎解耦调度", detail: "规划契约、依赖图并行 Actor 波次与跨厂商 Critic / Judge 独立验收严格分离。", state: "权责隔离" },
+        { code: "02", label: "代码级硬门禁", detail: "前提审计 exit 7、SSOT 权威文档漂移检查、防腐扫描与精确 commit 远端 CI 回执。", state: "机械验证" },
+        { code: "03", label: "低介入战略拍板", detail: "常规执行与对抗硬化自主收敛，仅将关键方向决策打包交给人类 DRI。", state: "高杠杆" },
       ],
-      footerAxiom: "CODE GATES OVER PROMPT OBEDIENCE // 能否把 Agent Swarm 整编成可信组织，决定 AI 时代人的能力上限。",
+      axiom: "代码门禁高于提示词服从——能否把 Agent 群落整编成可信组织，决定 AI 时代人的能力上限。",
     }
   : {
-      eyebrow: "SIGNAL // WHY SELF-LOOP · CHAOS MOB TO AGENT ORG",
-      heading: "Compute is cheap. Human attention is the only bottleneck.",
-      chaosTag: "[!] WITHOUT SELF-LOOP // CHAOTIC AGENT MOB",
+      index: "01 · Engineering Premise",
+      heading: "Compute is cheap. Human attention is the bottleneck.",
+      subtitle: "Unmanaged coding agents amplify rework. X32 Studio enforces role separation and executable gates so autonomous teams ship verified software.",
+      chaosTag: "Unmanaged agent swarms",
+      chaosMeta: "Structural failure modes",
       chaosRows: [
-        { code: "01", label: "SELF-GRADING", detail: "Same model writes code and tests, gaming checks silently", badge: "FAKE PASS" },
-        { code: "02", label: "PREMISE DRIFT", detail: "Blindly stacks patch #7 on top of a broken assumption", badge: "LOOP #7" },
-        { code: "03", label: "HUMAN COST", detail: "100% terminal babysitting in chaos until burnout", badge: "BURNOUT" },
+        { code: "01", label: "Self-grading checks", detail: "One model edits implementation and weakens its own tests to claim a green build.", state: "Unverified" },
+        { code: "02", label: "Premise drift", detail: "Agents stack patch after patch on top of a broken architectural assumption.", state: "Stalled" },
+        { code: "03", label: "Attention drain", detail: "Engineers spend hours supervising terminals instead of owning system strategy.", state: "Depleted" },
       ],
-      orderTag: "[✓] WITH SELF-LOOP v0.8.0 // TRUSTWORTHY AGENT ORG",
+      orderTag: "Governed self-loop architecture",
+      orderMeta: "Verifiable agent delivery organization",
       orderRows: [
-        { code: "01", label: "DISPATCH + JUDGE", detail: "Decoupled parallel Actor waves + Cross-Vendor Critic / Judge", badge: "LOCKED" },
-        { code: "02", label: "HARD GATES", detail: "Premise exit 7 + SSOT drift + anti-rot + exact-tree CI", badge: "VERIFIED" },
-        { code: "03", label: "HUMAN MODE", detail: "Street-side coffee while agents ship — only strategy batched", badge: "COFFEE MODE" },
+        { code: "01", label: "Decoupled three-engine flow", detail: "Contract planning, dependency-aware parallel Actor waves, and cross-vendor Critic / Judge verification.", state: "Separated" },
+        { code: "02", label: "Executable hard gates", detail: "Premise audit exit 7, SSOT drift checks, anti-rot scanning, and exact-commit remote CI receipts.", state: "Enforced" },
+        { code: "03", label: "Batched strategic decisions", detail: "Execution and adversarial hardening converge autonomously while only material choices surface to the DRI.", state: "Leveraged" },
       ],
-      footerAxiom: "CODE GATES OVER PROMPT OBEDIENCE // HOW YOU GOVERN YOUR AGENT SWARM DEFINES YOUR LEVERAGE.",
+      axiom: "Code gates replace prompt obedience: how you govern your agent organization determines how much verified software one engineer can ship.",
     };
 ---
 
 <section class="section contrast-section" aria-label={copy.heading}>
   <div class="container">
     <div class="contrast-head reveal">
-      <p class="eyebrow">{copy.eyebrow}</p>
+      <span class="section-index">{copy.index}</span>
       <h2>{copy.heading}</h2>
+      <p class="contrast-sub">{copy.subtitle}</p>
     </div>
 
     <div class="contrast-grid reveal" data-delay="1">
-      <article class="contrast-panel is-chaos">
-        <div class="panel-bar mono-metric">
-          <span class="bar-dot is-danger" aria-hidden="true"></span>
-          <span>{copy.chaosTag}</span>
+      <article class="arch-panel contrast-panel is-baseline">
+        <div class="panel-bar">
+          <div>
+            <h3>{copy.chaosTag}</h3>
+            <p class="panel-meta">{copy.chaosMeta}</p>
+          </div>
         </div>
         <ul class="signal-rows">
           {
@@ -67,17 +76,19 @@ const copy = isZh
                   <strong>{row.label}</strong>
                   <p>{row.detail}</p>
                 </div>
-                <span class="row-badge is-danger mono-metric">{row.badge}</span>
+                <span class="row-state is-muted mono-metric">{row.state}</span>
               </li>
             ))
           }
         </ul>
       </article>
 
-      <article class="contrast-panel is-order">
-        <div class="panel-bar mono-metric">
-          <span class="bar-dot is-ok" aria-hidden="true"></span>
-          <span>{copy.orderTag}</span>
+      <article class="arch-panel contrast-panel is-governed">
+        <div class="panel-bar">
+          <div>
+            <h3>{copy.orderTag}</h3>
+            <p class="panel-meta">{copy.orderMeta}</p>
+          </div>
         </div>
         <ul class="signal-rows">
           {
@@ -88,7 +99,7 @@ const copy = isZh
                   <strong>{row.label}</strong>
                   <p>{row.detail}</p>
                 </div>
-                <span class="row-badge is-ok mono-metric">{row.badge}</span>
+                <span class="row-state is-accent mono-metric">{row.state}</span>
               </li>
             ))
           }
@@ -96,89 +107,64 @@ const copy = isZh
       </article>
     </div>
 
-    <div class="axiom-strip mono-metric reveal" data-delay="2">
-      <span class="axiom-arrow" aria-hidden="true">&gt;_</span>
-      <span>{copy.footerAxiom}</span>
-    </div>
+    <p class="axiom-strip reveal" data-delay="2">{copy.axiom}</p>
   </div>
 </section>
 
 <style>
-  .contrast-section {
-    padding-block: clamp(2rem, 5vw, 3.8rem);
-  }
-
   .contrast-head {
-    margin-bottom: 1.75rem;
+    margin-bottom: clamp(2rem, 4.5vw, 3rem);
   }
 
   .contrast-head h2 {
-    margin-top: 0.65rem;
-    font-size: clamp(1.75rem, 3.6vw, 2.75rem);
-    color: #ffffff;
+    font-size: clamp(1.9rem, 3.6vw, 2.85rem);
+    max-width: 24ch;
+  }
+
+  .contrast-sub {
+    margin-top: 0.9rem;
+    max-width: 60ch;
+    color: var(--color-ink-soft);
+    font-size: 1rem;
   }
 
   .contrast-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   .contrast-panel {
-    position: relative;
-    background: var(--color-panel);
-    border: 1px solid var(--color-line-subtle);
-    box-shadow: var(--shadow-deck);
     overflow: hidden;
   }
 
-  .contrast-panel.is-chaos {
-    border-top: 2px solid var(--color-crimson);
-    border-color: rgba(255, 46, 76, 0.34);
-    background: linear-gradient(180deg, rgba(255, 46, 76, 0.08) 0%, rgba(7, 10, 16, 0.96) 36%);
+  .contrast-panel.is-baseline {
+    background: var(--color-bg-raised);
   }
 
-  .contrast-panel.is-order {
-    border-top: 2px solid var(--color-emerald);
-    border-color: rgba(0, 255, 157, 0.38);
-    background: linear-gradient(180deg, rgba(0, 240, 255, 0.08) 0%, rgba(7, 10, 16, 0.96) 36%);
-    box-shadow: var(--shadow-deck), 0 0 32px rgba(0, 240, 255, 0.12);
+  .contrast-panel.is-governed {
+    border-color: var(--color-accent-line);
+    background: var(--color-panel);
   }
 
   .panel-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.78rem 1.15rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    border-bottom: 1px solid var(--color-line-subtle);
-    background: rgba(0, 0, 0, 0.55);
+    padding: 1.2rem 1.4rem;
+    border-bottom: 1px solid var(--color-line);
   }
 
-  .is-chaos .panel-bar {
-    color: #ff6b81;
+  .panel-bar h3 {
+    font-size: 1.12rem;
+    font-weight: 600;
   }
 
-  .is-order .panel-bar {
-    color: var(--color-emerald);
+  .is-governed .panel-bar h3 {
+    color: var(--color-accent);
   }
 
-  .bar-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .bar-dot.is-danger {
-    background: var(--color-crimson);
-    box-shadow: 0 0 10px rgba(255, 46, 76, 0.9);
-  }
-
-  .bar-dot.is-ok {
-    background: var(--color-emerald);
-    box-shadow: 0 0 10px rgba(0, 255, 157, 0.9);
+  .panel-meta {
+    margin-top: 0.2rem;
+    font-size: 0.84rem;
+    color: var(--color-ink-faint);
   }
 
   .signal-rows {
@@ -188,11 +174,11 @@ const copy = isZh
 
   .signal-rows li {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 0.9rem;
-    padding: 1rem 1.15rem;
-    border-bottom: 1px solid rgba(148, 163, 214, 0.1);
+    grid-template-columns: 2rem 1fr auto;
+    align-items: start;
+    gap: 0.95rem;
+    padding: 1.15rem 1.4rem;
+    border-bottom: 1px solid var(--color-line-subtle);
   }
 
   .signal-rows li:last-child {
@@ -200,62 +186,52 @@ const copy = isZh
   }
 
   .row-code {
-    font-size: 0.74rem;
-    font-weight: 700;
+    font-size: 0.78rem;
     color: var(--color-ink-faint);
+    padding-top: 0.16rem;
   }
 
   .row-main strong {
     display: block;
-    font-size: 0.95rem;
-    color: #ffffff;
-    letter-spacing: 0.01em;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--color-ink);
   }
 
   .row-main p {
-    font-size: 0.84rem;
+    font-size: 0.9rem;
     color: var(--color-ink-soft);
-    margin-top: 0.18rem;
-    line-height: 1.45;
+    margin-top: 0.25rem;
+    line-height: 1.52;
   }
 
-  .row-badge {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 0.24rem 0.52rem;
-    border: 1px solid currentColor;
+  .row-state {
+    font-size: 0.74rem;
+    padding: 0.2rem 0.56rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-line);
     white-space: nowrap;
   }
 
-  .row-badge.is-danger {
-    color: #ff6b81;
-    background: rgba(255, 46, 76, 0.12);
+  .row-state.is-muted {
+    color: var(--color-ink-faint);
   }
 
-  .row-badge.is-ok {
-    color: var(--color-cyan);
-    background: rgba(0, 240, 255, 0.1);
+  .row-state.is-accent {
+    color: var(--color-accent);
+    border-color: var(--color-accent-line);
+    background: var(--color-accent-soft);
   }
 
   .axiom-strip {
-    margin-top: 1.15rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.85rem 1.15rem;
-    border: 1px solid var(--color-line-bright);
-    border-left: 3px solid var(--color-ember);
-    background: #000000;
-    font-size: 0.76rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: #ffffff;
-  }
-
-  .axiom-arrow {
-    color: var(--color-ember);
-    font-weight: 700;
+    margin-top: 1.5rem;
+    padding: 1.1rem 1.4rem;
+    border-left: 2px solid var(--color-accent);
+    border-top: 1px solid var(--color-line-subtle);
+    border-bottom: 1px solid var(--color-line-subtle);
+    background: var(--color-bg-raised);
+    font-size: 0.94rem;
+    color: var(--color-ink);
   }
 
   @media (max-width: 860px) {
@@ -270,7 +246,7 @@ const copy = isZh
       gap: 0.45rem;
     }
 
-    .row-badge {
+    .row-state {
       justify-self: start;
     }
   }

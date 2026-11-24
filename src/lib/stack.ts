@@ -68,9 +68,9 @@ export type StackCopy = {
 const STACK_COPY: Record<Locale, StackCopy> = {
   en: {
     eyebrow: "X32 Agentic Stack · 4-Layer Architecture",
-    title: "Four instruments. One closed-loop system.",
+    title: "Four-layer closed-loop engineering stack",
     subtitle:
-      "Not scattered demos — a composed engineering stack where first-principles theory governs skill topology, autonomous delivery ships verified code, and deep research feeds new purpose back into the loop.",
+      "A composed engineering stack where first-principles theory governs skill topology, autonomous delivery ships verified code, and deep research feeds new purpose back into the loop.",
     busLabel: "Closed-loop telemetry bus",
     feedbackLabel: "L4 ↺ L1 feedback",
     inputLabel: "Input",
@@ -114,9 +114,9 @@ const STACK_LAYERS: Record<Locale, StackLayer[]> = {
       name: "self-loop",
       badge: "v0.8.0 · DISPATCH + AGENT ORG",
       role: "Trustworthy Agent Coding Team Engine",
-      oneLiner: "Turns a chaotic agent mob into a trustworthy Agent Coding Team — decoupled parallel dispatch, anti-rot scanning, SSOT gates & cross-vendor judging.",
+      oneLiner: "Turns a chaotic agent mob into a trustworthy Agent Coding Team via decoupled parallel dispatch, anti-rot scanning, SSOT gates, and cross-vendor judging.",
       description:
-        "In the AI era, human attention is the only real bottleneck. self-loop v0.8.0 chains Generation (plans & contracts), Dispatch & Integration (arch-facts dependency graph + parallel Actor waves + disjoint integration), and Adversarial Verification (unified/parallel Critics + cross-vendor Judge) behind two-loop anti-rot scanning, SSOT drift gates, premise exit-7 brakes, and exact-tree GitHub/AWS CI receipts.",
+        "In the AI era, human attention is the only real bottleneck. self-loop v0.8.0 chains Generation (plans and contracts), Dispatch & Integration (arch-facts dependency graph, parallel Actor waves, and disjoint integration), and Adversarial Verification (Critics and cross-vendor Judge) behind two-loop anti-rot scanning, SSOT drift gates, premise exit-7 brakes, and exact-tree GitHub/AWS CI receipts.",
       io: {
         input: "Purpose (P-NNNN) + Chaotic Agent Swarm",
         output: "Trustworthy Agent Coding Team & Verified Commits",

@@ -7,20 +7,41 @@ type Props = {
 };
 
 const { content } = Astro.props;
+const isZh = content.locale === "zh";
 const secondaryExternal = content.hero.secondaryCta.href.startsWith("http");
+const pauseLabel = isZh ? "暂停背景视频" : "Pause ambient video";
+const playLabel = isZh ? "播放背景视频" : "Play ambient video";
+const pauseText = isZh ? "暂停动态" : "Pause motion";
+const playText = isZh ? "恢复动态" : "Play motion";
 ---
 
-<section class="hero">
+<section class="hero" id="hero">
+  <div class="hero-backdrop" aria-hidden="true">
+    <div class="hero-poster-layer"></div>
+    <video
+      id="hero-ambient-video"
+      class="hero-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      poster="/media/hero-bg-poster.webp"
+      aria-hidden="true"
+    >
+      <source src="/media/hero-bg.webm" type="video/webm" />
+      <source src="/media/hero-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-scrim"></div>
+  </div>
+
   <div class="container hero-deck">
     <div class="hero-narrative">
-      <p class="eyebrow rise">
-        <span class="status-led is-cyan" aria-hidden="true"></span>
-        {content.hero.eyebrow}
-      </p>
+      <p class="hero-kicker rise">{content.hero.eyebrow}</p>
 
       <h1 class="rise d1">
         {content.hero.title}
-        <span class="gradient-text">{content.hero.titleAccent}</span>
+        <span class="hero-title-accent">{content.hero.titleAccent}</span>
       </h1>
 
       <p class="subtitle rise d2">{content.hero.subtitle}</p>
@@ -31,7 +52,7 @@ const secondaryExternal = content.hero.secondaryCta.href.startsWith("http");
           <span aria-hidden="true">↓</span>
         </a>
         <a
-          class="btn btn-ghost"
+          class="btn btn-secondary"
           href={content.hero.secondaryCta.href}
           target={secondaryExternal ? "_blank" : undefined}
           rel={secondaryExternal ? "noopener noreferrer" : undefined}
@@ -58,28 +79,144 @@ const secondaryExternal = content.hero.secondaryCta.href.startsWith("http");
     </div>
   </div>
 
-  <div class="container">
-    <div class="signal-tape mono-metric rise d4" aria-hidden="true">
-      <span><b class="tape-key">BOTTLENECK</b> HUMAN ATTENTION</span>
-      <span class="tape-sep">//</span>
-      <span><b class="tape-key">PROTOCOL</b> SELF-LOOP v0.8.0</span>
-      <span class="tape-sep">//</span>
-      <span><b class="tape-key">SHIFT</b> CHAOS MOB → TRUSTWORTHY AGENT ORG</span>
-      <span class="tape-sep">//</span>
-      <span><b class="tape-key">COMMAND</b> X32 STUDIO · k-r33</span>
+  <div class="container hero-bar-wrap">
+    <div class="hero-footer-bar rise d4">
+      <div class="hero-principles mono-metric">
+        <span>{isZh ? "核心瓶颈：人的注意力" : "Bottleneck: Human attention"}</span>
+        <span class="bar-divider" aria-hidden="true">·</span>
+        <span>{isZh ? "治理范式：代码硬门禁" : "Governance: Code gates"}</span>
+        <span class="bar-divider" aria-hidden="true">·</span>
+        <span>{isZh ? "一人公司：X32 Studio · k-r33" : "One-Person Firm: X32 Studio · k-r33"}</span>
+      </div>
+
+      <button
+        type="button"
+        class="motion-toggle mono-metric"
+        data-hero-video-toggle
+        aria-controls="hero-ambient-video"
+        aria-pressed="false"
+        aria-label={pauseLabel}
+        data-pause-label={pauseLabel}
+        data-play-label={playLabel}
+        data-pause-text={pauseText}
+        data-play-text={playText}
+      >
+        <span class="toggle-indicator" aria-hidden="true"></span>
+        <span data-toggle-text>{pauseText}</span>
+      </button>
     </div>
   </div>
 </section>
 
+<script>
+  const video = document.getElementById("hero-ambient-video") as HTMLVideoElement | null;
+  const toggle = document.querySelector<HTMLButtonElement>("[data-hero-video-toggle]");
+  const toggleText = toggle?.querySelector<HTMLElement>("[data-toggle-text]");
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const syncToggleState = (paused: boolean) => {
+    if (!toggle) return;
+    toggle.setAttribute("aria-pressed", String(paused));
+    const nextLabel = paused ? toggle.dataset.playLabel : toggle.dataset.pauseLabel;
+    const nextText = paused ? toggle.dataset.playText : toggle.dataset.pauseText;
+    if (nextLabel) toggle.setAttribute("aria-label", nextLabel);
+    if (toggleText && nextText) toggleText.textContent = nextText;
+  };
+
+  if (video) {
+    if (motionQuery.matches) {
+      video.pause();
+      syncToggleState(true);
+    }
+
+    motionQuery.addEventListener?.("change", (event) => {
+      if (event.matches) {
+        video.pause();
+        syncToggleState(true);
+      }
+    });
+
+    toggle?.addEventListener("click", () => {
+      if (video.paused) {
+        void video.play().catch(() => {});
+        syncToggleState(false);
+      } else {
+        video.pause();
+        syncToggleState(true);
+      }
+    });
+  }
+</script>
+
 <style>
   .hero {
-    padding-block: clamp(2.8rem, 7vh, 5.2rem) clamp(1.8rem, 4vh, 3rem);
+    position: relative;
+    overflow: hidden;
+    min-height: min(92vh, 880px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: clamp(3.5rem, 8vh, 6.2rem) clamp(2rem, 4.5vh, 3.2rem);
+    background: var(--color-bg);
+  }
+
+  .hero-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-poster-layer {
+    position: absolute;
+    inset: 0;
+    background-image: url("/media/hero-bg-poster.webp");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.72;
+  }
+
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.78;
+    filter: contrast(1.04) saturate(0.92);
+  }
+
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(7, 8, 10, 0.86) 0%,
+        rgba(7, 8, 10, 0.62) 52%,
+        rgba(7, 8, 10, 0.42) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(7, 8, 10, 0.48) 0%,
+        rgba(7, 8, 10, 0.24) 44%,
+        rgba(7, 8, 10, 0.88) 90%,
+        #07080a 100%
+      );
+  }
+
+  .hero-deck,
+  .hero-bar-wrap {
+    position: relative;
+    z-index: 1;
   }
 
   .hero-deck {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    gap: clamp(2rem, 4.5vw, 3.6rem);
+    grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.76fr);
+    gap: clamp(2.2rem, 5vw, 4.2rem);
     align-items: center;
   }
 
@@ -87,114 +224,156 @@ const secondaryExternal = content.hero.secondaryCta.href.startsWith("http");
     min-width: 0;
   }
 
-  h1 {
-    font-size: clamp(2.85rem, 6.2vw, 5.15rem);
-    font-weight: 700;
-    line-height: 0.99;
-    letter-spacing: -0.045em;
-    color: #ffffff;
-    margin-top: 1.05rem;
-    max-width: 15ch;
+  .hero-kicker {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    letter-spacing: -0.005em;
   }
 
-  h1 .gradient-text {
+  h1 {
+    font-size: clamp(2.85rem, 6vw, 5.15rem);
+    font-weight: 600;
+    line-height: 1.01;
+    letter-spacing: -0.04em;
+    color: var(--color-ink);
+    margin-top: 1.15rem;
+    max-width: 14.5ch;
+  }
+
+  .hero-title-accent {
     display: block;
     margin-top: 0.14em;
-    filter: drop-shadow(0 0 28px rgba(0, 240, 255, 0.24));
+    color: var(--color-accent);
   }
 
   .subtitle {
     max-width: 54ch;
-    margin-top: 1.35rem;
-    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    margin-top: 1.45rem;
+    font-size: clamp(1.02rem, 1.35vw, 1.16rem);
     color: var(--color-ink-soft);
-    line-height: 1.62;
+    line-height: 1.66;
   }
 
   .cta-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
-    margin-top: 1.9rem;
+    gap: 0.9rem;
+    margin-top: 2.1rem;
   }
 
   .stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: clamp(2.1rem, 5vh, 3rem);
+    gap: 1.25rem;
+    margin-top: clamp(2.4rem, 5.5vh, 3.6rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
   }
 
   .stat {
     min-width: 0;
-    padding: 0.85rem 0.95rem;
-    border: 1px solid var(--color-line-subtle);
-    border-top: 2px solid var(--color-cyan);
-    background: rgba(7, 10, 16, 0.88);
   }
 
   .stat dt {
-    font-size: clamp(1.55rem, 2.7vw, 2.1rem);
-    font-weight: 700;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 600;
     letter-spacing: -0.03em;
-    color: #ffffff;
+    color: var(--color-ink);
   }
 
   .stat dd {
-    font-family: var(--font-mono);
-    font-size: 0.69rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-cyan);
-    margin-top: 0.28rem;
+    font-size: 0.84rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.25rem;
   }
 
   .hero-console {
     min-width: 0;
   }
 
-  .signal-tape {
-    margin-top: clamp(2.2rem, 5vh, 3.2rem);
+  .hero-bar-wrap {
+    margin-top: clamp(2.6rem, 6vh, 4rem);
+  }
+
+  .hero-footer-bar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 0.7rem 1.2rem;
-    padding: 0.7rem 1rem;
-    border-top: 1px solid var(--color-line-bright);
-    border-bottom: 1px solid var(--color-line);
-    background: rgba(0, 240, 255, 0.045);
-    font-size: 0.69rem;
-    letter-spacing: 0.12em;
+    gap: 0.85rem 1.5rem;
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .hero-principles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.9rem;
+    font-size: 0.78rem;
     color: var(--color-ink-soft);
   }
 
-  .tape-key {
-    color: var(--color-cyan);
-    font-weight: 700;
-    margin-right: 0.35rem;
+  .bar-divider {
+    color: var(--color-accent);
   }
 
-  .tape-sep {
-    color: var(--color-ember);
-    font-weight: 700;
+  .motion-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.25rem;
+    padding: 0.32rem 0.78rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-line-bright);
+    background: rgba(7, 8, 10, 0.72);
+    font-size: 0.76rem;
+    color: var(--color-ink-soft);
+    transition: border-color 0.18s var(--ease-out), color 0.18s var(--ease-out), background 0.18s var(--ease-out);
+  }
+
+  .motion-toggle:hover {
+    border-color: var(--color-accent);
+    color: var(--color-ink);
+    background: rgba(17, 20, 26, 0.92);
+  }
+
+  .toggle-indicator {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .motion-toggle[aria-pressed="true"] .toggle-indicator {
+    background: var(--color-ink-faint);
+  }
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    .hero-video {
+      display: none;
+    }
   }
 
   @media (max-width: 960px) {
+    .hero {
+      min-height: auto;
+    }
+
     .hero-deck {
       grid-template-columns: 1fr;
     }
 
     h1 {
-      max-width: 20ch;
+      max-width: 19ch;
     }
   }
 
   @media (max-width: 520px) {
     .stats {
       grid-template-columns: 1fr;
-      gap: 0.75rem;
+      gap: 0.9rem;
     }
 
     .stat {

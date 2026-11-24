@@ -4,7 +4,7 @@ tagline: Turn a chaotic agent mob into a trustworthy Agent Coding Team — prote
 github: https://github.com/X32Studio/self-loop
 status: Open source · v0.8.0
 glyph: L1
-cover: /assets/self-loop-deck.svg
+cover: /assets/self-loop.webp
 locale: en
 featured: true
 order: 1

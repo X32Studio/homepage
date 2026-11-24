@@ -4,7 +4,7 @@ tagline: 把混乱的 Agent 乌合之众整编为可信赖的 Agent Coding Team�
 github: https://github.com/X32Studio/self-loop
 status: 开源 · v0.8.0
 glyph: L1
-cover: /assets/self-loop-deck.svg
+cover: /assets/self-loop.webp
 locale: zh
 featured: true
 order: 1

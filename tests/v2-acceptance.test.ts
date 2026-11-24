@@ -1,9 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { basename, join } from "node:path";
-import { runInNewContext } from "node:vm";
 import { parse, type DefaultTreeAdapterTypes } from "parse5";
-import { createSourceFile, forEachChild, isArrayLiteralExpression, isVariableDeclaration, ScriptTarget, transpile, type Node as SyntaxNode } from "typescript";
 import { parse as parseYaml } from "yaml";
 import { beforeAll, expect, it } from "vitest";
 import { getSiteContent } from "../src/lib/content";
@@ -54,63 +52,6 @@ beforeAll(() => {
     execFileSync("npm", ["run", "build"], { stdio: "inherit", timeout: 115_000 });
   }
 }, 120_000);
-it("V2-F1-01 applies the imported HUD stylesheet to the built homepage", () => {
-  expect(read("src/styles/hud.css")).toMatch(/\.hud-frame\b/);
-  expect(files("src").filter((path) => /\.(astro|css|[cm]?[jt]s|tsx)$/.test(path))
-    .some((path) => /\bimport\s+(?:url\(\s*)?["'](?:[^"']*\/)?hud\.css["']/.test(read(path)))).toBe(true);
-  const home = html("/");
-  const sheets = elements(home, (el) => el.tagName === "link" && attr(el, "rel") === "stylesheet")
-    .map((el) => new URL(attr(el, "href")!, origin))
-    .filter((url) => url.origin === origin).map((url) => read("dist" + url.pathname));
-  const inline = elements(home, (el) => el.tagName === "style")
-    .flatMap(children).map(text);
-  expect([...sheets, ...inline].join("\n")).toMatch(/\.hud-frame\b/);
-});
-it("V2-F1-02 defines three starfield depths and guards the animation lifecycle", () => {
-  const starfield = read("src/components/Starfield.astro").replace(/\/\*[\s\S]*?\*\//g, "");
-  expect(starfield).toMatch(/prefers-reduced-motion\s*:\s*reduce/);
-  expect(starfield).toMatch(/addEventListener\s*\(\s*["']visibilitychange["']/);
-  expect(starfield).toMatch(/\b(?:hidden|visibilityState)\b/);
-  const [script] = elements(parse(starfield), (el) => el.tagName === "script" &&
-    children(el).map(text).join("").includes("requestAnimationFrame"));
-  expect(script, "canvas animation script").toBeDefined();
-  const source = children(script).map(text).join("");
-  const depthArray = (node: SyntaxNode): boolean => Boolean(
-    isVariableDeclaration(node) && /layer|depth|parallax/i.test(node.name.getText()) &&
-    node.initializer && isArrayLiteralExpression(node.initializer) && node.initializer.elements.length === 3 ||
-    forEachChild(node, (child) => depthArray(child) || undefined),
-  );
-  expect(depthArray(createSourceFile("starfield.ts", source, ScriptTarget.Latest, true)),
-    "three starfield depth definitions").toBe(true);
-  const code = transpile(source, { target: ScriptTarget.ES2022 });
-  for (const reduced of [false, true]) {
-    const ctx = new Proxy({}, { get: () => () => ({ addColorStop() {} }) });
-    const canvas = { style: {}, getContext: () => ctx };
-    const pending = new Map<number, (time: number) => void>();
-    let sequence = 0;
-    const requestAnimationFrame = (frame: (time: number) => void) => {
-      pending.set(++sequence, frame);
-      return sequence;
-    };
-    const cancelAnimationFrame = (id: number) => pending.delete(id);
-    const media = Object.assign(new EventTarget(), { matches: reduced });
-    const viewport = { innerWidth: 1440, innerHeight: 900, devicePixelRatio: 1, scrollY: 0 };
-    const motion = { matchMedia: () => media, requestAnimationFrame, cancelAnimationFrame };
-    const window = Object.assign(new EventTarget(), viewport, motion);
-    const document = Object.assign(new EventTarget(), {
-      hidden: false, visibilityState: "visible", getElementById: () => canvas, querySelector: () => canvas,
-    });
-    Object.assign(window, { document });
-    runInNewContext(code, { window, document, ...viewport, ...motion, performance, HTMLCanvasElement: Object });
-    if (!reduced) expect(pending.size, "visible canvas schedules frames").toBeGreaterThan(0);
-    document.hidden = !reduced;
-    document.visibilityState = reduced ? "visible" : "hidden";
-    document.dispatchEvent(new Event("visibilitychange"));
-    window.dispatchEvent(new Event("visibilitychange"));
-    for (const [id, frame] of [...pending]) if (pending.delete(id)) frame(16);
-    expect(pending.size, reduced ? "reduced motion" : "hidden document").toBe(0);
-  }
-});
 it("V2-F1-03 marks the current page in both navigation layouts across the eight section routes", () => {
   for (const root of homes) {
     const routes = ["", "projects/", "blog/", "about/"].map((suffix) => root + suffix);
